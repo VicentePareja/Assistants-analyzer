@@ -1,0 +1,5 @@
+.env
+google_service/aibotyou-assitantscreator-881108c39324.json
+__pycache__/
+*.pyc
+*.pyo
