@@ -1,6 +1,9 @@
-from src.doc_finder import AssistantDocFinder
-from src.document_importer import DocumentImporter
-from parameters import (PATH_INSTRUCTIONS_DIRECTORY, PATH_GOOGLE_SERVICE_ACCOUNT)
+import os
+
+from src.gather_bot_data.create_assistant.doc_finder import AssistantDocFinder
+from src.gather_bot_data.create_assistant.document_importer import DocumentImporter
+from src.gather_bot_data.create_assistant.text_separator_runner import TextSeparatorRunner
+from parameters import *
 
 class GatherBotData:
     def __init__(self):
@@ -8,6 +11,7 @@ class GatherBotData:
 
     def create_assistant(self):
         self.create_instructions()
+        self.create_openai_assistant()
 
     def create_instructions(self):
         self.find_doc_id()
@@ -29,6 +33,14 @@ class GatherBotData:
         importer.import_text()
 
     def separate_text(self):
+        separator_runner = TextSeparatorRunner(
+            api_key= os.getenv("OPENAI_API_KEY"),
+            assistant_id=os.getenv("ID_ASSISTANT_TEXT_SEPARATOR"), 
+            assistant_name=self.assistant_name
+        )
+        separator_runner.run()
+
+    def create_openai_assistant(self):
         pass
 
     def create_static_test(self):
@@ -47,8 +59,9 @@ class GatherBotData:
         pass
 
     def get_data(self, assistant_name):
-
         self.assistant_name = assistant_name
+
+        print(f"Getting data for assistant: {assistant_name}")
         
         self.create_assistant()
         self.create_static_test()

@@ -1,4 +1,4 @@
-from src.gather_bot_data import GatherBotData
+from src.gather_bot_data.gather_bot_data import GatherBotData
 from parameters import BOTS_NAMES
 
 def main():
