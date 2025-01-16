@@ -8,6 +8,7 @@ from src.gather_bot_data.create_assistant.assistant_creator import AssistantCrea
 from src.gather_bot_data.assistant_saver import AssistantSaver
 from src.gather_bot_data.assistant_testing.static_test_creator import StaticTestCreator
 from src.gather_bot_data.assistant_testing.static_test_runner import StaticAssistantRunner
+from src.gather_bot_data.assistant_grader.assistant_grader import AssistantGrader
 from parameters import *
 
 class GatherBotData:
@@ -26,6 +27,11 @@ class GatherBotData:
                                                         assistant_ids_path=PATH_ASSISTANTS_DIRECTORY,
                                                         test_cases_path=PATH_STATIC_TESTS_DIRECTORY,
                                                         answers_path=PATH_STATIC_ANSWERS_DIRECTORY)
+        self.assistant_grader = AssistantGrader(openai_api_key=os.getenv("OPENAI_API_KEY"), 
+                                                instructions_dir_path=PATH_INSTRUCTIONS_DIRECTORY,
+                                                answers_dir_path=PATH_STATIC_ANSWERS_DIRECTORY,
+                                                grades_dir_path=PATH_STATIC_GRADES_DIRECTORY)
+
 
     def create_assistant(self):
         self.create_instructions()
@@ -85,9 +91,9 @@ class GatherBotData:
         
         #self.create_assistant()
         #self.create_static_test()
-        self.get_assistant_answers()
+        #self.get_assistant_answers()
         
-        #self.grade_assistant()
+        self.grade_assistant()
         #self.unify_data()
 
         print(f"finsh getting data from {assistant_name}. It took {(time.time()-starting_time):.2f} seconds.")
