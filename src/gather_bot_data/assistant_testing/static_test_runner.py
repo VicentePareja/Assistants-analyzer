@@ -70,17 +70,17 @@ class StaticAssistantRunner:
         for name, asst_id in self.assistants_dict.items():
             print(f"  {name} => {asst_id}")
 
-    def load_qa_data(self):
+    def load_qa_data(self, test_file: str):
         """
         Reads the CSV file containing question,human_answer
         and stores it in a list of dicts: [{'question':..., 'human_answer':...}, ...].
         """
         self.qa_data = []
-        if not os.path.exists(self.test_file):
-            print(f"Error: The file {self.test_file} does not exist.")
+        if not os.path.exists(test_file):
+            print(f"Error: The file {test_file} does not exist.")
             return
 
-        with open(self.test_file, 'r', encoding='utf-8') as f:
+        with open(test_file, 'r', encoding='utf-8') as f:
             reader = csv.DictReader(f)
             for row in reader:
                 question = row.get(COLUMN_QUESTION, "").strip()
@@ -90,7 +90,7 @@ class StaticAssistantRunner:
                     COLUMN_HUMAN_ANSWER: human_answer
                 })
 
-        print(f"Loaded {len(self.qa_data)} Q&A rows from {self.test_file}.")
+        print(f"Loaded {len(self.qa_data)} Q&A rows from {test_file}.")
 
     def create_threads_and_send_questions(self):
         """
@@ -283,7 +283,7 @@ class StaticAssistantRunner:
 
 
 
-    def write_results_to_csv(self):
+    def write_results_to_csv(self, output_file: str):
         """
         Step 7: Write everything (question, human_answer, and each assistant's final answer)
         to a new output CSV file.
@@ -291,7 +291,7 @@ class StaticAssistantRunner:
         fieldnames = [COLUMN_QUESTION, COLUMN_HUMAN_ANSWER] + list(self.assistants_dict.keys())
 
         try:
-            with open(self.answers_worst_of_4_file_path, 'w', newline='', encoding='utf-8') as out_f:
+            with open(output_file, 'w', newline='', encoding='utf-8') as out_f:
                 writer = csv.DictWriter(out_f, fieldnames=fieldnames)
                 writer.writeheader()
 
@@ -306,14 +306,16 @@ class StaticAssistantRunner:
                         row[asst_name] = answer
                     writer.writerow(row)
 
-            print(f"\nWorst of 4 answers saved to {self.answers_worst_of_4_file_path}\n")
+            print(f"\nAnswers saved to {output_file}\n")
         except Exception as e:
-            print(f"Error creating output CSV {self.answers_worst_of_4_file_path}: {e}")
+            print(f"Error creating output CSV {output_file}: {e}")
 
     def update_paths(self):
         self.assistant_id_path = self.assistant_ids_path + f"/{self.assistant_name}.txt"
-        self.test_file = self.test_cases_dir_path + f"/{self.assistant_name}_worst_of_4_test.csv"
+        self.worst_of_4_test_file = self.test_cases_dir_path + f"/{self.assistant_name}_worst_of_4_test.csv"
         self.answers_worst_of_4_file_path = self.answers_dir_path + f"/{self.assistant_name}_answers_worst_of_4.csv"
+        self.single_assessment_test_file = self.test_cases_dir_path + f"/{self.assistant_name}_single_assessment_test.csv"
+        self.answers_single_assessment_file_path = self.answers_dir_path + f"/{self.assistant_name}_answers_single_assessment.csv"
 
     def run_all_worst_of_4_tests(self, assistant_name: str):
         """
@@ -335,7 +337,7 @@ class StaticAssistantRunner:
         # 1) load assistants
         self.load_assistants()
         # 2) load Q&A
-        self.load_qa_data()
+        self.load_qa_data(self.worst_of_4_test_file)
 
         if not self.assistants_dict or not self.qa_data:
             print("No assistants or QA data found. Exiting.")
@@ -351,7 +353,50 @@ class StaticAssistantRunner:
         self.poll_runs_until_complete()
 
         # 7) Write everything to CSV
-        self.write_results_to_csv()
+        self.write_results_to_csv(self.answers_worst_of_4_file_path)
+
+        # Record end time and calculate total duration
+        end_time = time.time()
+        total_time = end_time - start_time
+        print(f"\nAnswers gathered in: {total_time:.2f} seconds")
+
+    def run_all_single_assessment_tests(self, assistant_name: str):
+        """
+        Master flow that does steps 1..7:
+        1) Load assistants
+        2) Load Q&A
+        3) Create a thread for each question
+        4) Post the question as a user message
+        5) Create a run for each (assistant, thread)
+        6) Poll until runs are completed, store final answers
+        7) Write results to CSV
+        """
+        # Record start time
+        start_time = time.time()
+        self.assistant_name = assistant_name
+
+        self.update_paths()
+
+        # 1) load assistants
+        self.load_assistants()
+        # 2) load Q&A
+        self.load_qa_data(self.single_assessment_test_file)
+
+        if not self.assistants_dict or not self.qa_data:
+            print("No assistants or QA data found. Exiting.")
+            return
+
+        # 3 & 4) Create a thread for each question and send user messages
+        self.create_threads_and_send_questions()
+
+        # 5) Create runs for each (assistant, question)
+        self.create_runs()
+
+        # 5 & 6) Poll runs until completed, retrieve final answers
+        self.poll_runs_until_complete()
+
+        # 7) Write everything to CSV
+        self.write_results_to_csv(self.answers_single_assessment_file_path)
 
         # Record end time and calculate total duration
         end_time = time.time()

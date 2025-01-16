@@ -67,6 +67,7 @@ class GatherBotData:
 
     def get_assistant_answers(self):
         self.static_test_runner.run_all_worst_of_4_tests(self.assistant_name)
+        self.static_test_runner.run_all_single_assessment_tests(self.assistant_name)
 
     def create_evaluator(self):
         pass
