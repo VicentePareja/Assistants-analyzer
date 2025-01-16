@@ -1,0 +1,75 @@
+<!-- assistant_report_template.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Report for {{ assistant_name }}</title>
+</head>
+<body>
+    <h1>Analysis Report for: {{ assistant_name }}</h1>
+
+    <h2>1. Basic Statistics (Grading)</h2>
+    {% if stats %}
+      <ul>
+          <li>Count: {{ stats.count }}</li>
+          <li>Mean: {{ "{:.2f}".format(stats.mean) if stats.mean else "N/A" }}</li>
+          <li>Std: {{ "{:.2f}".format(stats.std) if stats.std else "N/A" }}</li>
+          <li>Min: {{ stats.min }}</li>
+          <li>25%: {{ stats["25%"] }}</li>
+          <li>50%: {{ stats["50%"] }}</li>
+          <li>75%: {{ stats["75%"] }}</li>
+          <li>Max: {{ stats.max }}</li>
+      </ul>
+    {% else %}
+      <p>No stats available.</p>
+    {% endif %}
+
+    <h2>2. Worst of 4 Rows</h2>
+    {% if worst_rows %}
+      <table border="1" cellpadding="5">
+        <tr>
+          <th>Question</th>
+          <th>Human Answer</th>
+          <th>Machine Answer</th>
+          <th>Grading</th>
+          <th>Explanation</th>
+        </tr>
+        {% for row in worst_rows %}
+        <tr>
+          <td>{{ row["Question"] }}</td>
+          <td>{{ row["Human Answer"] }}</td>
+          <td>{{ row["Machine Answer"] }}</td>
+          <td>{{ row["Grading"] }}</td>
+          <td>{{ row["Explanation"] }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+      <p>No worst-of-4 data found.</p>
+    {% endif %}
+
+    <h2>3. Single-Assessment Data</h2>
+    {% if single_rows %}
+      <table border="1" cellpadding="5">
+        <tr>
+          <th>Question</th>
+          <th>Human Answer</th>
+          <th>Machine Answer</th>
+          <th>Grading</th>
+          <th>Explanation</th>
+        </tr>
+        {% for row in single_rows %}
+        <tr>
+          <td>{{ row["Question"] }}</td>
+          <td>{{ row["Human Answer"] }}</td>
+          <td>{{ row["Machine Answer"] }}</td>
+          <td>{{ row["Grading"] }}</td>
+          <td>{{ row["Explanation"] }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+      <p>No single-assessment data found.</p>
+    {% endif %}
+</body>
+</html>

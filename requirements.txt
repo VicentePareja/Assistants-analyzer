@@ -2,3 +2,6 @@ dotenv
 requests
 openai
 tqdm
+pdfkit
+weasyprint
+reportlab

@@ -75,25 +75,18 @@ class GatherBotData:
         self.static_test_runner.run_all_worst_of_4_tests(self.assistant_name)
         self.static_test_runner.run_all_single_assessment_tests(self.assistant_name)
 
-    def create_evaluator(self):
-        pass
-
     def grade_assistant(self):
         self.assistant_grader.grade_assistant(self.assistant_name)
-
-    def unify_data(self):
-        pass
 
     def get_data(self, assistant_name):
         self.assistant_name = assistant_name
         starting_time = time.time()
         print(f"Getting data for assistant: {assistant_name}")
         
-        #self.create_assistant()
-        #self.create_static_test()
-        #self.get_assistant_answers()
-        
+        self.create_assistant()
+        self.create_static_test()
+        self.get_assistant_answers()
         self.grade_assistant()
-        #self.unify_data()
+
 
         print(f"Finished retrieving data from '{assistant_name}' in {time.time() - starting_time:.2f} seconds.")

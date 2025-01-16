@@ -1,0 +1,10 @@
+Question;Human Answer;Machine Answer;Grading;Explanation
+¡Quiero saber más de sus cursos y talleres!;Qué habilidades estás buscando desarrollar? Tenemos el curso de la magia del lenguaje. Perfecto para encausar tu propósito a través del lenguaje.;¡Hola! Soy tu asistente de Spencer Consulting. ¿Qué habilidades te gustaría desarrollar? Te puedo contar sobre nuestros cursos y talleres.;4;La respuesta del asistente es correcta y similar a la humana, ya que ambas preguntas invitan al cliente a especificar sus intereses. Sin embargo, la respuesta humana menciona un curso específico, lo que la hace más informativa.
+Los talleres son grupales o individuales?;Tenemos cursos de distintas naturaleza. Los cursos abiertos son grupales, pero las mentorías son individuales.;¡Hola! Soy tu asistente de Spencer Consulting. Los cursos son grupales, mientras que las mentorías son individuales. ¿Te gustaría más información sobre alguno?;5;La respuesta del asistente es correcta y proporciona la misma información que la respuesta humana, además de ofrecer ayuda adicional, lo que la hace igual o más útil.
+¿Me das más información de las mentorías?;Perfecto, te gustaría que te enviemos un correo con más información?;"¡Hola! Soy tu asistente de Spencer Consulting. Nuestras mentorías son: 
+
+1. Desarrollo Liderazgo: Fortalece tu percepción y autoestima.
+2. Desarrollo Espiritual: Supera miedos y limitaciones.
+
+¿Te gustaría recibir más información por correo?";5;La respuesta del asistente es tan buena como la humana. Proporciona información clara sobre las mentorías y ofrece la opción de enviar más información por correo, lo que es relevante y útil para el cliente.
+Estoy interesado en el curso de PNL Aplicada.;Dame tu nombre y correo para registrarlos y enviarte directamente a la página de inscripción.;¡Hola! Soy tu asistente de Spencer Consulting. Por favor, indícame tu nombre y correo electrónico para enviarte el link de inscripción.;5;La respuesta del asistente es tan buena como la humana. Ambas respuestas solicitan el nombre y correo del interesado para proceder con el registro y envío del link de inscripción, cumpliendo con la función de manera efectiva.

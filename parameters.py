@@ -1,14 +1,14 @@
 BOTS_NAMES = [
     "MyU",
     "Ai Bot You",
-    #"Spencer Consulting",
-    #"Oncoprecisión",
-    #"Laboratorio Biomed",
-    #"Trayecto Bookstore",
-    #"Ortodoncia de la Fuente",
-    #"KLIK Muebles",
-    #"Nomad Genetics",
-    #"House of Spencer"
+    "Spencer Consulting",
+    "Oncoprecisión",
+    "Laboratorio Biomed",
+    "Trayecto Bookstore",
+    "Ortodoncia de la Fuente",
+    "KLIK Muebles",
+    "Nomad Genetics",
+    "House of Spencer"
 ]
 
 # Bots' parameters
@@ -27,8 +27,9 @@ PATH_ASSISTANTS_DIRECTORY = f"data/assistants"
 PATH_STATIC_TESTS_DIRECTORY = f"data/static_tests"
 PATH_STATIC_ANSWERS_DIRECTORY = f"data/static_answers"
 PATH_STATIC_GRADES_DIRECTORY = f"data/static_grades"
-
-
+PATH_PROCESSED_RESULTS_DIRECTORY = f"data/processed_results"
+PATH_REPORTS_DIRECTORY = f"data/reports"
+PATH_TEMPLATES_DIRECTORY = f"src/templates"
     # Google Service Account
 PATH_GOOGLE_SERVICE_ACCOUNT = f"google_service/aibotyou-assitantscreator-881108c39324.json"
 
