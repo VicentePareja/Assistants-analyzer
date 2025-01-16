@@ -31,24 +31,25 @@ class EventHandler(AssistantEventHandler):
 # calling OpenAI, extracting JSON, and saving results.
 ################################################################################
 class TextSeparator:
-    def __init__(self, api_key: str, assistant_id: str, assistant_name: str):
+    def __init__(self, api_key: str, separator_assistant_id: str):
         """
         :param api_key: Your OpenAI API key
         :param assistant_id: The ID of your target assistant on OpenAI
         """
-        self.path_intructions_no_examples = PATH_INSTRUCTIONS_DIRECTORY + f"/{assistant_name}_instructions_no_examples.txt"
-        self.path_intructions_txt = PATH_INSTRUCTIONS_DIRECTORY + f"/{assistant_name}_original_instructions.txt"
-        self.path_examples_txt = PATH_INSTRUCTIONS_DIRECTORY + f"/{assistant_name}_examples.txt"
         self.api_key = api_key
-        self.assistant_id = assistant_id
+        self.assistant_id = separator_assistant_id
         self.client = OpenAI(api_key=self.api_key)
 
-    def run(self):
+    def run(self, assistant_name: str):
         """
         Reads the instructions file, sends it to the assistant, 
         extracts JSON, writes text outputs, etc.
         """
-        print("Starting the TextSeparator run process.")
+        print(f"Starting the TextSeparator run process for {assistant_name}.")
+
+        self.path_intructions_no_examples = PATH_INSTRUCTIONS_DIRECTORY + f"/{assistant_name}_instructions_no_examples.txt"
+        self.path_intructions_txt = PATH_INSTRUCTIONS_DIRECTORY + f"/{assistant_name}_original_instructions.txt"
+        self.path_examples_txt = PATH_INSTRUCTIONS_DIRECTORY + f"/{assistant_name}_examples.txt"
 
         # 1. Read your instructions from a local file
         prompt = self._read_instructions(self.path_intructions_txt)
@@ -200,15 +201,13 @@ class TextSeparator:
 
 
 class TextSeparatorRunner:
-    def __init__(self, api_key: str, assistant_id: str, assistant_name: str):
+    def __init__(self, api_key: str, separator_assistant_id: str):
         self.api_key = api_key
-        self.assistant_id = assistant_id
-        self.assistant_name = assistant_name
+        self.separator_assistant_id = separator_assistant_id
 
-    def run(self):
+    def run(self, assistant_name: str):
         separator = TextSeparator(
-            api_key=self.api_key, 
-            assistant_id=self.assistant_id,
-            assistant_name=self.assistant_name
+            api_key=self.api_key,
+            separator_assistant_id= self.separator_assistant_id
         )
-        separator.run()
+        separator.run(assistant_name)

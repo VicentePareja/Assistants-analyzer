@@ -3,11 +3,21 @@ import os
 from src.gather_bot_data.create_assistant.doc_finder import AssistantDocFinder
 from src.gather_bot_data.create_assistant.document_importer import DocumentImporter
 from src.gather_bot_data.create_assistant.text_separator_runner import TextSeparatorRunner
+from src.gather_bot_data.create_assistant.assistant_creator import AssistantCreator
+from src.gather_bot_data.assistant_saver import AssistantSaver
 from parameters import *
 
 class GatherBotData:
     def __init__(self):
-        pass
+        self.assistant_saver = AssistantSaver()
+        self.finder = AssistantDocFinder()
+        self.importer = DocumentImporter(
+            service_account_path=PATH_GOOGLE_SERVICE_ACCOUNT,
+            instructions_dir_path=PATH_INSTRUCTIONS_DIRECTORY, 
+        )
+        self.text_separator_runner = TextSeparatorRunner(api_key= os.getenv("OPENAI_API_KEY"),
+                                                          separator_assistant_id=os.getenv("ID_ASSISTANT_TEXT_SEPARATOR"))
+        self.assistant_creator = AssistantCreator(api_key=os.getenv("OPENAI_API_KEY"))
 
     def create_assistant(self):
         self.create_instructions()
@@ -19,29 +29,29 @@ class GatherBotData:
         self.separate_text()
 
     def find_doc_id(self):
-        finder = AssistantDocFinder()
-        assistant_id, gdocs_address = finder.get_doc_id_by_assistant_name(self.assistant_name)
+        assistant_id, gdocs_address = self.finder.get_doc_id_by_assistant_name(self.assistant_name)
         self.document_id = gdocs_address
 
     def import_text_from_google_doc(self):
-        importer = DocumentImporter(
-            service_account_path=PATH_GOOGLE_SERVICE_ACCOUNT,
-            document_id=self.document_id,
-            instructions_dir_path=PATH_INSTRUCTIONS_DIRECTORY, 
-            project_name=self.assistant_name
-        )
-        importer.import_text()
+        self.importer.import_text(self.assistant_name, self.document_id)
 
     def separate_text(self):
-        separator_runner = TextSeparatorRunner(
-            api_key= os.getenv("OPENAI_API_KEY"),
-            assistant_id=os.getenv("ID_ASSISTANT_TEXT_SEPARATOR"), 
-            assistant_name=self.assistant_name
-        )
-        separator_runner.run()
+        self.text_separator_runner.run(self.assistant_name)
 
     def create_openai_assistant(self):
-        pass
+        
+        assistant = self.assistant_creator.create_assistant(
+            name=self.assistant_name,
+            model=BASE_MODEL,
+            tools=[],
+            temperature=BASE_TEMPERATURE,
+            top_p=BASE_TEMPERATURE
+        )
+
+        self.assistant_saver.save(
+            assistant.name,
+            assistant.id,
+        )
 
     def create_static_test(self):
         pass

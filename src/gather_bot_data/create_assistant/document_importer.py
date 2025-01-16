@@ -43,14 +43,14 @@ class GoogleDocReader:
         return text
 
 class DocumentImporter:
-    def __init__(self, service_account_path: str, document_id: str, instructions_dir_path: str, project_name: str):
+    def __init__(self, service_account_path: str, instructions_dir_path: str):
         self.service_account_path = service_account_path
-        self.document_id = document_id
-        self.instructions_path = instructions_dir_path + f"/{project_name}_original_instructions.txt"
+        self.instructions_dir_path = instructions_dir_path
 
-    def import_text(self):
-        reader = GoogleDocReader(self.service_account_path, self.document_id)
+    def import_text(self, project_name: str, document_id: str, ):
+        reader = GoogleDocReader(self.service_account_path, document_id)
         doc_text = reader.fetch_text()
-        with open(self.instructions_path, "w", encoding="utf-8") as f:
+        path = self.instructions_dir_path + f"/{project_name}_original_instructions.txt"
+        with open(path, "w", encoding="utf-8") as f:
             f.write(doc_text)
-        print(f"Document text saved to {self.instructions_path}")
+        print(f"Document text saved to {path}")
