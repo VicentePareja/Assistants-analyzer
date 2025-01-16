@@ -81,7 +81,7 @@ class StaticAssistantRunner:
             return
 
         with open(test_file, 'r', encoding='utf-8') as f:
-            reader = csv.DictReader(f)
+            reader = csv.DictReader(f, delimiter=';')
             for row in reader:
                 question = row.get(COLUMN_QUESTION, "").strip()
                 human_answer = row.get(COLUMN_HUMAN_ANSWER, "").strip()
@@ -292,7 +292,7 @@ class StaticAssistantRunner:
 
         try:
             with open(output_file, 'w', newline='', encoding='utf-8') as out_f:
-                writer = csv.DictWriter(out_f, fieldnames=fieldnames)
+                writer = csv.DictWriter(out_f, fieldnames=fieldnames, delimiter=';')
                 writer.writeheader()
 
                 for idx, qa_item in enumerate(self.qa_data):

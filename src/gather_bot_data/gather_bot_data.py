@@ -87,9 +87,7 @@ class GatherBotData:
         #self.create_static_test()
         self.get_assistant_answers()
         
-
-        self.create_evaluator()
-        self.grade_assistant()
-        self.unify_data()
+        #self.grade_assistant()
+        #self.unify_data()
 
         print(f"finsh getting data from {assistant_name}. It took {(time.time()-starting_time):.2f} seconds.")

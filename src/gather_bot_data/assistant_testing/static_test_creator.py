@@ -27,7 +27,7 @@ class StaticTestCreator:
         # Write to the CSV file
         output_test_file = self.static_test_directory + f"/{assistant_name}_worst_of_4_test.csv"
         with open(output_test_file, "w", newline='', encoding="utf-8") as csv_file:
-            writer = csv.writer(csv_file)
+            writer = csv.writer(csv_file, delimiter=';')
             # Write the headers
             writer.writerow([COLUMN_QUESTION, COLUMN_HUMAN_ANSWER])
             
@@ -57,7 +57,7 @@ class StaticTestCreator:
         # Write to the CSV file
         output_test_file = self.static_test_directory + f"/{assistant_name}_single_assessment_test.csv"
         with open(output_test_file, "w", newline='', encoding="utf-8") as csv_file:
-            writer = csv.writer(csv_file)
+            writer = csv.writer(csv_file, delimiter=';')
             # Write the headers
             writer.writerow([COLUMN_QUESTION, COLUMN_HUMAN_ANSWER])
             
