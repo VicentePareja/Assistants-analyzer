@@ -79,7 +79,7 @@ class GatherBotData:
         pass
 
     def grade_assistant(self):
-        pass
+        self.assistant_grader.grade_assistant(self.assistant_name)
 
     def unify_data(self):
         pass
@@ -87,7 +87,7 @@ class GatherBotData:
     def get_data(self, assistant_name):
         self.assistant_name = assistant_name
         starting_time = time.time()
-        print(f"Getting data for assistant: {assistant_name} at {starting_time}")
+        print(f"Getting data for assistant: {assistant_name}")
         
         #self.create_assistant()
         #self.create_static_test()
@@ -96,4 +96,4 @@ class GatherBotData:
         self.grade_assistant()
         #self.unify_data()
 
-        print(f"finsh getting data from {assistant_name}. It took {(time.time()-starting_time):.2f} seconds.")
+        print(f"Finished retrieving data from '{assistant_name}' in {time.time() - starting_time:.2f} seconds.")

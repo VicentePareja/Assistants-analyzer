@@ -33,7 +33,10 @@ PATH_STATIC_GRADES_DIRECTORY = f"data/static_grades"
 PATH_GOOGLE_SERVICE_ACCOUNT = f"google_service/aibotyou-assitantscreator-881108c39324.json"
 
 # Evaluation parameters
-DEVELOPER_INTRO = """Eres una evaluador minusioso y cuidadoso. Tu labor es evaluar un asistente de IA y compararlo con respuestas humanas.
+
+EVAL_MODEL = "gpt-4o-mini-2024-07-18"
+
+DEVELOPER_INTRO = """Eres una evaluador minusioso, exigente y cuidadoso. Tu labor es evaluar un asistente de IA y compararlo con respuestas humanas.
 Es decir, se te entregara una pregunta y dos respuestas, una realizada por el humano y otra por el asistente de IA y debes compararlas.
 
 Para que tengas contexto acerca del asistente, te dejo sus intrucciones:"""

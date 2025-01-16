@@ -1,3 +1,4 @@
 dotenv
 requests
 openai
+tqdm

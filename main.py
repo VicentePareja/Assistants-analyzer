@@ -5,7 +5,10 @@ def main():
     gather_bot_data = GatherBotData()
 
     for bot_name in BOTS_NAMES:
-        gather_bot_data.get_data(bot_name)
+        try:
+            gather_bot_data.get_data(bot_name)
+        except Exception as e:
+            print(f"Error for {bot_name}: {str(e)}")
 
 if __name__ == "__main__":
     main()
