@@ -5,6 +5,7 @@ from src.gather_bot_data.create_assistant.document_importer import DocumentImpor
 from src.gather_bot_data.create_assistant.text_separator_runner import TextSeparatorRunner
 from src.gather_bot_data.create_assistant.assistant_creator import AssistantCreator
 from src.gather_bot_data.assistant_saver import AssistantSaver
+from src.gather_bot_data.assistant_testing.static_test_creator import StaticTestCreator
 from parameters import *
 
 class GatherBotData:
@@ -18,6 +19,7 @@ class GatherBotData:
         self.text_separator_runner = TextSeparatorRunner(api_key= os.getenv("OPENAI_API_KEY"),
                                                           separator_assistant_id=os.getenv("ID_ASSISTANT_TEXT_SEPARATOR"))
         self.assistant_creator = AssistantCreator(api_key=os.getenv("OPENAI_API_KEY"))
+        self.static_test_creator = StaticTestCreator()
 
     def create_assistant(self):
         self.create_instructions()
@@ -54,7 +56,8 @@ class GatherBotData:
         )
 
     def create_static_test(self):
-        pass
+        self.static_test_creator.create_worst_of_4_test(self.assistant_name)
+        self.static_test_creator.create_single_assessment_test(self.assistant_name)
 
     def get_assistant_answers(self):
         pass
