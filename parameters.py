@@ -24,6 +24,9 @@ COLUMN_HUMAN_ANSWER = "Human Answer"
 # Paths
 PATH_INSTRUCTIONS_DIRECTORY = f"data/instructions"
 PATH_ASSISTANTS_DIRECTORY = f"data/assistants"
-PATH_GOOGLE_SERVICE_ACCOUNT = f"google_service/aibotyou-assitantscreator-881108c39324.json"
 PATH_STATIC_TESTS_DIRECTORY = f"data/static_tests"
+PATH_STATIC_ANSWERS_DIRECTORY = f"data/static_answers"
 
+
+    # Google Service Account
+PATH_GOOGLE_SERVICE_ACCOUNT = f"google_service/aibotyou-assitantscreator-881108c39324.json"
