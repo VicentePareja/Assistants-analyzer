@@ -1,177 +1,509 @@
 # -*- coding: utf-8 -*-
 """
-analize_bot_data.py
+analyze_bot_data.py
 
-This file has a class that does two main things:
-1. Analyzes the data (worst_of_4 + single_assessment) and processes it.
-2. Creates a PDF report using the ReportLab library.
+This version focuses on creating an HTML file with:
+1) A table with all the rows from the single-assessment CSV (_grades_single_assessment).
+2) A table with the "worst" answer for each question from the worst-of-4 CSV (_grades_worst_of_4).
+3) A statistical summary for each of the above.
 """
 
-import os
 import pandas as pd
-import numpy as np
-from jinja2 import Environment, FileSystemLoader
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-# Adjust these imports to your actual project structure.
+# NOTE: We avoid using os.path.join; we just concatenate paths with "/"
+# as requested by the instructions.
+
 from parameters import (
     PATH_STATIC_GRADES_DIRECTORY,
     PATH_PROCESSED_RESULTS_DIRECTORY,
     PATH_REPORTS_DIRECTORY,
-    PATH_TEMPLATES_DIRECTORY,
+    PATH_TEMPLATES_DIRECTORY, 
+    BEST_WORST, 
+    MOST_DIFFERENT
 )
+
+
+class PathsManager:
+    """
+    Handles updating and creating necessary paths/directories based on the assistant name.
+    """
+    def __init__(self):
+        self.assistant_name = None
+        self.worst_of_4_file = None
+        self.single_assessment_file = None
+        self.processed_dir = None
+        self.report_dir = None
+
+    def update_paths(self, assistant_name: str):
+        """
+        Prepare file paths and directories based on the assistant name.
+        We won't use os.makedirs or os.path.exists; 
+        but in your environment, you may want to ensure the folders exist.
+        """
+        self.assistant_name = assistant_name
+        self.worst_of_4_file = PATH_STATIC_GRADES_DIRECTORY + f"/{assistant_name}_grades_worst_of_4.csv"
+        self.single_assessment_file = PATH_STATIC_GRADES_DIRECTORY + f"/{assistant_name}_grades_single_assessment.csv"
+        self.processed_dir = PATH_PROCESSED_RESULTS_DIRECTORY
+        self.report_dir = PATH_REPORTS_DIRECTORY
+
+
+class BotDataLoader:
+    """
+    Loads the worst-of-4 and single-assessment CSVs.
+    """
+    def load_data(self, paths_manager: PathsManager):
+        df_worst_of_4 = pd.DataFrame()
+        df_single = pd.DataFrame()
+
+        try:
+            df_worst_of_4 = pd.read_csv(paths_manager.worst_of_4_file, sep=';')
+        except Exception as e:
+            print(f"Warning: Could not load worst_of_4 file {paths_manager.worst_of_4_file}. Error: {e}")
+
+        try:
+            df_single = pd.read_csv(paths_manager.single_assessment_file, sep=';')
+        except Exception as e:
+            print(f"Warning: Could not load single_assessment file {paths_manager.single_assessment_file}. Error: {e}")
+
+        return df_worst_of_4, df_single
+
+
+class BotDataProcessor:
+    """
+    Processes data frames. We will create a new method to find the top
+    MOST_DIFFERENT questions, each with best & worst attempts.
+    """
+
+    def get_worst_answer_per_question(self, df_worst: pd.DataFrame):
+        # (Keep or remove this old method as needed)
+        if df_worst.empty or "Grading" not in df_worst.columns:
+            return pd.DataFrame()
+
+        worst_df = df_worst.loc[df_worst.groupby("Question")["Grading"].idxmin()].copy()
+        return worst_df
+
+    def get_best_and_worst_with_biggest_difference(self, df_worst: pd.DataFrame, top_n: int):
+        """
+        For each question, find the best (max) and worst (min) rows by 'Grading'.
+        Compute the difference (max - min). Keep only the top 'top_n' questions 
+        with the largest difference. Return a DataFrame with 2*top_n rows 
+        (the best and worst for each question).
+        """
+        if df_worst.empty or "Grading" not in df_worst.columns:
+            return pd.DataFrame()
+
+        # Group by question
+        grouped = df_worst.groupby("Question")
+
+        # For each group, find:
+        #   * best_row (max Grading)
+        #   * worst_row (min Grading)
+        #   * difference = best_row.Grading - worst_row.Grading
+        results = []
+        for question, group_df in grouped:
+            # If the group is empty or missing columns, skip
+            if group_df.empty:
+                continue
+
+            max_idx = group_df["Grading"].idxmax()
+            min_idx = group_df["Grading"].idxmin()
+
+            best_row = group_df.loc[max_idx]
+            worst_row = group_df.loc[min_idx]
+            difference = best_row["Grading"] - worst_row["Grading"]
+
+            results.append({
+                "Question": question,
+                "BestRow": best_row,
+                "WorstRow": worst_row,
+                "Difference": difference
+            })
+
+        # Sort by difference descending, keep top N
+        sorted_results = sorted(results, key=lambda x: x["Difference"], reverse=True)
+        top_results = sorted_results[:top_n]
+
+        # Build a final DataFrame with both best & worst rows
+        # We'll keep the original columns, plus a "Type" column 
+        # so you know if it's "BEST" or "WORST" in the final table
+        final_rows = []
+        for item in top_results:
+            best_row_data = item["BestRow"].to_dict()
+            worst_row_data = item["WorstRow"].to_dict()
+
+            # Tag them for clarity
+            best_row_data["Type"] = "BEST"
+            worst_row_data["Type"] = "WORST"
+
+            # We might also store the difference if you want to see it in the HTML
+            best_row_data["Difference"] = item["Difference"]
+            worst_row_data["Difference"] = item["Difference"]
+
+            final_rows.append(best_row_data)
+            final_rows.append(worst_row_data)
+
+        df_final = pd.DataFrame(final_rows)
+        return df_final.reset_index(drop=True)
+
+    def filter_single_assessment_top_and_bottom(self, df_single: pd.DataFrame, n: int, grading_col: str = "Grading"):
+        # (This method stays the same if you still want top & bottom rows)
+        if df_single.empty or grading_col not in df_single.columns:
+            return df_single  
+        df_single_sorted = df_single.sort_values(by=grading_col, ascending=False)
+        top_n = df_single_sorted.head(n)
+        bottom_n = df_single_sorted.tail(n)
+        return pd.concat([top_n, bottom_n], axis=0).reset_index(drop=True)
+    
+    def get_top_n(self, df: pd.DataFrame, n: int, grading_col: str = "Grading") -> pd.DataFrame:
+        """
+        Return the top-n rows sorted by `grading_col` descending.
+        """
+        if df.empty or grading_col not in df.columns:
+            return pd.DataFrame()  # Return an empty DataFrame if conditions are not met
+        return df.sort_values(by=grading_col, ascending=False).head(n)
+
+    def get_bottom_n(self, df: pd.DataFrame, n: int, grading_col: str = "Grading") -> pd.DataFrame:
+        """
+        Return the bottom-n rows sorted by `grading_col` ascending.
+        """
+        if df.empty or grading_col not in df.columns:
+            return pd.DataFrame()  # Return an empty DataFrame if conditions are not met
+        return df.sort_values(by=grading_col, ascending=False).tail(n)
+
+
+
+
+class WorstOf4Saver:
+    """
+    Saves the entire worst-of-4 data (or any processed subset) to a CSV file (optional).
+    """
+    def save_worst_data(self, df_worst: pd.DataFrame, paths_manager: PathsManager, assistant_name: str):
+        if df_worst.empty:
+            print("No data to save for worst-of-4.")
+            return
+        output_file = paths_manager.processed_dir + f"/{assistant_name}_only_worst.csv"
+        df_worst.to_csv(output_file, index=False, sep=';')
+        print(f"Worst-of-4 data saved to: {output_file}")
+
+
+class HTMLReportRenderer:
+    def render_report_html(self,
+                           assistant_name: str,
+                           df_single_best: pd.DataFrame,
+                           df_single_worst: pd.DataFrame,
+                           df_worst_each_question: pd.DataFrame) -> str:
+        """
+        Build a simple inline HTML with:
+         - Summary stats at the top.
+         - Single-assessment best rows table.
+         - Single-assessment worst rows table.
+         - Worst-of-4 table (best+worst with biggest difference).
+        """
+
+        env = Environment(
+            loader=FileSystemLoader(PATH_TEMPLATES_DIRECTORY),
+            autoescape=select_autoescape(["html", "xml"])
+        )
+
+        template_source = """
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8"/>
+            <title>Report for {{ assistant_name }}</title>
+            <style>
+                table, th, td {
+                    border: 1px solid #ccc;
+                    border-collapse: collapse;
+                    padding: 5px;
+                }
+                th {
+                    background-color: #f0f0f0;
+                }
+                .stats-table {
+                    margin: 20px 0;
+                }
+                h1, h2 {
+                    margin-top: 20px;
+                }
+            </style>
+        </head>
+        <body>
+            <h1>Report for {{ assistant_name }}</h1>
+
+            <!-- 1) STATISTICAL SUMMARY for Single-Assessment (TOP) -->
+            {% if single_summary_columns %}
+            <h2>Statistical Summary: Single Assessment</h2>
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        {% for col in single_summary_columns %}
+                            <th>{{ col }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in single_summary_rows %}
+                    <tr>
+                        {% for col in single_summary_columns %}
+                            <td>{{ row[col] }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+
+            <!-- 2) STATISTICAL SUMMARY for Worst-of-4 (TOP) -->
+            {% if worst_summary_columns %}
+            <h2>Statistical Summary: Worst-of-4</h2>
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        {% for col in worst_summary_columns %}
+                            <th>{{ col }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in worst_summary_rows %}
+                    <tr>
+                        {% for col in worst_summary_columns %}
+                            <td>{{ row[col] }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+
+
+            <!-- 3) TABLE: Single Assessment (BEST) -->
+            <h2>Single Assessment: BEST (Top {{ BEST_WORST }})</h2>
+            <table>
+                <thead>
+                    <tr>
+                        {% for col in single_best_columns %}
+                            <th>{{ col }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in single_best_rows %}
+                    <tr>
+                        {% for col in single_best_columns %}
+                            <td>{{ row[col] }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+            <!-- 4) TABLE: Single Assessment (WORST) -->
+            <h2>Single Assessment: WORST (Bottom {{ BEST_WORST }})</h2>
+            <table>
+                <thead>
+                    <tr>
+                        {% for col in single_worst_columns %}
+                            <th>{{ col }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in single_worst_rows %}
+                    <tr>
+                        {% for col in single_worst_columns %}
+                            <td>{{ row[col] }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+            <!-- 5) TABLE: Worst-of-4 (BEST & WORST with biggest difference) -->
+            <h2>Worst-of-4 (Max Difference)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        {% for col in worst_each_q_columns %}
+                            <th>{{ col }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in worst_each_q_rows %}
+                    <tr>
+                        {% for col in worst_each_q_columns %}
+                            <td>{{ row[col] }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </body>
+        </html>
+        """
+
+        template = env.from_string(template_source)
+
+        #
+        # Convert data frames to dict for Jinja2
+        #
+        # Single best
+        single_best_rows = df_single_best.to_dict(orient="records")
+        single_best_columns = df_single_best.columns.tolist()
+
+        # Single worst
+        single_worst_rows = df_single_worst.to_dict(orient="records")
+        single_worst_columns = df_single_worst.columns.tolist()
+
+        # Worst-of-4
+        worst_each_q_rows = df_worst_each_question.to_dict(orient="records")
+        worst_each_q_columns = df_worst_each_question.columns.tolist()
+
+        #
+        # Create statistical summary for single assessment
+        #
+        try:
+            df_single_all = pd.concat([df_single_best, df_single_worst], ignore_index=True)
+            df_single_summary = df_single_all.describe()
+        except ValueError:
+            df_single_summary = pd.DataFrame()
+
+        #
+        # Create statistical summary for worst-of-4
+        #
+        try:
+            df_worst_summary = df_worst_each_question.describe()
+        except ValueError:
+            df_worst_summary = pd.DataFrame()
+
+        # Transpose so that rows = stats, columns = features
+        df_single_summary = df_single_summary.T.reset_index()
+        df_worst_summary = df_worst_summary.T.reset_index()
+
+        single_summary_rows = df_single_summary.to_dict(orient="records")
+        single_summary_columns = df_single_summary.columns.tolist()
+
+        worst_summary_rows = df_worst_summary.to_dict(orient="records")
+        worst_summary_columns = df_worst_summary.columns.tolist()
+
+        context_data = {
+            "assistant_name": assistant_name,
+
+            # Summaries
+            "single_summary_rows": single_summary_rows,
+            "single_summary_columns": single_summary_columns,
+            "worst_summary_rows": worst_summary_rows,
+            "worst_summary_columns": worst_summary_columns,
+
+            # Single best
+            "single_best_rows": single_best_rows,
+            "single_best_columns": single_best_columns,
+
+            # Single worst
+            "single_worst_rows": single_worst_rows,
+            "single_worst_columns": single_worst_columns,
+
+            # Worst-of-4 combined data
+            "worst_each_q_rows": worst_each_q_rows,
+            "worst_each_q_columns": worst_each_q_columns,
+
+            # For heading
+            "BEST_WORST": BEST_WORST
+        }
+
+        return template.render(**context_data)
+
+
+
+class HTMLReportCreator:
+    def create_html_report(self,
+                           assistant_name: str,
+                           df_single_best: pd.DataFrame,
+                           df_single_worst: pd.DataFrame,
+                           df_worst_each_question: pd.DataFrame,
+                           paths_manager: PathsManager):
+        renderer = HTMLReportRenderer()
+        html_content = renderer.render_report_html(
+            assistant_name,
+            df_single_best,
+            df_single_worst,
+            df_worst_each_question
+        )
+
+        html_filename = paths_manager.report_dir + f"/{assistant_name}_report.html"
+        with open(html_filename, "w", encoding="utf-8") as f:
+            f.write(html_content)
+
+        print(f"HTML report generated: {html_filename}")
+
 
 
 class BotDataAnalyzer:
     """
-    A class to analyze the data for a single assistant and produce a PDF report.
+    Coordinates the data loading, processing, 
+    and creation of the HTML report with two tables and their stats.
     """
-
     def __init__(self):
-        """
-        Parameters
-        ----------
-        assistant_name : str
-            The name/identifier of the assistant to analyze.
-        """
-        # DataFrames for loaded data
+        self.paths_manager = PathsManager()
+        self.data_loader = BotDataLoader()
+        self.data_processor = BotDataProcessor()
+        self.worst_saver = WorstOf4Saver()
+        self.html_report_creator = HTMLReportCreator()
+
+        # Data holders
         self.df_worst_of_4 = pd.DataFrame()
         self.df_single = pd.DataFrame()
-
-        # Combined data or any derived subsets
-        self.df_combined = pd.DataFrame()
-        self.df_only_worst = pd.DataFrame()
-
-        # Basic stats store
-        self.stats = {}
-
-    def load_data(self):
-        """
-        Load the data from CSV files into DataFrames.
-        """
-        if os.path.exists(self.worst_of_4_file):
-            self.df_worst_of_4 = pd.read_csv(self.worst_of_4_file, sep=';')
-        else:
-            print(f"Warning: worst_of_4 file not found: {self.worst_of_4_file}")
-
-        if os.path.exists(self.single_assessment_file):
-            self.df_single = pd.read_csv(self.single_assessment_file, sep=';')
-        else:
-            print(f"Warning: single_assessment file not found: {self.single_assessment_file}")
-
-        # Optionally combine them (if needed)
-        self.df_combined = pd.concat([self.df_worst_of_4, self.df_single], ignore_index=True)
-
-    def process_data(self):
-        """
-        Process the data to compute basic statistics, filter or transform as needed.
-        """
-        if not self.df_combined.empty and "Grading" in self.df_combined.columns:
-            valid_grades = self.df_combined["Grading"].dropna()
-            if not valid_grades.empty:
-                self.stats = {
-                    "count": len(valid_grades),
-                    "mean": np.mean(valid_grades),
-                    "std": np.std(valid_grades),
-                    "min": np.min(valid_grades),
-                    "25%": np.percentile(valid_grades, 25),
-                    "50%": np.median(valid_grades),
-                    "75%": np.percentile(valid_grades, 75),
-                    "max": np.max(valid_grades),
-                }
-            else:
-                self.stats = {}
-        else:
-            self.stats = {}
-
-        self.df_only_worst = self.df_worst_of_4.copy()
-
-    def save_extracted_worst_data(self):
-        """
-        Save the "worst of the four" subset into a CSV in the processed directory.
-        """
-        output_file = self.processed_dir + f"/{self.assistant_name}_only_worst.csv"
-
-        if not self.df_only_worst.empty:
-            self.df_only_worst.to_csv(output_file, index=False, sep=';')
-            print(f"Extracted worst-of-4 data saved to: {output_file}")
-        else:
-            print("No data in df_only_worst. Skipping save.")
-
-    def render_report_html(self) -> str:
-        """
-        Render an HTML string using a Jinja2 template.
-        Returns
-        -------
-        str
-            The rendered HTML content.
-        """
-        templates_dir = PATH_TEMPLATES_DIRECTORY
-        env = Environment(loader=FileSystemLoader(templates_dir))
-        template = env.get_template("report_template.html")
-
-        context_data = {
-            "assistant_name": self.assistant_name,
-            "stats": self.stats,
-            "worst_rows": self.df_only_worst.to_dict(orient="records"),
-            "single_rows": self.df_single.to_dict(orient="records"),
-        }
-        return template.render(**context_data)
-
-    def create_pdf_report(self):
-        """
-        Generate a PDF report using ReportLab.
-        """
-        pdf_filename = self.report_dir + f"/{self.assistant_name}_report.pdf"
-        c = canvas.Canvas(pdf_filename, pagesize=letter)
-        width, height = letter
-
-        c.setFont("Helvetica-Bold", 16)
-        c.drawString(30, height - 50, f"Report for Assistant: {self.assistant_name}")
-
-        # Draw statistics
-        c.setFont("Helvetica", 12)
-        y_position = height - 80
-        for key, value in self.stats.items():
-            c.drawString(30, y_position, f"{key.capitalize()}: {value}")
-            y_position -= 20
-
-        # Add table headers for "worst of 4"
-        y_position -= 30
-        if not self.df_only_worst.empty:
-            c.setFont("Helvetica-Bold", 12)
-            c.drawString(30, y_position, "Worst of 4:")
-            y_position -= 20
-            for row in self.df_only_worst.to_dict(orient="records"):
-                c.setFont("Helvetica", 10)
-                c.drawString(30, y_position, str(row))
-                y_position -= 15
-
-        c.save()
-        print(f"PDF report generated: {pdf_filename}")
-
-    def update_paths(self, assistant_name: str):
-        self.assistant_name = assistant_name
-        self.worst_of_4_file = PATH_STATIC_GRADES_DIRECTORY + f"/{assistant_name}_grades_worst_of_4.csv"
-        self.single_assessment_file = PATH_STATIC_GRADES_DIRECTORY + f"/{assistant_name}_grades_single_assessment.csv"
-
-        self.processed_dir = PATH_PROCESSED_RESULTS_DIRECTORY
-        self.report_dir = PATH_REPORTS_DIRECTORY
-
-        os.makedirs(self.processed_dir, exist_ok=True)
-        os.makedirs(self.report_dir, exist_ok=True)
+        self.df_worst_each_question = pd.DataFrame()
 
     def run_analysis(self, assistant_name: str):
-        self.update_paths(assistant_name)
-        self.load_data()
-        self.process_data()
-        self.save_extracted_worst_data()
-        self.create_pdf_report()
+        ...
+        #    we now get best & worst rows from the top MOST_DIFFERENT differences.
+        self.paths_manager.update_paths(assistant_name)
+
+        # 2. Load data
+        self.df_worst_of_4, self.df_single = self.data_loader.load_data(self.paths_manager)
+
+
+        self.df_worst_each_question = self.data_processor.get_best_and_worst_with_biggest_difference(
+            df_worst=self.df_worst_of_4,
+            top_n=MOST_DIFFERENT  # from parameters.py
+        )
+
+        # Drop the "Difference" column (so it won't appear in the final tables/statistics)
+        if "Difference" in self.df_worst_each_question.columns:
+            self.df_worst_each_question.drop(columns=["Difference"], inplace=True)
+
+        # 4. Get top & bottom rows for single assessment as two separate DataFrames
+        self.df_single_best = self.data_processor.get_top_n(
+            self.df_single, 
+            n=BEST_WORST, 
+            grading_col="Grading"
+        )
+        self.df_single_worst = self.data_processor.get_bottom_n(
+            self.df_single,
+            n=BEST_WORST,
+            grading_col="Grading"
+        )
+
+        ...
+        # 6. Create HTML report
+        self.html_report_creator.create_html_report(
+            assistant_name,
+            self.df_single_best,
+            self.df_single_worst,
+            self.df_worst_each_question,
+            self.paths_manager
+        )
+
 
 
 def main():
-    bot_name = "name_assistant"
+    bot_name = "Ai Bot You"
     analyzer = BotDataAnalyzer()
     analyzer.run_analysis(bot_name)
 

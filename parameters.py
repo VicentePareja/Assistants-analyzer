@@ -66,3 +66,7 @@ Justificación: La respuesta del asistente es correcta pero le falta informació
 Nota adicional: Has especial énfasis en la correcititud de datos como los enlaces o los numeros.
 
 A continuación, se te entregará la pregunta, la respuesta humana y la pregunta del asistente."""
+
+# Analysis parameters
+BEST_WORST = 3
+MOST_DIFFERENT = 3
