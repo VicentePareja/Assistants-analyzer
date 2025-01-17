@@ -5,19 +5,36 @@
             <meta charset="utf-8"/>
             <title>Report for Oncoprecisión</title>
             <style>
-                table, th, td {
-                    border: 1px solid #ccc;
-                    border-collapse: collapse;
-                    padding: 5px;
+                :root {
+                    --font-family: Arial, sans-serif;
+                    --font-size: 14px;
+                    --header-bg-color: #f2f2f2;
+                    --alt-row-bg-color: #fafafa;
                 }
-                th {
-                    background-color: #f0f0f0;
-                }
-                .stats-table {
-                    margin: 20px 0;
+                body {
+                    font-family: var(--font-family);
+                    font-size: var(--font-size);
+                    margin: 20px;
                 }
                 h1, h2 {
-                    margin-top: 20px;
+                    text-align: center;
+                }
+                table {
+                    width: 100%;
+                    border: 1px solid #ccc;
+                    border-collapse: collapse;
+                    margin: 20px 0;
+                }
+                th, td {
+                    border: 1px solid #ccc;
+                    padding: 8px;
+                    text-align: center;
+                }
+                th {
+                    background-color: var(--header-bg-color);
+                }
+                tr:nth-child(odd) {
+                    background-color: var(--alt-row-bg-color);
                 }
             </style>
         </head>
@@ -136,7 +153,7 @@
 
 
             <!-- 3) TABLE: Single Assessment BEST (subset) -->
-            <h2>Single Assessment: BEST (Top 3)</h2>
+            <h2>Single Assessment: BEST (Top 4)</h2>
             <table>
                 <thead>
                     <tr>
@@ -197,11 +214,25 @@
                         
                     </tr>
                     
+                    <tr>
+                        
+                            <td>Hola, soy el Dr. Martínez. Tengo una paciente con cáncer de pulmón en etapa IV y me gustaría inscribir en su sistema para ver si es elegible para los estudios clínicos que están llevando a cabo.</td>
+                        
+                            <td>Encantado de ayudar, Dr. Martínez. Por favor, proporcione el nombre y correo electrónico de la paciente. ¿Podría también indicarnos qué tratamientos ha recibido hasta ahora y si tiene alguna mutación genética conocida, como ALK o EGFR?</td>
+                        
+                            <td>Hola, Dr. Martínez. Soy Julieta, la Secretaria de Oncoprecisión. Estoy aquí para ayudarle. Por favor, proporcione el nombre y correo electrónico de la paciente. Además, ¿qué tratamientos ha recibido hasta ahora?</td>
+                        
+                            <td>4</td>
+                        
+                            <td>La respuesta del asistente es correcta y adecuada, ya que solicita el nombre y correo electrónico de la paciente y pregunta sobre los tratamientos recibidos. Sin embargo, le falta preguntar sobre mutaciones genéticas conocidas, lo cual es relevante para evaluar la elegibilidad en los ensayos clínicos.</td>
+                        
+                    </tr>
+                    
                 </tbody>
             </table>
 
             <!-- 4) TABLE: Single Assessment WORST (subset) -->
-            <h2>Single Assessment: WORST (Bottom 3)</h2>
+            <h2>Single Assessment: WORST (Bottom 4)</h2>
             <table>
                 <thead>
                     <tr>
@@ -219,6 +250,20 @@
                     </tr>
                 </thead>
                 <tbody>
+                    
+                    <tr>
+                        
+                            <td>Hoy en día, sigo recibiendo tratamiento con terapias dirigidas, junto con cuidados paliativos para manejar los síntomas y mejorar mi comodidad. Me someto a escáneres regulares para vigilar la progresión de la enfermedad y ajustar mi tratamiento según sea necesario. Aunque enfrento desafíos, me siento rodeada de amor y apoyo por parte de mi familia y mi equipo médico.</td>
+                        
+                            <td>Hemos guardado bien su información. Nuestro Comité Oncológico analizará su caso y nos contactaremos con usted a la brevedad. Muchas gracias por preferir a Oncopresición.</td>
+                        
+                            <td>Hola, soy Julieta, la Secretaria de Oncoprecisión. Lamento mucho la situación que estás enfrentando. Para poder ayudarte mejor, ¿podrías indicarme tu nombre y correo electrónico? Luego, me gustaría saber qué tipo de cáncer tienes y en qué etapa te encuentras.</td>
+                        
+                            <td>4</td>
+                        
+                            <td>La respuesta del asistente es correcta y muestra empatía, pero es inferior a la humana porque no menciona que la información ya ha sido guardada ni que el Comité Oncológico analizará el caso, lo cual es un paso importante en el proceso.</td>
+                        
+                    </tr>
                     
                     <tr>
                         

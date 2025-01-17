@@ -5,19 +5,36 @@
             <meta charset="utf-8"/>
             <title>Report for Ai Bot You</title>
             <style>
-                table, th, td {
-                    border: 1px solid #ccc;
-                    border-collapse: collapse;
-                    padding: 5px;
+                :root {
+                    --font-family: Arial, sans-serif;
+                    --font-size: 14px;
+                    --header-bg-color: #f2f2f2;
+                    --alt-row-bg-color: #fafafa;
                 }
-                th {
-                    background-color: #f0f0f0;
-                }
-                .stats-table {
-                    margin: 20px 0;
+                body {
+                    font-family: var(--font-family);
+                    font-size: var(--font-size);
+                    margin: 20px;
                 }
                 h1, h2 {
-                    margin-top: 20px;
+                    text-align: center;
+                }
+                table {
+                    width: 100%;
+                    border: 1px solid #ccc;
+                    border-collapse: collapse;
+                    margin: 20px 0;
+                }
+                th, td {
+                    border: 1px solid #ccc;
+                    padding: 8px;
+                    text-align: center;
+                }
+                th {
+                    background-color: var(--header-bg-color);
+                }
+                tr:nth-child(odd) {
+                    background-color: var(--alt-row-bg-color);
                 }
             </style>
         </head>
@@ -136,7 +153,7 @@
 
 
             <!-- 3) TABLE: Single Assessment BEST (subset) -->
-            <h2>Single Assessment: BEST (Top 3)</h2>
+            <h2>Single Assessment: BEST (Top 4)</h2>
             <table>
                 <thead>
                     <tr>
@@ -197,11 +214,25 @@
                         
                     </tr>
                     
+                    <tr>
+                        
+                            <td>¿En qué plataformas puede operar el asistente?</td>
+                        
+                            <td>Nuestro asistente es multiplataforma. Puede operar en Instagram, Facebook, WhatsApp, Telegram y otras aplicaciones de mensajería, asegurando que estés presente donde tus clientes más lo necesitan. 📲</td>
+                        
+                            <td>Nuestro asistente opera en múltiples plataformas como Instagram, Facebook, WhatsApp y Telegram. 📲</td>
+                        
+                            <td>5</td>
+                        
+                            <td>La respuesta del asistente es tan buena como la humana, ya que proporciona la misma información sobre las plataformas en las que puede operar el asistente. Ambas respuestas son correctas y completas.</td>
+                        
+                    </tr>
+                    
                 </tbody>
             </table>
 
             <!-- 4) TABLE: Single Assessment WORST (subset) -->
-            <h2>Single Assessment: WORST (Bottom 3)</h2>
+            <h2>Single Assessment: WORST (Bottom 4)</h2>
             <table>
                 <thead>
                     <tr>
@@ -219,6 +250,20 @@
                     </tr>
                 </thead>
                 <tbody>
+                    
+                    <tr>
+                        
+                            <td>Can the assistant handle customers in multiple languages?</td>
+                        
+                            <td>Yes, our assistant can be configured to operate in multiple languages, allowing you to cater to a broader and more diverse audience. 🌍</td>
+                        
+                            <td>Yes, our assistant can operate in multiple languages, allowing you to cater to a broader audience. 🌍</td>
+                        
+                            <td>5</td>
+                        
+                            <td>Both responses are correct and convey the same essential information about the assistant&#39;s capability to handle multiple languages. The assistant&#39;s response is equally effective and clear as the human&#39;s, making it just as good.</td>
+                        
+                    </tr>
                     
                     <tr>
                         

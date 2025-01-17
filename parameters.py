@@ -1,13 +1,13 @@
 BOTS_NAMES = [
-    #"MyU",
-    #"Ai Bot You",
-    #"Spencer Consulting",
-    #"Oncoprecisión",
-    #"Laboratorio Biomed",
-    #"Trayecto Bookstore",
-    #"Ortodoncia de la Fuente",
-    #"KLIK Muebles",
-    #Nomad Genetics",
+    "MyU",
+    "Ai Bot You",
+    "Spencer Consulting",
+    "Oncoprecisión",
+    "Laboratorio Biomed",
+    "Trayecto Bookstore",
+    "Ortodoncia de la Fuente",
+    "KLIK Muebles",
+    "Nomad Genetics",
     "House of Spencer"
 ]
 
@@ -18,7 +18,7 @@ BASE_TEMPERATURE = 0.5
 BASE_TOP_P = 1
 
 # Text separator parameters
-SEPARATOR_MODEL = "gpt-4o-2024-08-06"
+SEPARATOR_MODEL = "o1-mini-2024-09-12"
 DEVELOPER_TEXT_SEPARATOR_DESCRIPTION = """
 You are a text processing AI. Your goal is to split the given text into two parts and return them **strictly** as valid JSON, **with no additional text** outside the JSON. The two parts are:
 
@@ -135,5 +135,9 @@ Nota adicional: Has especial énfasis en la correcititud de datos como los enlac
 A continuación, se te entregará la pregunta, la respuesta humana y la pregunta del asistente."""
 
 # Analysis parameters
-BEST_WORST = 3
+BEST_WORST = 4
 MOST_DIFFERENT = 3
+REPORT_FONT_FAMILY = "Arial, sans-serif"
+REPORT_FONT_SIZE = "14px"
+REPORT_HEADER_BG_COLOR = "#f2f2f2"
+REPORT_ALT_ROW_BG_COLOR = "#fafafa"

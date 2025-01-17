@@ -5,19 +5,36 @@
             <meta charset="utf-8"/>
             <title>Report for Laboratorio Biomed</title>
             <style>
-                table, th, td {
-                    border: 1px solid #ccc;
-                    border-collapse: collapse;
-                    padding: 5px;
+                :root {
+                    --font-family: Arial, sans-serif;
+                    --font-size: 14px;
+                    --header-bg-color: #f2f2f2;
+                    --alt-row-bg-color: #fafafa;
                 }
-                th {
-                    background-color: #f0f0f0;
-                }
-                .stats-table {
-                    margin: 20px 0;
+                body {
+                    font-family: var(--font-family);
+                    font-size: var(--font-size);
+                    margin: 20px;
                 }
                 h1, h2 {
-                    margin-top: 20px;
+                    text-align: center;
+                }
+                table {
+                    width: 100%;
+                    border: 1px solid #ccc;
+                    border-collapse: collapse;
+                    margin: 20px 0;
+                }
+                th, td {
+                    border: 1px solid #ccc;
+                    padding: 8px;
+                    text-align: center;
+                }
+                th {
+                    background-color: var(--header-bg-color);
+                }
+                tr:nth-child(odd) {
+                    background-color: var(--alt-row-bg-color);
                 }
             </style>
         </head>
@@ -136,7 +153,7 @@
 
 
             <!-- 3) TABLE: Single Assessment BEST (subset) -->
-            <h2>Single Assessment: BEST (Top 3)</h2>
+            <h2>Single Assessment: BEST (Top 4)</h2>
             <table>
                 <thead>
                     <tr>
@@ -197,11 +214,25 @@
                         
                     </tr>
                     
+                    <tr>
+                        
+                            <td>¿Qué debo hacer para agendar una hora para el PAP o VPH?</td>
+                        
+                            <td>Puedes agendar tu PAP o VPH aquí: https://wa.me/56945711542 Nuestro equipo te ayudará a escoger sucursal y horario. 👩u200d⚕️</td>
+                        
+                            <td>Puedes agendar tu PAP o VPH aquí: https://wa.me/56945711542. Nuestro equipo te ayudará a escoger sucursal y horario. 👩‍⚕️</td>
+                        
+                            <td>5</td>
+                        
+                            <td>La respuesta del asistente es tan buena como la humana. Proporciona el enlace correcto para agendar y la información necesaria sobre la ayuda del equipo para escoger sucursal y horario. Además, utiliza un emoji que añade un toque amigable a la respuesta.</td>
+                        
+                    </tr>
+                    
                 </tbody>
             </table>
 
             <!-- 4) TABLE: Single Assessment WORST (subset) -->
-            <h2>Single Assessment: WORST (Bottom 3)</h2>
+            <h2>Single Assessment: WORST (Bottom 4)</h2>
             <table>
                 <thead>
                     <tr>
@@ -219,6 +250,20 @@
                     </tr>
                 </thead>
                 <tbody>
+                    
+                    <tr>
+                        
+                            <td>¿Qué necesito para realizar el examen de glucosa en orina?</td>
+                        
+                            <td>Para conocer los requisitos del examen de glucosa en orina, por favor permíteme consultar la información. 😊 (Aquí se usaría la función consultar_tabla y se entregaría la información resumida)</td>
+                        
+                            <td>Para conocer los requisitos del examen de glucosa en orina, permíteme consultar la información. 😊 Un momento, por favor. </td>
+                        
+                            <td>4</td>
+                        
+                            <td>La respuesta del asistente es correcta y similar a la humana, ya que ambos indican que se necesita consultar información adicional. Sin embargo, la respuesta del asistente no proporciona la información específica que se esperaría tras la consulta, lo que la hace ligeramente inferior a la respuesta humana.</td>
+                        
+                    </tr>
                     
                     <tr>
                         

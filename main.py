@@ -34,8 +34,8 @@ def analyze_bot_data():
     print(f"Finished analysing all bots in {time.time() - starting_time:.2f} seconds.")
 
 def main():
-    gather_bot_data()
-    #analyze_bot_data()
+    #gather_bot_data()
+    analyze_bot_data()
 
 
 if __name__ == "__main__":

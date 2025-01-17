@@ -5,19 +5,36 @@
             <meta charset="utf-8"/>
             <title>Report for MyU</title>
             <style>
-                table, th, td {
-                    border: 1px solid #ccc;
-                    border-collapse: collapse;
-                    padding: 5px;
+                :root {
+                    --font-family: Arial, sans-serif;
+                    --font-size: 14px;
+                    --header-bg-color: #f2f2f2;
+                    --alt-row-bg-color: #fafafa;
                 }
-                th {
-                    background-color: #f0f0f0;
-                }
-                .stats-table {
-                    margin: 20px 0;
+                body {
+                    font-family: var(--font-family);
+                    font-size: var(--font-size);
+                    margin: 20px;
                 }
                 h1, h2 {
-                    margin-top: 20px;
+                    text-align: center;
+                }
+                table {
+                    width: 100%;
+                    border: 1px solid #ccc;
+                    border-collapse: collapse;
+                    margin: 20px 0;
+                }
+                th, td {
+                    border: 1px solid #ccc;
+                    padding: 8px;
+                    text-align: center;
+                }
+                th {
+                    background-color: var(--header-bg-color);
+                }
+                tr:nth-child(odd) {
+                    background-color: var(--alt-row-bg-color);
                 }
             </style>
         </head>
@@ -136,7 +153,7 @@
 
 
             <!-- 3) TABLE: Single Assessment BEST (subset) -->
-            <h2>Single Assessment: BEST (Top 3)</h2>
+            <h2>Single Assessment: BEST (Top 4)</h2>
             <table>
                 <thead>
                     <tr>
@@ -206,11 +223,25 @@ Tipo de equipo 🔧 (Opciones: &#34;Split&#34; o &#34;Multi-Split&#34;)</td>
                         
                     </tr>
                     
+                    <tr>
+                        
+                            <td>¿Es posible controlar los equipos de aire acondicionado desde el celular?</td>
+                        
+                            <td>¡Sí, claro que es posible! 📱 Las opciones dependen de la marca y el modelo. Para Samsung, utilizamos la app Smart Things, y para Midea, la app Midea Air. Si tus equipos son de otra marca, dependerá del modelo.</td>
+                        
+                            <td>¡Hola! 👋 Bienvenido al servicio al cliente de M&amp;U Soluciones de Climatización 🌬️❄️. Sí, es posible controlar los equipos desde el celular. Para Samsung, usamos la app Smart Things, y para Midea, la app Midea Air. Si son de otra marca, depende del modelo. ¿Necesitas más ayuda? 😊</td>
+                        
+                            <td>5</td>
+                        
+                            <td>La respuesta del asistente es tan buena como la humana. Proporciona la misma información relevante sobre las aplicaciones para controlar los equipos de aire acondicionado y aclara que para otras marcas depende del modelo. Además, mantiene un tono amigable y ofrece más ayuda, lo que mejora la experiencia del cliente.</td>
+                        
+                    </tr>
+                    
                 </tbody>
             </table>
 
             <!-- 4) TABLE: Single Assessment WORST (subset) -->
-            <h2>Single Assessment: WORST (Bottom 3)</h2>
+            <h2>Single Assessment: WORST (Bottom 4)</h2>
             <table>
                 <thead>
                     <tr>
@@ -228,6 +259,20 @@ Tipo de equipo 🔧 (Opciones: &#34;Split&#34; o &#34;Multi-Split&#34;)</td>
                     </tr>
                 </thead>
                 <tbody>
+                    
+                    <tr>
+                        
+                            <td>¿Cuánto se demora en realizar una instalación?</td>
+                        
+                            <td>Una instalación básica toma entre 2 y 4 horas por equipo ⏱️, siempre que no se incluyan adicionales.</td>
+                        
+                            <td>¡Hola! 👋 Bienvenido al servicio al cliente de M&amp;U Soluciones de Climatización 🌬️❄️. Una instalación básica toma entre 2 y 4 horas por equipo, siempre que no se incluyan adicionales. ¿En qué más puedo ayudarte? 😊</td>
+                        
+                            <td>5</td>
+                        
+                            <td>La respuesta del asistente es tan buena como la humana, ya que proporciona la misma información precisa sobre el tiempo de instalación y además incluye un saludo y una oferta de ayuda adicional, lo que mejora la experiencia del cliente.</td>
+                        
+                    </tr>
                     
                     <tr>
                         

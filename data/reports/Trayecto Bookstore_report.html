@@ -5,19 +5,36 @@
             <meta charset="utf-8"/>
             <title>Report for Trayecto Bookstore</title>
             <style>
-                table, th, td {
-                    border: 1px solid #ccc;
-                    border-collapse: collapse;
-                    padding: 5px;
+                :root {
+                    --font-family: Arial, sans-serif;
+                    --font-size: 14px;
+                    --header-bg-color: #f2f2f2;
+                    --alt-row-bg-color: #fafafa;
                 }
-                th {
-                    background-color: #f0f0f0;
-                }
-                .stats-table {
-                    margin: 20px 0;
+                body {
+                    font-family: var(--font-family);
+                    font-size: var(--font-size);
+                    margin: 20px;
                 }
                 h1, h2 {
-                    margin-top: 20px;
+                    text-align: center;
+                }
+                table {
+                    width: 100%;
+                    border: 1px solid #ccc;
+                    border-collapse: collapse;
+                    margin: 20px 0;
+                }
+                th, td {
+                    border: 1px solid #ccc;
+                    padding: 8px;
+                    text-align: center;
+                }
+                th {
+                    background-color: var(--header-bg-color);
+                }
+                tr:nth-child(odd) {
+                    background-color: var(--alt-row-bg-color);
                 }
             </style>
         </head>
@@ -61,7 +78,7 @@
                         
                             <td>4.666666666666667</td>
                         
-                            <td>0.7302967433402214</td>
+                            <td>0.9128709291752768</td>
                         
                             <td>2.0</td>
                         
@@ -114,9 +131,9 @@
                         
                             <td>84.0</td>
                         
-                            <td>4.726190476190476</td>
+                            <td>4.690476190476191</td>
                         
-                            <td>0.7501195161991874</td>
+                            <td>0.7757808421770461</td>
                         
                             <td>2.0</td>
                         
@@ -136,7 +153,7 @@
 
 
             <!-- 3) TABLE: Single Assessment BEST (subset) -->
-            <h2>Single Assessment: BEST (Top 3)</h2>
+            <h2>Single Assessment: BEST (Top 4)</h2>
             <table>
                 <thead>
                     <tr>
@@ -161,11 +178,11 @@
                         
                             <td>¡Hola! Te damos la bienvenida a Trayecto Bookstore, mi nombre es Trayectín. Podemos ayudarte con información de nuestros productos o resolver cualquier duda. ¡No dude en consultarnos! 😊</td>
                         
-                            <td>¡Hola! Te doy la bienvenida a Trayecto Bookstore, mi nombre es Trayectín. Puedo ayudarte con información sobre nuestros productos o resolver cualquier duda. 😊</td>
+                            <td>¡Hola! Te doy la bienvenida a Trayecto Bookstore, mi nombre es Trayectín. ¿En qué puedo ayudarte hoy? 😊</td>
                         
                             <td>5</td>
                         
-                            <td>Ambas respuestas son correctas y cumplen con el saludo y la presentación del asistente. La respuesta del asistente es tan buena como la humana, ya que mantiene un tono amigable y ofrece la misma información relevante.</td>
+                            <td>Ambas respuestas son correctas y cumplen con el saludo y la presentación del asistente. La respuesta del asistente es tan buena como la humana, ya que también invita al usuario a hacer preguntas, manteniendo un tono amigable y acogedor.</td>
                         
                     </tr>
                     
@@ -193,7 +210,21 @@
                         
                             <td>5</td>
                         
-                            <td>La respuesta del asistente es tan buena como la humana. Ambas respuestas son correctas y ofrecen la misma información, además de invitar al usuario a solicitar más detalles, lo que es un buen enfoque para la atención al cliente.</td>
+                            <td>La respuesta del asistente es tan buena como la humana. Ambas respuestas son correctas y ofrecen la misma información, además de invitar al usuario a solicitar más detalles, lo que es un enfoque amigable y útil.</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>Hola, necesito el libro Fuego Celeste de Alice Wolf. ¿Hacen despacho a Las Condes?</td>
+                        
+                            <td>¡Hola! Sí, despachamos a Las Condes. Puedes realizar tu pedido en nuestro sitio web. ¿Quisieras que te envíe el link?</td>
+                        
+                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Sí, despachamos a Las Condes. ¿Te gustaría que te envíe el link para que puedas realizar tu pedido? 😊</td>
+                        
+                            <td>5</td>
+                        
+                            <td>La respuesta del asistente es tan buena como la humana. Ambas respuestas son correctas y ofrecen la misma información relevante sobre el despacho a Las Condes y la opción de enviar el link para realizar el pedido. Además, el asistente mantiene un tono amigable y conciso, cumpliendo con las instrucciones dadas.</td>
                         
                     </tr>
                     
@@ -201,7 +232,7 @@
             </table>
 
             <!-- 4) TABLE: Single Assessment WORST (subset) -->
-            <h2>Single Assessment: WORST (Bottom 3)</h2>
+            <h2>Single Assessment: WORST (Bottom 4)</h2>
             <table>
                 <thead>
                     <tr>
@@ -222,15 +253,15 @@
                     
                     <tr>
                         
-                            <td>¿Hacen envíos dentro de Santiago?</td>
+                            <td>Estoy en la línea 1, ¿cómo llego?</td>
                         
-                            <td>¡Hola! Sí, enviamos dentro de Santiago (excepto San Bernardo, Colina, Padre Hurtado, Til-Til) con TRIP, nuestra empresa interna. No tenemos seguimiento, pero puedes consultarme cualquier duda 😉. ¿Quieres más información?, dime tu numero de pedido y con gusto te ayudaré.</td>
+                            <td>Desde la línea 1, combina con la línea 6, camina hasta el fondo del túnel Suecia, llega al Oxxo y sube un nivel. ¡Nos vemos pronto! 📖</td>
                         
-                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. 😊 Sí, hacemos envíos dentro de Santiago. Si necesitas más información, no dudes en preguntar.</td>
+                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Desde la línea 1, dirígete a la combinación con la línea 6. Camina hasta el fondo del túnel Suecia, llegarás al Oxxo y ahí sube un nivel. ¡Te esperamos! 📖</td>
                         
-                            <td>4</td>
+                            <td>5</td>
                         
-                            <td>La respuesta del asistente es correcta y concisa, pero le falta información importante sobre las excepciones de envío dentro de Santiago y la falta de seguimiento, que son detalles relevantes que proporciona la respuesta humana.</td>
+                            <td>La respuesta del asistente es tan buena como la humana. Proporciona instrucciones claras y precisas sobre cómo llegar desde la línea 1, incluyendo todos los pasos necesarios. Además, mantiene un tono amistoso y acogedor, similar al de la respuesta humana.</td>
                         
                     </tr>
                     
@@ -258,7 +289,21 @@
                         
                             <td>2</td>
                         
-                            <td>La respuesta del asistente es incorrecta porque no responde a la pregunta de manera adecuada. Aunque saluda y se presenta, no proporciona la información solicitada sobre el sitio web para completar el pedido, lo cual es esencial en este contexto.</td>
+                            <td>La respuesta del asistente es incorrecta porque no responde a la pregunta de manera adecuada. Aunque saluda y se presenta, no proporciona la información sobre el sitio web ni invita al usuario a completar su pedido, lo cual es esencial en este contexto.</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>No, muchas gracias.</td>
+                        
+                            <td>Perfecto. Muchas gracias por preferir Trayecto Bookstore. 😊</td>
+                        
+                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Si necesitas algo más o tienes alguna consulta, no dudes en decírmelo. ¡Estoy aquí para ayudarte! 😊</td>
+                        
+                            <td>2</td>
+                        
+                            <td>La respuesta del asistente es incorrecta porque no responde adecuadamente a la negativa del cliente. En lugar de agradecer y cerrar la conversación de manera amigable, el asistente intenta continuar la interacción, lo que puede resultar molesto para el usuario que ya ha indicado que no necesita más ayuda.</td>
                         
                     </tr>
                     
@@ -289,31 +334,31 @@
                     
                     <tr>
                         
-                            <td>No, muchas gracias.</td>
+                            <td>Hola, necesito el libro Fuego Celeste de Alice Wolf. ¿Hacen despacho a Las Condes?</td>
                         
-                            <td>Perfecto. Muchas gracias por preferir Trayecto Bookstore. 😊</td>
+                            <td>¡Hola! Sí, despachamos a Las Condes. Puedes realizar tu pedido en nuestro sitio web. ¿Quisieras que te envíe el link?</td>
                         
-                            <td>¡De nada! Si necesitas algo más, no dudes en preguntar. Estoy aquí para ayudarte. 😊</td>
+                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Sí, despachamos a Las Condes. ¿Te gustaría que te envíe el link para que realices tu pedido? 😊</td>
+                        
+                            <td>5</td>
+                        
+                            <td>La respuesta del asistente es tan buena como la humana. Ambas respuestas son correctas y ofrecen la misma información, incluyendo la disposición para enviar el link para realizar el pedido. El asistente mantiene un tono amigable y conciso, cumpliendo con las instrucciones dadas.</td>
+                        
+                            <td>BEST</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>Hola, necesito el libro Fuego Celeste de Alice Wolf. ¿Hacen despacho a Las Condes?</td>
+                        
+                            <td>¡Hola! Sí, despachamos a Las Condes. Puedes realizar tu pedido en nuestro sitio web. ¿Quisieras que te envíe el link?</td>
+                        
+                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Sí, despachamos a Las Condes. Permíteme buscar la información del libro &#34;Fuego Celeste / Alice Wolf&#34;. Un momento, por favor.</td>
                         
                             <td>4</td>
                         
-                            <td>La respuesta del asistente es correcta y amigable, pero no refleja específicamente el agradecimiento por preferir Trayecto Bookstore, que es un aspecto importante de la respuesta humana. Sin embargo, mantiene un tono cordial y ofrece ayuda adicional.</td>
-                        
-                            <td>BEST</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>No, muchas gracias.</td>
-                        
-                            <td>Perfecto. Muchas gracias por preferir Trayecto Bookstore. 😊</td>
-                        
-                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Si necesitas algo más, no dudes en preguntar. ¡Estoy aquí para ayudarte! 😊</td>
-                        
-                            <td>3</td>
-                        
-                            <td>La respuesta del asistente es amigable y ofrece ayuda adicional, pero no responde directamente a la negativa del cliente. La respuesta humana es más adecuada porque agradece y cierra la conversación de manera más efectiva.</td>
+                            <td>La respuesta del asistente es correcta y proporciona la información necesaria sobre el despacho a Las Condes. Sin embargo, le falta la oferta de enviar el link del sitio web, que es un detalle importante que la respuesta humana incluye.</td>
                         
                             <td>WORST</td>
                         
@@ -321,15 +366,15 @@
                     
                     <tr>
                         
-                            <td>Estoy en la línea 1, ¿cómo llego?</td>
+                            <td>¿Hacen envíos dentro de Santiago?</td>
                         
-                            <td>Desde la línea 1, combina con la línea 6, camina hasta el fondo del túnel Suecia, llega al Oxxo y sube un nivel. ¡Nos vemos pronto! 📖</td>
+                            <td>¡Hola! Sí, enviamos dentro de Santiago (excepto San Bernardo, Colina, Padre Hurtado, Til-Til) con TRIP, nuestra empresa interna. No tenemos seguimiento, pero puedes consultarme cualquier duda 😉. ¿Quieres más información?, dime tu numero de pedido y con gusto te ayudaré.</td>
                         
-                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Desde la línea 1, dirígete a la combinación con la línea 6. Camina hasta el fondo del túnel Suecia, llegarás al Oxxo y ahí sube un nivel. ¡Te esperamos! 📖</td>
+                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. 😊 Sí, hacemos envíos dentro de Santiago, excepto a San Bernardo, Colina, Padre Hurtado y Til-Til. ¿Te gustaría más información sobre un pedido?</td>
                         
                             <td>5</td>
                         
-                            <td>La respuesta del asistente es tan buena como la humana. Proporciona instrucciones claras y precisas sobre cómo llegar desde la línea 1, incluyendo todos los pasos necesarios. Además, mantiene un tono amigable y acogedor, similar al de la respuesta humana.</td>
+                            <td>La respuesta del asistente es tan buena como la humana. Proporciona la información correcta sobre los envíos dentro de Santiago, incluyendo las excepciones, y mantiene un tono amigable y accesible. Además, invita al usuario a solicitar más información, lo que es útil y apropiado.</td>
                         
                             <td>BEST</td>
                         
@@ -337,15 +382,15 @@
                     
                     <tr>
                         
-                            <td>Estoy en la línea 1, ¿cómo llego?</td>
+                            <td>¿Hacen envíos dentro de Santiago?</td>
                         
-                            <td>Desde la línea 1, combina con la línea 6, camina hasta el fondo del túnel Suecia, llega al Oxxo y sube un nivel. ¡Nos vemos pronto! 📖</td>
+                            <td>¡Hola! Sí, enviamos dentro de Santiago (excepto San Bernardo, Colina, Padre Hurtado, Til-Til) con TRIP, nuestra empresa interna. No tenemos seguimiento, pero puedes consultarme cualquier duda 😉. ¿Quieres más información?, dime tu numero de pedido y con gusto te ayudaré.</td>
                         
-                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Desde la línea 1, dirígete a la combinación con la línea 6. Camina hasta el fondo del túnel Suecia, llegarás al Oxxo y ahí sube un nivel. ¡Te esperamos! 📖</td>
+                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. 😊 Sí, hacemos envíos dentro de Santiago. Si necesitas más información, no dudes en preguntar.</td>
                         
-                            <td>5</td>
+                            <td>4</td>
                         
-                            <td>La respuesta del asistente es tan buena como la humana. Proporciona instrucciones claras y precisas sobre cómo llegar desde la línea 1, incluyendo todos los pasos necesarios. Además, mantiene un tono amigable y acogedor, similar al de la respuesta humana.</td>
+                            <td>La respuesta del asistente es correcta y concisa, pero le falta información importante sobre las excepciones de envío dentro de Santiago y la falta de seguimiento, que son detalles relevantes que proporciona la respuesta humana.</td>
                         
                             <td>WORST</td>
                         
@@ -353,15 +398,15 @@
                     
                     <tr>
                         
-                            <td>Hola, necesito el libro Fuego Celeste de Alice Wolf. ¿Hacen despacho a Las Condes?</td>
+                            <td>¿Puedo retirar mi pedido hoy?</td>
                         
-                            <td>¡Hola! Sí, despachamos a Las Condes. Puedes realizar tu pedido en nuestro sitio web. ¿Quisieras que te envíe el link?</td>
+                            <td>¡Hola! Debes esperar nuestro email de confirmación. Si no lo has recibido, aún no está listo. El plazo varía entre 1 a 7 días hábiles. ¡Pronto tendrás tus libros en mano! 📖✨</td>
                         
-                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Sí, despachamos a Las Condes. Puedes realizar tu pedido en nuestro sitio web. ¿Te gustaría que te envíe el link?</td>
+                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Debes esperar nuestro email de confirmación. Si no lo has recibido, aún no está listo. ¡Pronto tendrás tus libros en mano! 📖✨</td>
                         
                             <td>5</td>
                         
-                            <td>La respuesta del asistente es tan buena como la humana. Ambas respuestas son correctas y completas, incluyendo la confirmación del despacho a Las Condes y la oferta de enviar el link del sitio web para realizar el pedido. El asistente mantiene un tono amigable y conciso, cumpliendo con las instrucciones dadas.</td>
+                            <td>La respuesta del asistente es tan buena como la humana. Ambas respuestas son correctas y transmiten la misma información esencial sobre la necesidad de esperar el email de confirmación para el retiro del pedido. Además, el asistente mantiene un tono amigable y conciso, cumpliendo con las instrucciones dadas.</td>
                         
                             <td>BEST</td>
                         
@@ -369,15 +414,15 @@
                     
                     <tr>
                         
-                            <td>Hola, necesito el libro Fuego Celeste de Alice Wolf. ¿Hacen despacho a Las Condes?</td>
+                            <td>¿Puedo retirar mi pedido hoy?</td>
                         
-                            <td>¡Hola! Sí, despachamos a Las Condes. Puedes realizar tu pedido en nuestro sitio web. ¿Quisieras que te envíe el link?</td>
+                            <td>¡Hola! Debes esperar nuestro email de confirmación. Si no lo has recibido, aún no está listo. El plazo varía entre 1 a 7 días hábiles. ¡Pronto tendrás tus libros en mano! 📖✨</td>
                         
-                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Sí, despachamos a Las Condes. Puedes realizar tu pedido en nuestro sitio web. ¿Te gustaría que te envíe el link?</td>
+                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Debes esperar nuestro email de confirmación. Si no lo has recibido, aún no está listo. ¡Pronto tendrás tus libros en mano! 📖✨</td>
                         
-                            <td>5</td>
+                            <td>4</td>
                         
-                            <td>La respuesta del asistente es tan buena como la humana. Ambas respuestas son correctas y completas, incluyendo la confirmación del despacho a Las Condes y la oferta de enviar el link del sitio web para realizar el pedido. El asistente mantiene un tono amigable y conciso, cumpliendo con las instrucciones dadas.</td>
+                            <td>La respuesta del asistente es correcta y proporciona la información necesaria, pero no menciona el plazo de 1 a 7 días hábiles que incluye la respuesta humana. Sin embargo, la respuesta del asistente es clara y amigable, lo que la hace efectiva.</td>
                         
                             <td>WORST</td>
                         

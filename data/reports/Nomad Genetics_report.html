@@ -5,19 +5,36 @@
             <meta charset="utf-8"/>
             <title>Report for Nomad Genetics</title>
             <style>
-                table, th, td {
-                    border: 1px solid #ccc;
-                    border-collapse: collapse;
-                    padding: 5px;
+                :root {
+                    --font-family: Arial, sans-serif;
+                    --font-size: 14px;
+                    --header-bg-color: #f2f2f2;
+                    --alt-row-bg-color: #fafafa;
                 }
-                th {
-                    background-color: #f0f0f0;
-                }
-                .stats-table {
-                    margin: 20px 0;
+                body {
+                    font-family: var(--font-family);
+                    font-size: var(--font-size);
+                    margin: 20px;
                 }
                 h1, h2 {
-                    margin-top: 20px;
+                    text-align: center;
+                }
+                table {
+                    width: 100%;
+                    border: 1px solid #ccc;
+                    border-collapse: collapse;
+                    margin: 20px 0;
+                }
+                th, td {
+                    border: 1px solid #ccc;
+                    padding: 8px;
+                    text-align: center;
+                }
+                th {
+                    background-color: var(--header-bg-color);
+                }
+                tr:nth-child(odd) {
+                    background-color: var(--alt-row-bg-color);
                 }
             </style>
         </head>
@@ -57,13 +74,13 @@
                         
                             <td>Grading</td>
                         
-                            <td>38.0</td>
+                            <td>2.0</td>
                         
-                            <td>4.7894736842105265</td>
+                            <td>5.0</td>
                         
-                            <td>0.7409962153618966</td>
+                            <td>0.0</td>
                         
-                            <td>1.0</td>
+                            <td>5.0</td>
                         
                             <td>5.0</td>
                         
@@ -112,13 +129,13 @@
                         
                             <td>Grading</td>
                         
-                            <td>152.0</td>
+                            <td>8.0</td>
                         
-                            <td>4.875</td>
+                            <td>5.0</td>
                         
-                            <td>0.40383099212254064</td>
+                            <td>0.0</td>
                         
-                            <td>3.0</td>
+                            <td>5.0</td>
                         
                             <td>5.0</td>
                         
@@ -136,7 +153,7 @@
 
 
             <!-- 3) TABLE: Single Assessment BEST (subset) -->
-            <h2>Single Assessment: BEST (Top 3)</h2>
+            <h2>Single Assessment: BEST (Top 4)</h2>
             <table>
                 <thead>
                     <tr>
@@ -157,45 +174,29 @@
                     
                     <tr>
                         
-                            <td>Hola, necesito saber el horario de atención de la sucursal Centro en Puerto Montt.</td>
+                            <td>¡Hola!</td>
                         
-                            <td>¡Hola! El horario de atención de nuestra Sucursal Centro en Puerto Montt (Benavente 474) es de lunes a viernes de 07:30 a 16:30 horas para atención al cliente y hasta las 16:00 horas para toma de muestras. Los sábados, atención al cliente de 08:00 a 13:00 y toma de muestras hasta las 12:30. ¿Puedo ayudarte en algo más? 😊</td>
+                            <td>¡Hola! Soy el Bot AI de Nomad Genetics. Estoy aquí para ayudarte con información sobre exámenes genéticos y sus características. ¿En qué puedo asistirte hoy?</td>
                         
-                            <td>¡Hola! El horario de atención de nuestra Sucursal Centro en Puerto Montt (Benavente 474) es de lunes a viernes de 07:30 a 16:30 horas para atención al cliente y hasta las 16:00 horas para toma de muestras. Los sábados, atención al cliente de 08:00 a 13:00 y toma de muestras hasta las 12:30. ¿Puedo ayudarte en algo más? 😊</td>
+                            <td>¡Hola! Soy el Bot AI de Nomad Genetics. Estoy aquí para ayudarte con información sobre exámenes genéticos y sus características. ¿En qué puedo asistirte hoy?</td>
                         
                             <td>5</td>
                         
-                            <td>La respuesta del asistente es idéntica a la respuesta humana, proporcionando la información correcta y completa sobre los horarios de atención de la sucursal Centro en Puerto Montt. Además, incluye un toque amigable al final, lo que la hace tan buena como la respuesta humana.</td>
+                            <td>La respuesta del asistente es idéntica a la respuesta humana, cumpliendo con el saludo y la presentación adecuada, así como ofreciendo asistencia. Por lo tanto, es tan buena como la respuesta humana.</td>
                         
                     </tr>
                     
                     <tr>
                         
-                            <td>Quiero agendar una hora con el Dr. Raúl Mansilla.</td>
+                            <td>Quiero información sobre el Examen Hereditario 39.</td>
                         
-                            <td>¡Claro! Puedes agendar una cita con el Dr. Raúl Mansilla a través de este enlace: https://8d38a057041999f08f2c133e325c84c029351e63.agenda.softwaremedilink.com/agenda?modalidad=1. 😊</td>
+                            <td>Claro, el Examen Hereditario 39 es una prueba que permite analizar un total de 39 genes asociados a tipos de cánceres hereditarios, incluyendo cáncer de mama, ovario, próstata y gastrointestinales, entre otros. Es un examen germinal que utiliza sangre periférica como muestra y pertenece a la categoría de Examen Amplio Hereditario. Está disponible y es procesado en Alemania por nuestro proveedor Centogene, con un tiempo de entrega de resultados de aproximadamente 20 días hábiles. ¿Te gustaría más información o tienes alguna otra pregunta?</td>
                         
-                            <td>Puedes agendar una cita con el Dr. Raúl Mansilla a través de este enlace: [Agendar cita](https://8d38a057041999f08f2c133e325c84c029351e63.agenda.softwaremedilink.com/agenda?modalidad=1). 😊</td>
-                        
-                            <td>5</td>
-                        
-                            <td>La respuesta del asistente es tan buena como la humana. Proporciona el enlace correcto para agendar la cita con el Dr. Raúl Mansilla y utiliza un tono amigable con el emoji, lo que la hace igual de efectiva y clara.</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>¿Qué necesito para realizar el examen de glucosa en orina?</td>
-                        
-                            <td>Para conocer los requisitos del examen de glucosa en orina, por favor permíteme consultar la información. 😊 (Aquí se usaría la función consultar_tabla y se entregaría la información resumida)</td>
-                        
-                            <td>Para conocer los requisitos del examen de glucosa en orina, por favor permíteme consultar la información. 😊
-
-(Se utilizaría la función consultar_tabla para obtener los detalles específicos).</td>
+                            <td>Claro, el Examen Hereditario 39 analiza 39 genes asociados a cánceres hereditarios, como mama, ovario y próstata. Es un examen germinal que utiliza sangre periférica. Procesado en Alemania por Centogene, con un tiempo de entrega de resultados de aproximadamente 20 días hábiles. ¿Necesitas más información?</td>
                         
                             <td>5</td>
                         
-                            <td>La respuesta del asistente es idéntica a la respuesta humana, mostrando la misma intención de consultar la información necesaria para proporcionar los requisitos del examen de glucosa en orina. Ambos son correctos y cumplen con el objetivo de obtener información precisa.</td>
+                            <td>La respuesta del asistente es tan buena como la humana. Proporciona información completa sobre el examen, incluyendo los tipos de cáncer asociados, el tipo de muestra, el proveedor y el tiempo de entrega de resultados. Además, mantiene un tono amigable y ofrece ayuda adicional, lo que es adecuado para la consulta.</td>
                         
                     </tr>
                     
@@ -203,7 +204,7 @@
             </table>
 
             <!-- 4) TABLE: Single Assessment WORST (subset) -->
-            <h2>Single Assessment: WORST (Bottom 3)</h2>
+            <h2>Single Assessment: WORST (Bottom 4)</h2>
             <table>
                 <thead>
                     <tr>
@@ -224,52 +225,29 @@
                     
                     <tr>
                         
-                            <td>Hola</td>
+                            <td>¡Hola!</td>
                         
-                            <td>¡Buen día, gracias por comunicarte con Laboratorio Clínico Biomed! Mi nombre es Emma, soy la asistente virtual 🤗 ¿Cómo puedo ayudarte hoy? 🌟 Puedo resolver dudas sobre: ✅ Preparación para exámenes ✅ Horarios ✅ Agendar horas médicas ✅ Dirección y horarios de sucursales.</td>
+                            <td>¡Hola! Soy el Bot AI de Nomad Genetics. Estoy aquí para ayudarte con información sobre exámenes genéticos y sus características. ¿En qué puedo asistirte hoy?</td>
                         
-                            <td>¡Buen día! Gracias por comunicarte con Laboratorio Clínico Biomed. Mi nombre es Emma, soy la asistente virtual 🤗 ¿Cómo puedo ayudarte hoy? 🌟</td>
+                            <td>¡Hola! Soy el Bot AI de Nomad Genetics. Estoy aquí para ayudarte con información sobre exámenes genéticos y sus características. ¿En qué puedo asistirte hoy?</td>
                         
-                            <td>4</td>
+                            <td>5</td>
                         
-                            <td>La respuesta del asistente es correcta y similar a la humana, pero le falta información sobre los servicios que puede ofrecer, como la preparación para exámenes, horarios y agendamiento de horas médicas. Esto hace que la respuesta sea inferior a la humana.</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>¿Cuáles son los patógenos que incluye el PCR-ETS?</td>
-                        
-                            <td>En Laboratorio Biomed, nuestro PCR o Panel ETS incluye: Candida Albicans Chlamydia Trachomatis Gardnerella Vaginalis Mycoplasma Genitalium Mycoplasma Hominis Treponema Pallidum Trichomonas Vaginalis Ureaplasma Parvum Ureaplasma Urealyticum Virus Herpes simple I y II Neisseria Gonorrhoeae</td>
-                        
-                            <td>El PCR-ETS incluye los siguientes patógenos:
-
-- Chlamydia trachomatis
-- Neisseria gonorrhoeae
-- Mycoplasma genitalium
-- Mycoplasma hominis
-- Ureaplasma parvum
-- Ureaplasma urealyticum
-
-¿Puedo ayudarte con algo más? 😊</td>
-                        
-                            <td>3</td>
-                        
-                            <td>La respuesta del asistente es parcialmente correcta, ya que menciona algunos de los patógenos incluidos en el PCR-ETS, pero omite varios otros importantes que están en la respuesta humana, como Candida Albicans, Treponema Pallidum, Trichomonas Vaginalis y Virus Herpes simple I y II. Esto hace que la respuesta sea incompleta.</td>
+                            <td>La respuesta del asistente es idéntica a la respuesta humana, cumpliendo con el saludo y la presentación adecuada, así como ofreciendo asistencia. Por lo tanto, es tan buena como la respuesta humana.</td>
                         
                     </tr>
                     
                     <tr>
                         
-                            <td>Hola, ¿cuáles son los horarios de la sucursal Puerto Varas?</td>
+                            <td>Quiero información sobre el Examen Hereditario 39.</td>
                         
-                            <td>Puerto Varas (Pio Nono 426): lun a vie toma de muestras 07:30-15:30, atención hasta 16:30; sáb toma de muestras hasta 11:30, atención hasta 13:00. 😊</td>
+                            <td>Claro, el Examen Hereditario 39 es una prueba que permite analizar un total de 39 genes asociados a tipos de cánceres hereditarios, incluyendo cáncer de mama, ovario, próstata y gastrointestinales, entre otros. Es un examen germinal que utiliza sangre periférica como muestra y pertenece a la categoría de Examen Amplio Hereditario. Está disponible y es procesado en Alemania por nuestro proveedor Centogene, con un tiempo de entrega de resultados de aproximadamente 20 días hábiles. ¿Te gustaría más información o tienes alguna otra pregunta?</td>
                         
-                            <td>Run ended with status=failed</td>
+                            <td>Claro, el Examen Hereditario 39 analiza 39 genes asociados a cánceres hereditarios, como mama, ovario y próstata. Es un examen germinal que utiliza sangre periférica. Procesado en Alemania por Centogene, con un tiempo de entrega de resultados de aproximadamente 20 días hábiles. ¿Necesitas más información?</td>
                         
-                            <td>1</td>
+                            <td>5</td>
                         
-                            <td>La respuesta del asistente no proporciona información sobre los horarios de la sucursal Puerto Varas, ya que el sistema falló y no generó una respuesta. Por lo tanto, no hay datos correctos o útiles en la respuesta del asistente.</td>
+                            <td>La respuesta del asistente es tan buena como la humana. Proporciona información completa sobre el examen, incluyendo los tipos de cáncer asociados, el tipo de muestra, el proveedor y el tiempo de entrega de resultados. Además, mantiene un tono amigable y ofrece ayuda adicional, lo que es adecuado para la consulta.</td>
                         
                     </tr>
                     
@@ -300,15 +278,15 @@
                     
                     <tr>
                         
-                            <td>Hola, ¿puedo agendar una cita para una mamografía?</td>
+                            <td>Quiero información sobre el Examen Hereditario 39.</td>
                         
-                            <td>Las mamografías se realizan en Casa Matriz (Benavente 761, Puerto Montt). Llámanos al +56 65 2 329 400 o visítanos. 🏥</td>
+                            <td>Claro, el Examen Hereditario 39 es una prueba que permite analizar un total de 39 genes asociados a tipos de cánceres hereditarios, incluyendo cáncer de mama, ovario, próstata y gastrointestinales, entre otros. Es un examen germinal que utiliza sangre periférica como muestra y pertenece a la categoría de Examen Amplio Hereditario. Está disponible y es procesado en Alemania por nuestro proveedor Centogene, con un tiempo de entrega de resultados de aproximadamente 20 días hábiles. ¿Te gustaría más información o tienes alguna otra pregunta?</td>
                         
-                            <td>Las mamografías se realizan solo en nuestra Casa Matriz (Benavente 761, Puerto Montt). Te recomiendo que llames al +56 65 2 329 400 o que nos visites directamente. 😊</td>
+                            <td>Claro, el Examen Hereditario 39 analiza 39 genes asociados a cánceres hereditarios, como mama, ovario y próstata. Es un examen germinal que utiliza sangre periférica. Procesado en Alemania por Centogene, con un tiempo de entrega de resultados de aproximadamente 20 días hábiles. ¿Necesitas más información?</td>
                         
                             <td>5</td>
                         
-                            <td>Ambas respuestas son correctas y proporcionan la misma información esencial sobre la ubicación y el contacto para agendar una mamografía. La respuesta del asistente es tan buena como la humana, incluyendo la recomendación de llamar o visitar, y utiliza un emoji para hacerla más amigable.</td>
+                            <td>La respuesta del asistente es tan buena como la humana. Proporciona información completa sobre el examen, incluyendo los tipos de cáncer asociados, el tipo de muestra, el proveedor y el tiempo de entrega de resultados. Además, mantiene un tono amigable y ofrece ayuda adicional, lo que es adecuado para la consulta.</td>
                         
                             <td>BEST</td>
                         
@@ -316,15 +294,15 @@
                     
                     <tr>
                         
-                            <td>Hola, ¿puedo agendar una cita para una mamografía?</td>
+                            <td>Quiero información sobre el Examen Hereditario 39.</td>
                         
-                            <td>Las mamografías se realizan en Casa Matriz (Benavente 761, Puerto Montt). Llámanos al +56 65 2 329 400 o visítanos. 🏥</td>
+                            <td>Claro, el Examen Hereditario 39 es una prueba que permite analizar un total de 39 genes asociados a tipos de cánceres hereditarios, incluyendo cáncer de mama, ovario, próstata y gastrointestinales, entre otros. Es un examen germinal que utiliza sangre periférica como muestra y pertenece a la categoría de Examen Amplio Hereditario. Está disponible y es procesado en Alemania por nuestro proveedor Centogene, con un tiempo de entrega de resultados de aproximadamente 20 días hábiles. ¿Te gustaría más información o tienes alguna otra pregunta?</td>
                         
-                            <td>Las mamografías se realizan solo en nuestra Sucursal Casa Matriz (Benavente 761, Puerto Montt). Puedes acudir directamente en horario de atención. 😊</td>
+                            <td>Claro, el Examen Hereditario 39 analiza 39 genes asociados a cánceres hereditarios, como mama, ovario y próstata. Es un examen germinal que utiliza sangre periférica. Procesado en Alemania por Centogene, con un tiempo de entrega de resultados de aproximadamente 20 días hábiles. ¿Necesitas más información?</td>
                         
-                            <td>4</td>
+                            <td>5</td>
                         
-                            <td>La respuesta del asistente es correcta y proporciona la ubicación de la sucursal, pero no menciona el número de contacto para agendar la cita, lo cual es un detalle importante que se incluye en la respuesta humana. Sin embargo, la respuesta del asistente es clara y concisa.</td>
+                            <td>La respuesta del asistente es tan buena como la humana. Proporciona información completa sobre el examen, incluyendo los tipos de cáncer asociados, el tipo de muestra, el proveedor y el tiempo de entrega de resultados. Además, mantiene un tono amigable y ofrece ayuda adicional, lo que es adecuado para la consulta.</td>
                         
                             <td>WORST</td>
                         
@@ -332,15 +310,15 @@
                     
                     <tr>
                         
-                            <td>¿Qué necesito para realizar el examen de glucosa en orina?</td>
+                            <td>¡Hola!</td>
                         
-                            <td>Para conocer los requisitos del examen de glucosa en orina, por favor permíteme consultar la información. 😊 (Aquí se usaría la función consultar_tabla y se entregaría la información resumida)</td>
+                            <td>¡Hola! Soy el Bot AI de Nomad Genetics. Estoy aquí para ayudarte con información sobre exámenes genéticos y sus características. ¿En qué puedo asistirte hoy?</td>
                         
-                            <td>Para conocer los requisitos del examen de glucosa en orina, permíteme consultar la información. 😊</td>
+                            <td>¡Hola! Soy el Bot AI de Nomad Genetics. Estoy aquí para ayudarte con información sobre exámenes genéticos y sus características. ¿En qué puedo asistirte hoy?</td>
                         
                             <td>5</td>
                         
-                            <td>La respuesta del asistente es igual a la respuesta humana, mostrando la misma intención de consultar la información necesaria. Además, utiliza un tono amigable con el emoji, lo que la hace adecuada y efectiva.</td>
+                            <td>La respuesta del asistente es idéntica a la respuesta humana, cumpliendo con el saludo y la presentación adecuada, así como ofreciendo asistencia. Por lo tanto, es tan buena como la respuesta humana.</td>
                         
                             <td>BEST</td>
                         
@@ -348,47 +326,15 @@
                     
                     <tr>
                         
-                            <td>¿Qué necesito para realizar el examen de glucosa en orina?</td>
+                            <td>¡Hola!</td>
                         
-                            <td>Para conocer los requisitos del examen de glucosa en orina, por favor permíteme consultar la información. 😊 (Aquí se usaría la función consultar_tabla y se entregaría la información resumida)</td>
+                            <td>¡Hola! Soy el Bot AI de Nomad Genetics. Estoy aquí para ayudarte con información sobre exámenes genéticos y sus características. ¿En qué puedo asistirte hoy?</td>
                         
-                            <td>Para conocer los requisitos del examen de glucosa en orina, permíteme consultar la información. 😊 Un momento, por favor.</td>
+                            <td>¡Hola! Soy el Bot AI de Nomad Genetics. Estoy aquí para ayudarte con información sobre exámenes genéticos y sus características. ¿En qué puedo asistirte hoy?</td>
                         
-                            <td>4</td>
+                            <td>5</td>
                         
-                            <td>La respuesta del asistente es correcta y similar a la humana, ya que ambos indican que se necesita consultar información adicional. Sin embargo, la respuesta del asistente no proporciona la información específica que se esperaría después de la consulta, lo que la hace ligeramente inferior a la respuesta humana.</td>
-                        
-                            <td>WORST</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>Hola</td>
-                        
-                            <td>¡Buen día, gracias por comunicarte con Laboratorio Clínico Biomed! Mi nombre es Emma, soy la asistente virtual 🤗 ¿Cómo puedo ayudarte hoy? 🌟 Puedo resolver dudas sobre: ✅ Preparación para exámenes ✅ Horarios ✅ Agendar horas médicas ✅ Dirección y horarios de sucursales.</td>
-                        
-                            <td>¡Buen día! Gracias por comunicarte con Laboratorio Clínico Biomed. Mi nombre es Emma, soy la asistente virtual 🤗 ¿Cómo puedo ayudarte hoy? 🌟</td>
-                        
-                            <td>4</td>
-                        
-                            <td>La respuesta del asistente es correcta y similar a la humana, pero le falta información sobre los servicios específicos que puede ofrecer, como la preparación para exámenes, horarios y agendamiento de horas médicas. Esto hace que la respuesta sea inferior a la humana.</td>
-                        
-                            <td>BEST</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>Hola</td>
-                        
-                            <td>¡Buen día, gracias por comunicarte con Laboratorio Clínico Biomed! Mi nombre es Emma, soy la asistente virtual 🤗 ¿Cómo puedo ayudarte hoy? 🌟 Puedo resolver dudas sobre: ✅ Preparación para exámenes ✅ Horarios ✅ Agendar horas médicas ✅ Dirección y horarios de sucursales.</td>
-                        
-                            <td>¡Buen día! Gracias por comunicarte con Laboratorio Clínico Biomed. Mi nombre es Emma, soy la asistente virtual 🤗 ¿Cómo puedo ayudarte hoy? 🌟</td>
-                        
-                            <td>4</td>
-                        
-                            <td>La respuesta del asistente es correcta y similar a la humana, pero le falta información sobre los servicios específicos que puede ofrecer, como la preparación para exámenes, horarios y agendamiento de horas médicas. Esto hace que la respuesta sea inferior a la humana.</td>
+                            <td>La respuesta del asistente es idéntica a la respuesta humana, cumpliendo con el saludo y la presentación adecuada, así como ofreciendo asistencia. Por lo tanto, es tan buena como la respuesta humana.</td>
                         
                             <td>WORST</td>
                         
