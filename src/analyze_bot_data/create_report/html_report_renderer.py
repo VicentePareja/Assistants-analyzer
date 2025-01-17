@@ -16,10 +16,10 @@ from parameters import (
 class HTMLReportRenderer:
     def render_report_html(self,
                            assistant_name: str,
-                           df_single_full: pd.DataFrame,      # ADDED
+                           df_single_full: pd.DataFrame,
                            df_single_best: pd.DataFrame,
                            df_single_worst: pd.DataFrame,
-                           df_worst_of_4_full: pd.DataFrame,  # ADDED
+                           df_worst_of_4_full: pd.DataFrame,
                            df_worst_each_question: pd.DataFrame
                            ) -> str:
         """
@@ -31,6 +31,25 @@ class HTMLReportRenderer:
             autoescape=select_autoescape(["html", "xml"])
         )
 
+        # ---------------------------------------------------------------------
+        # BELOW is the main template content.
+        #
+        # Aesthetics can be improved by adjusting:
+        # 1. The color scheme
+        # 2. Font sizes and families
+        # 3. Border styles
+        # 4. Spacing, padding, margins
+        # 5. Hover highlights
+        #
+        # For instance, you might want to:
+        # - Use more modern fonts (e.g., "Helvetica Neue", "Arial", sans-serif).
+        # - Add a subtle hover effect on rows.
+        # - Use a separate CSS file to keep style and structure separated.
+        # - Include more advanced styling like stripes in tables, box-shadow, etc.
+        #
+        # The following template is kept fairly minimal, but you can expand it
+        # as needed.
+        # ---------------------------------------------------------------------
         template_source = """
         <!DOCTYPE html>
         <html>
@@ -48,15 +67,19 @@ class HTMLReportRenderer:
                     font-family: var(--font-family);
                     font-size: var(--font-size);
                     margin: 20px;
+                    color: #333;
+                    background-color: #fafafa; /* <--- Example: slightly off-white background */
                 }
                 h1, h2 {
                     text-align: center;
+                    margin-bottom: 10px;
                 }
                 table {
                     width: 100%;
                     border: 1px solid #ccc;
                     border-collapse: collapse;
                     margin: 20px 0;
+                    background-color: #fff; /* White background for tables */
                 }
                 th, td {
                     border: 1px solid #ccc;
@@ -66,8 +89,28 @@ class HTMLReportRenderer:
                 th {
                     background-color: var(--header-bg-color);
                 }
+                /* Alternate row background */
                 tr:nth-child(odd) {
                     background-color: var(--alt-row-bg-color);
+                }
+                /* OPTIONAL: Hover effect on table rows */
+                tr:hover {
+                    background-color: #f5f5f5; /* Subtle change on hover */
+                }
+                /* OPTIONAL: Make table headers sticky on scroll (if you have large tables)
+                   Requires a fixed height container or overflow: auto on the table wrapper
+                th {
+                    position: sticky;
+                    top: 0;
+                    z-index: 1;
+                } */
+                .stats-table {
+                    margin-top: 30px;
+                }
+                /* Optional: Slight style difference for stats summary tables */
+                .stats-table th {
+                    background-color: #e0e0e0;
+                    font-weight: bold;
                 }
             </style>
         </head>
@@ -206,6 +249,7 @@ class HTMLReportRenderer:
         try:
             df_single_summary = df_single_full.describe()
         except ValueError:
+            # If DataFrame is empty or no numeric columns, .describe() might fail
             df_single_summary = pd.DataFrame()
 
         # 2) Compute stats on the FULL worst-of-4 DataFrame
@@ -224,7 +268,7 @@ class HTMLReportRenderer:
         worst_summary_rows = df_worst_summary.to_dict(orient='records')
         worst_summary_columns = df_worst_summary.columns.tolist()
 
-        # Render
+        # Prepare context data for the template
         context_data = {
             "assistant_name": assistant_name,
             "font_family": REPORT_FONT_FAMILY,
@@ -249,4 +293,5 @@ class HTMLReportRenderer:
             "BEST_WORST": BEST_WORST
         }
 
+        # Render the HTML from the template and context data
         return template.render(**context_data)
