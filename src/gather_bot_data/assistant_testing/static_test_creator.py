@@ -33,9 +33,7 @@ class StaticTestCreator:
             
             # Write each question-answer pair 4 times
             for entry in data:
-                print(f"DEBUG: entry: {entry}\n")
                 for _ in range(4):  # Repeat each pair 4 times
-                    print(f"DEBUG: entry: {entry}")
                     writer.writerow([entry["Q"], entry["A"]])
 
         

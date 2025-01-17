@@ -85,8 +85,8 @@ class GatherBotData:
         
         self.create_assistant()
         self.create_static_test()
-        #self.get_assistant_answers()
-        #self.grade_assistant()
+        self.get_assistant_answers()
+        self.grade_assistant()
 
 
         print(f"Finished retrieving data from '{assistant_name}' in {time.time() - starting_time:.2f} seconds.")

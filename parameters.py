@@ -6,9 +6,9 @@ BOTS_NAMES = [
     #"Laboratorio Biomed",
     #"Trayecto Bookstore",
     #"Ortodoncia de la Fuente",
-    "KLIK Muebles",
+    #"KLIK Muebles",
     #Nomad Genetics",
-    #House of Spencer"
+    "House of Spencer"
 ]
 
 # Bots' parameters
@@ -80,6 +80,8 @@ For example:
 Should be 
 
 'A': '¡Claro que sí! 😃 Para ayudarte, necesito que me indiques los siguientes datos: Nombre completo 📝 Dirección 🏠 Comuna 📍 Correo electrónico 📧 Marca de los equipos ❄️ (Ejemplo: Samsung, Midea, Otro) Número de equipos 🔢 ¿Quién instaló los equipos? ⚙️ (Opciones: M&U o Tercero) Tipo de equipo 🔧 (Opciones: Split o Multi-Split)'  
+
+Si un texto está en inglés y utila abreviaciones como it's, don't, etc. reemplazalas por su forma completa.
 
 """
 # Test parameters
