@@ -6,7 +6,7 @@ from parameters import BOTS_NAMES
 def gather_bot_data():
     gather_bot_data = GatherBotData()
 
-    print("Analysing all bots\n")
+    print("Gathering data for all bots\n")
 
     starting_time = time.time()
 
@@ -16,7 +16,7 @@ def gather_bot_data():
         except Exception as e:
             print(f"Error for {bot_name}: {str(e)}")
 
-    print(f"Finished analysing all bots in {time.time() - starting_time:.2f} seconds.")
+    print(f"Finished gathering data for all bots in {time.time() - starting_time:.2f} seconds.")
 
 def analyze_bot_data():
     analyze_bot_data = BotDataAnalyzer()
@@ -34,9 +34,15 @@ def analyze_bot_data():
     print(f"Finished analysing all bots in {time.time() - starting_time:.2f} seconds.")
 
 def main():
-    #gather_bot_data()
-    analyze_bot_data()
+    user_input = input("Do you want to gather bot data? (yes/no, default: no): ").strip().lower()
 
+    # Default to 'no' if no input is provided
+    if user_input == "yes":
+        gather_bot_data()
+    else:
+        print("Skipping data gathering.\n")
+
+    analyze_bot_data()
 
 if __name__ == "__main__":
     main()
