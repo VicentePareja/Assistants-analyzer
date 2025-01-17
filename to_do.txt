@@ -1,1 +1,2 @@
 1. refactoring of TextSeparator class.
+2. repair the pbar.
