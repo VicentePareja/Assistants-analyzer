@@ -10,12 +10,8 @@ from parameters import (
     MOST_DIFFERENT, 
 )
 
-
 class BotDataAnalyzer:
-    """
-    Coordinates the data loading, processing, 
-    and creation of the HTML report with two tables and their stats.
-    """
+
     def __init__(self):
         self.paths_manager = PathsManager()
         self.data_loader = BotDataLoader()
@@ -23,7 +19,6 @@ class BotDataAnalyzer:
         self.worst_saver = WorstOf4Saver()
         self.html_report_creator = HTMLReportCreator()
 
-        # Data holders
         self.df_worst_of_4 = pd.DataFrame()
         self.df_single = pd.DataFrame()
         self.df_worst_each_question = pd.DataFrame()
@@ -55,27 +50,12 @@ class BotDataAnalyzer:
             grading_col="Grading"
         )
 
-        # Save data if you want
-        # self.worst_saver.save_worst_data(self.df_worst_each_question, self.paths_manager, assistant_name)
-
-        # CREATE HTML REPORT, passing both full DataFrames + subset DataFrames
         self.html_report_creator.create_html_report(
             assistant_name,
-            df_single_full=self.df_single,                # The entire single-assessment dataset
+            df_single_full=self.df_single,      
             df_single_best=self.df_single_best,
             df_single_worst=self.df_single_worst,
-            df_worst_of_4_full=self.df_worst_of_4,         # The entire worst-of-4 dataset
+            df_worst_of_4_full=self.df_worst_of_4,     
             df_worst_each_question=self.df_worst_each_question,
             paths_manager=self.paths_manager
         )
-
-
-
-def main():
-    bot_name = "Ai Bot You"
-    analyzer = BotDataAnalyzer()
-    analyzer.run_analysis(bot_name)
-
-
-if __name__ == "__main__":
-    main()
