@@ -1,14 +1,14 @@
 BOTS_NAMES = [
     "MyU",
     "Ai Bot You",
-    #"Spencer Consulting",
-    #"Oncoprecisión",
-    #"Laboratorio Biomed",
-    #"Trayecto Bookstore",
-    #"Ortodoncia de la Fuente",
-    #"KLIK Muebles",
-    #"Nomad Genetics",
-    #"House of Spencer"
+    "Spencer Consulting",
+    "Oncoprecisión",
+    "Laboratorio Biomed",
+    "Trayecto Bookstore",
+    "Ortodoncia de la Fuente",
+    "KLIK Muebles",
+    "Nomad Genetics",
+    "House of Spencer"
 ]
 
 # Bots' parameters
@@ -17,6 +17,73 @@ BASE_MODEL_SUFFIX = "base"
 BASE_TEMPERATURE = 0.5
 BASE_TOP_P = 1
 
+# Text separator parameters
+SEPARATOR_MODEL = "o1-mini-2024-09-12"
+DEVELOPER_TEXT_SEPARATOR_DESCRIPTION = """
+You are a text processing AI. Your goal is to split the given text into two parts and return them **strictly** as valid JSON, **with no additional text** outside the JSON. The two parts are:
+
+1. "text_without_examples": This must contain all text from the input **before** any example Q/A pairs appear.
+2. "only_examples": This must contain **only** the example pairs in JSON array format, something like:
+   [
+     {'Q': '...','A': '...'},
+     {'Q': '...', 'A': '...'}
+   ]
+
+### Steps
+1. Identify where the example Q/A pairs begin (usually indicated by lines starting with "Q:" or a clear "Example" section).
+2. Extract all text **before** this section and place it under the "text_without_examples" key.
+3. Extract **only** the Q/A pairs, ensuring the "Q" and "A" strings are correct, and place them in the "only_examples" array. 
+4. Do not include any extra text in "only_examples"; just the Q/A pairs. 
+5. If there are no examples, return "only_examples" as an empty array.
+
+### Required JSON Output Format
+```json
+{
+  "text_without_examples": "All the text before any examples appear",
+  "only_examples": "[{'Q':'question1', 'A':'answer1'}, {'Q':'question2', 'A':'answer2'}]" 
+}
+
+Always mantain that format.
+
+If there are different groups of examples manten them in the same json.
+
+Example:
+
+Este es un asistente diseñado para satisfacer las necesidades del usuario.
+
+Ejemplo 18: Q: ¿Entregan un reporte por cada sesión para poder reembolsar a la Isapre?
+A: ¡Hola! 😊 No entregamos un reporte por sesión, pero nuestra boleta de servicios puede te permite reembolsar. Cuentanos si necesitas detallar el tipo de sesiones realizadas para facilitar tu reembolso con la Isapre. Contactanos directamente a https://walink.co/83468b para poder ayudarte mejor 📝 ¿Te ayudo con algo más?
+
+Ejemplos de Conversaciones en Inglés:
+Ejemplo 1:
+Q: Hi, do you offer trial classes to get to know your services?
+A: Hi there! 😊 Absolutely! You can book your free trial class here: 📲 https://boxmagic.cl/sp/HouseofSpencer24. Let me know if you need any help!
+
+{
+"text_without_examples": "Este es un asistente diseñado para satisfacer las necesidades del usuario.",
+"only_examples": "[{'Q:': '¿Entregan un reporte por cada sesión para poder reembolsar a la Isapre?', 'A': '¡Hola! 😊 No entregamos un reporte por sesión, pero nuestra boleta de servicios puede te permite reembolsar. Cuentanos si necesitas detallar el tipo de sesiones realizadas para facilitar tu reembolso con la Isapre. Contactanos directamente a https://walink.co/83468b para poder ayudarte mejor 📝 ¿Te ayudo con algo más?'}, {'Q': 'Hi, do you offer trial classes to get to know your services?', 'A': 'Hi there! 😊 Absolutely! You can book your free trial class here: 📲 https://boxmagic.cl/sp/HouseofSpencer24. Let me know if you need any help!
+'}]"
+}
+
+
+
+### Extra observations
+1) Be very varefull using \n, use \\n.
+
+
+2) Only use doble quote to delimit the JSON. if some text has quotes or double quotes delete them. 
+
+For example:
+
+'A': '¡Claro que sí! 😃 Para ayudarte, necesito que me indiques los siguientes datos: Nombre completo 📝 Dirección 🏠 Comuna 📍 Correo electrónico 📧 Marca de los equipos ❄️ (Ejemplo: Samsung, Midea, Otro) Número de equipos 🔢 ¿Quién instaló los equipos? ⚙️ (Opciones: "M&U" o "Tercero") Tipo de equipo 🔧 (Opciones: "Split" o "Multi-Split")'
+
+Should be 
+
+'A': '¡Claro que sí! 😃 Para ayudarte, necesito que me indiques los siguientes datos: Nombre completo 📝 Dirección 🏠 Comuna 📍 Correo electrónico 📧 Marca de los equipos ❄️ (Ejemplo: Samsung, Midea, Otro) Número de equipos 🔢 ¿Quién instaló los equipos? ⚙️ (Opciones: M&U o Tercero) Tipo de equipo 🔧 (Opciones: Split o Multi-Split)'  
+
+Si un texto está en inglés y utila abreviaciones como it's, don't, etc. reemplazalas por su forma completa.
+
+"""
 # Test parameters
 COLUMN_QUESTION = "Question"
 COLUMN_HUMAN_ANSWER = "Human Answer"
@@ -27,8 +94,9 @@ PATH_ASSISTANTS_DIRECTORY = f"data/assistants"
 PATH_STATIC_TESTS_DIRECTORY = f"data/static_tests"
 PATH_STATIC_ANSWERS_DIRECTORY = f"data/static_answers"
 PATH_STATIC_GRADES_DIRECTORY = f"data/static_grades"
-
-
+PATH_PROCESSED_RESULTS_DIRECTORY = f"data/processed_results"
+PATH_REPORTS_DIRECTORY = f"data/reports"
+PATH_TEMPLATES_DIRECTORY = f"src/templates"
     # Google Service Account
 PATH_GOOGLE_SERVICE_ACCOUNT = f"google_service/aibotyou-assitantscreator-881108c39324.json"
 
@@ -65,3 +133,11 @@ Justificación: La respuesta del asistente es correcta pero le falta informació
 Nota adicional: Has especial énfasis en la correcititud de datos como los enlaces o los numeros.
 
 A continuación, se te entregará la pregunta, la respuesta humana y la pregunta del asistente."""
+
+# Analysis parameters
+BEST_WORST = 4
+MOST_DIFFERENT = 3
+REPORT_FONT_FAMILY = "Arial, sans-serif"
+REPORT_FONT_SIZE = "14px"
+REPORT_HEADER_BG_COLOR = "#f2f2f2"
+REPORT_ALT_ROW_BG_COLOR = "#fafafa"

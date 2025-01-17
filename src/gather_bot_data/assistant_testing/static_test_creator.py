@@ -36,6 +36,8 @@ class StaticTestCreator:
                 for _ in range(4):  # Repeat each pair 4 times
                     writer.writerow([entry["Q"], entry["A"]])
 
+        
+
         print(f"Base Test file created: {output_test_file}")
 
     def create_single_assessment_test(self, assistant_name):

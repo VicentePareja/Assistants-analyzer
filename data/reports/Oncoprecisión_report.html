@@ -1,0 +1,460 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8"/>
+            <title>Report for Oncoprecisión</title>
+            <style>
+                :root {
+                    --font-family: Arial, sans-serif;
+                    --font-size: 14px;
+                    --header-bg-color: #f2f2f2;
+                    --alt-row-bg-color: #fafafa;
+                }
+                body {
+                    font-family: var(--font-family);
+                    font-size: var(--font-size);
+                    margin: 20px;
+                    color: #333;
+                    background-color: #fafafa; /* <--- Example: slightly off-white background */
+                }
+                h1, h2 {
+                    text-align: center;
+                    margin-bottom: 10px;
+                }
+                table {
+                    width: 100%;
+                    border: 1px solid #ccc;
+                    border-collapse: collapse;
+                    margin: 20px 0;
+                    background-color: #fff; /* White background for tables */
+                }
+                th, td {
+                    border: 1px solid #ccc;
+                    padding: 8px;
+                    text-align: center;
+                }
+                th {
+                    background-color: var(--header-bg-color);
+                }
+                /* Alternate row background */
+                tr:nth-child(odd) {
+                    background-color: var(--alt-row-bg-color);
+                }
+                /* OPTIONAL: Hover effect on table rows */
+                tr:hover {
+                    background-color: #f5f5f5; /* Subtle change on hover */
+                }
+                /* OPTIONAL: Make table headers sticky on scroll (if you have large tables)
+                   Requires a fixed height container or overflow: auto on the table wrapper
+                th {
+                    position: sticky;
+                    top: 0;
+                    z-index: 1;
+                } */
+                .stats-table {
+                    margin-top: 30px;
+                }
+                /* Optional: Slight style difference for stats summary tables */
+                .stats-table th {
+                    background-color: #e0e0e0;
+                    font-weight: bold;
+                }
+            </style>
+        </head>
+        <body>
+            <h1>Report for Oncoprecisión</h1>
+
+            <!-- 1) STATISTICAL SUMMARY for Single-Assessment (using the ENTIRE dataset) -->
+            
+            <h2>Statistical Summary: Single Assessment (All Data)</h2>
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        
+                            <th>index</th>
+                        
+                            <th>count</th>
+                        
+                            <th>mean</th>
+                        
+                            <th>std</th>
+                        
+                            <th>min</th>
+                        
+                            <th>25%</th>
+                        
+                            <th>50%</th>
+                        
+                            <th>75%</th>
+                        
+                            <th>max</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        
+                            <td>Grading</td>
+                        
+                            <td>6.0</td>
+                        
+                            <td>4.166666666666667</td>
+                        
+                            <td>0.408248290463863</td>
+                        
+                            <td>4.0</td>
+                        
+                            <td>4.0</td>
+                        
+                            <td>4.0</td>
+                        
+                            <td>4.0</td>
+                        
+                            <td>5.0</td>
+                        
+                    </tr>
+                    
+                </tbody>
+            </table>
+            
+
+            <!-- 2) STATISTICAL SUMMARY for Worst-of-4 (using the ENTIRE dataset) -->
+            
+            <h2>Statistical Summary: Worst-of-4 (All Data)</h2>
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        
+                            <th>index</th>
+                        
+                            <th>count</th>
+                        
+                            <th>mean</th>
+                        
+                            <th>std</th>
+                        
+                            <th>min</th>
+                        
+                            <th>25%</th>
+                        
+                            <th>50%</th>
+                        
+                            <th>75%</th>
+                        
+                            <th>max</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        
+                            <td>Grading</td>
+                        
+                            <td>24.0</td>
+                        
+                            <td>4.083333333333333</td>
+                        
+                            <td>0.28232985128663995</td>
+                        
+                            <td>4.0</td>
+                        
+                            <td>4.0</td>
+                        
+                            <td>4.0</td>
+                        
+                            <td>4.0</td>
+                        
+                            <td>5.0</td>
+                        
+                    </tr>
+                    
+                </tbody>
+            </table>
+            
+
+
+            <!-- 3) TABLE: Single Assessment BEST (subset) -->
+            <h2>Single Assessment: BEST (Top 4)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        
+                            <th>Question</th>
+                        
+                            <th>Human Answer</th>
+                        
+                            <th>Machine Answer</th>
+                        
+                            <th>Grading</th>
+                        
+                            <th>Explanation</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        
+                            <td>Hola, soy Luisa. Hace un año, recibí el diagnóstico de cáncer de pulmón en etapa IV.</td>
+                        
+                            <td>Lamento mucho la situación. Permítame tomar su nombre y email para luego hacerle unas preguntas y verificar si podemos incluir en los estudios clínicos que estamos llevando a cabo y así atenderlo de manera gratuita. ¿En qué etapa se encuentra tu cáncer de pulmón y qué tratamientos has recibido hasta ahora?</td>
+                        
+                            <td>Hola Luisa, soy Julieta, la Secretaria de Oncoprecisión. Lamento mucho la situación. Permíteme tomar tu nombre y correo electrónico para hacerte algunas preguntas y verificar si podemos incluirte en nuestros estudios clínicos. ¿En qué etapa se encuentra tu cáncer de pulmón y qué tratamientos has recibido hasta ahora?</td>
+                        
+                            <td>5</td>
+                        
+                            <td>La respuesta del asistente es tan buena como la humana. Ambas respuestas expresan empatía y solicitan la información necesaria para evaluar la inclusión en los estudios clínicos. El asistente también se presenta adecuadamente y sigue el protocolo de la clínica, lo que la hace igual de efectiva que la respuesta humana.</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>Sería excelente que puedan ayudarme. Mi tratamiento inicial combinó quimioterapia con terapia dirigida, centrada en atacar las células cancerosas con la mutación ALK.</td>
+                        
+                            <td>Gracias por la información. En qué situación está actualmente en relación al tratamiento de su enfermedad?</td>
+                        
+                            <td>Hola, soy Julieta, la Secretaria de Oncoprecisión. Lamento mucho la situación. Para poder ayudarle, necesito su nombre y correo electrónico. Luego, haré algunas preguntas sobre su enfermedad. ¿Podría proporcionarme esa información?</td>
+                        
+                            <td>4</td>
+                        
+                            <td>La respuesta del asistente es correcta y muestra empatía, pero es inferior a la humana porque no hace una pregunta directa sobre la situación actual del tratamiento, que es crucial para entender mejor la situación del paciente.</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>Hoy en día, sigo recibiendo tratamiento con terapias dirigidas, junto con cuidados paliativos para manejar los síntomas y mejorar mi comodidad. Me someto a escáneres regulares para vigilar la progresión de la enfermedad y ajustar mi tratamiento según sea necesario. Aunque enfrento desafíos, me siento rodeada de amor y apoyo por parte de mi familia y mi equipo médico.</td>
+                        
+                            <td>Hemos guardado bien su información. Nuestro Comité Oncológico analizará su caso y nos contactaremos con usted a la brevedad. Muchas gracias por preferir a Oncopresición.</td>
+                        
+                            <td>Hola, soy Julieta, la Secretaria de Oncoprecisión. Lamento mucho la situación que estás enfrentando. Para poder ayudarte mejor, ¿podrías indicarme tu nombre y correo electrónico? Luego, me gustaría saber qué tipo de cáncer tienes y en qué etapa te encuentras.</td>
+                        
+                            <td>4</td>
+                        
+                            <td>La respuesta del asistente es correcta y muestra empatía, pero es inferior a la humana porque no menciona que la información ya ha sido guardada ni que el Comité Oncológico analizará el caso, lo cual es un paso importante en el proceso.</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>Hola, soy el Dr. Martínez. Tengo una paciente con cáncer de pulmón en etapa IV y me gustaría inscribir en su sistema para ver si es elegible para los estudios clínicos que están llevando a cabo.</td>
+                        
+                            <td>Encantado de ayudar, Dr. Martínez. Por favor, proporcione el nombre y correo electrónico de la paciente. ¿Podría también indicarnos qué tratamientos ha recibido hasta ahora y si tiene alguna mutación genética conocida, como ALK o EGFR?</td>
+                        
+                            <td>Hola, Dr. Martínez. Soy Julieta, la Secretaria de Oncoprecisión. Estoy aquí para ayudarle. Por favor, proporcione el nombre y correo electrónico de la paciente. Además, ¿qué tratamientos ha recibido hasta ahora?</td>
+                        
+                            <td>4</td>
+                        
+                            <td>La respuesta del asistente es correcta y adecuada, ya que solicita el nombre y correo electrónico de la paciente y pregunta sobre los tratamientos recibidos. Sin embargo, le falta preguntar sobre mutaciones genéticas conocidas, lo cual es relevante para evaluar la elegibilidad en los ensayos clínicos.</td>
+                        
+                    </tr>
+                    
+                </tbody>
+            </table>
+
+            <!-- 4) TABLE: Single Assessment WORST (subset) -->
+            <h2>Single Assessment: WORST (Bottom 4)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        
+                            <th>Question</th>
+                        
+                            <th>Human Answer</th>
+                        
+                            <th>Machine Answer</th>
+                        
+                            <th>Grading</th>
+                        
+                            <th>Explanation</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        
+                            <td>Hoy en día, sigo recibiendo tratamiento con terapias dirigidas, junto con cuidados paliativos para manejar los síntomas y mejorar mi comodidad. Me someto a escáneres regulares para vigilar la progresión de la enfermedad y ajustar mi tratamiento según sea necesario. Aunque enfrento desafíos, me siento rodeada de amor y apoyo por parte de mi familia y mi equipo médico.</td>
+                        
+                            <td>Hemos guardado bien su información. Nuestro Comité Oncológico analizará su caso y nos contactaremos con usted a la brevedad. Muchas gracias por preferir a Oncopresición.</td>
+                        
+                            <td>Hola, soy Julieta, la Secretaria de Oncoprecisión. Lamento mucho la situación que estás enfrentando. Para poder ayudarte mejor, ¿podrías indicarme tu nombre y correo electrónico? Luego, me gustaría saber qué tipo de cáncer tienes y en qué etapa te encuentras.</td>
+                        
+                            <td>4</td>
+                        
+                            <td>La respuesta del asistente es correcta y muestra empatía, pero es inferior a la humana porque no menciona que la información ya ha sido guardada ni que el Comité Oncológico analizará el caso, lo cual es un paso importante en el proceso.</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>Hola, soy el Dr. Martínez. Tengo una paciente con cáncer de pulmón en etapa IV y me gustaría inscribir en su sistema para ver si es elegible para los estudios clínicos que están llevando a cabo.</td>
+                        
+                            <td>Encantado de ayudar, Dr. Martínez. Por favor, proporcione el nombre y correo electrónico de la paciente. ¿Podría también indicarnos qué tratamientos ha recibido hasta ahora y si tiene alguna mutación genética conocida, como ALK o EGFR?</td>
+                        
+                            <td>Hola, Dr. Martínez. Soy Julieta, la Secretaria de Oncoprecisión. Estoy aquí para ayudarle. Por favor, proporcione el nombre y correo electrónico de la paciente. Además, ¿qué tratamientos ha recibido hasta ahora?</td>
+                        
+                            <td>4</td>
+                        
+                            <td>La respuesta del asistente es correcta y adecuada, ya que solicita el nombre y correo electrónico de la paciente y pregunta sobre los tratamientos recibidos. Sin embargo, le falta preguntar sobre mutaciones genéticas conocidas, lo cual es relevante para evaluar la elegibilidad en los ensayos clínicos.</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>Claro, la paciente se llama Ana López, su correo es ana.lopez@example.com. Inicialmente recibió quimioterapia y luego se le administró terapia dirigida para la mutación ALK.</td>
+                        
+                            <td>Gracias por la información, Dr. Martínez. ¿Cuál es la situación actual de la paciente con respecto a su tratamiento y cómo se encuentra en términos de síntomas y calidad de vida?</td>
+                        
+                            <td>Hola, soy Julieta, la Secretaria de Oncoprecisión. Gracias por la información, Dr. Martínez. ¿Podría indicarme en qué etapa se encuentra actualmente el cáncer de Ana y qué tratamientos está recibiendo en este momento?</td>
+                        
+                            <td>4</td>
+                        
+                            <td>La respuesta del asistente es correcta y adecuada, ya que agradece la información y hace preguntas relevantes sobre la etapa del cáncer y los tratamientos actuales. Sin embargo, la respuesta humana es más completa al incluir la calidad de vida y síntomas, lo que la hace superior.</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>Actualmente, Ana sigue con terapias dirigidas y cuidados paliativos para manejar los síntomas. Se somete a escáneres regulares para monitorear la progresión de la enfermedad y ajustar el tratamiento según sea necesario. Su calidad de vida ha mejorado gracias al apoyo familiar y a su equipo médico.</td>
+                        
+                            <td>Guardaremos la información de Ana en nuestro sistema. Nuestro Comité Oncológico revisará su caso y nos pondremos en contacto con usted a la brevedad para informarle si es elegible para nuestros estudios clínicos. Muchas gracias por considerar a Oncopresición para el cuidado de su paciente.</td>
+                        
+                            <td>Hola, soy Julieta, la Secretaria de Oncoprecisión. Gracias por compartir la información sobre Ana. Para ayudarla mejor, por favor indíquenos su nombre y correo electrónico. Luego, ¿podría decirme qué tipo de cáncer tiene Ana?</td>
+                        
+                            <td>4</td>
+                        
+                            <td>La respuesta del asistente es correcta y adecuada, ya que agradece la información y solicita datos necesarios para continuar con el proceso. Sin embargo, no menciona que se guardará la información de Ana ni que el Comité Oncológico revisará su caso, lo cual es un detalle importante que se incluye en la respuesta humana.</td>
+                        
+                    </tr>
+                    
+                </tbody>
+            </table>
+
+            <!-- 5) TABLE: Worst-of-4 (Max Difference subset) -->
+            <h2>Worst-of-4 (Max Difference Subset)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        
+                            <th>Question</th>
+                        
+                            <th>Human Answer</th>
+                        
+                            <th>Machine Answer</th>
+                        
+                            <th>Grading</th>
+                        
+                            <th>Explanation</th>
+                        
+                            <th>Type</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        
+                            <td>Hola, soy Luisa. Hace un año, recibí el diagnóstico de cáncer de pulmón en etapa IV.</td>
+                        
+                            <td>Lamento mucho la situación. Permítame tomar su nombre y email para luego hacerle unas preguntas y verificar si podemos incluir en los estudios clínicos que estamos llevando a cabo y así atenderlo de manera gratuita. ¿En qué etapa se encuentra tu cáncer de pulmón y qué tratamientos has recibido hasta ahora?</td>
+                        
+                            <td>Hola Luisa, soy Julieta, la Secretaria de Oncoprecisión. Lamento mucho la situación. Permíteme tomar tu nombre y correo electrónico para hacerte algunas preguntas y verificar si podemos incluirte en nuestros estudios clínicos y así atenderte de manera gratuita. ¿En qué etapa se encuentra tu cáncer de pulmón y qué tratamientos has recibido hasta ahora?</td>
+                        
+                            <td>5</td>
+                        
+                            <td>La respuesta del asistente es tan buena como la humana. Ambas respuestas expresan empatía y ofrecen un proceso claro para recopilar información necesaria para evaluar la inclusión en estudios clínicos. El asistente también se presenta adecuadamente y mantiene un tono amable y profesional.</td>
+                        
+                            <td>BEST</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>Hola, soy Luisa. Hace un año, recibí el diagnóstico de cáncer de pulmón en etapa IV.</td>
+                        
+                            <td>Lamento mucho la situación. Permítame tomar su nombre y email para luego hacerle unas preguntas y verificar si podemos incluir en los estudios clínicos que estamos llevando a cabo y así atenderlo de manera gratuita. ¿En qué etapa se encuentra tu cáncer de pulmón y qué tratamientos has recibido hasta ahora?</td>
+                        
+                            <td>Hola Luisa, soy Julieta, la Secretaria de Oncoprecisión. Lamento mucho tu situación. Permíteme tomar tu nombre y correo electrónico para hacerte algunas preguntas y verificar si podemos ayudarte a través de nuestros ensayos clínicos. ¿Cuál es tu correo electrónico?</td>
+                        
+                            <td>4</td>
+                        
+                            <td>La respuesta del asistente es correcta y muestra empatía, pero le falta preguntar sobre la etapa del cáncer y los tratamientos recibidos, lo cual es importante para evaluar la elegibilidad para los ensayos clínicos. Sin embargo, la respuesta es adecuada y sigue el protocolo de la clínica.</td>
+                        
+                            <td>WORST</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>Actualmente, Ana sigue con terapias dirigidas y cuidados paliativos para manejar los síntomas. Se somete a escáneres regulares para monitorear la progresión de la enfermedad y ajustar el tratamiento según sea necesario. Su calidad de vida ha mejorado gracias al apoyo familiar y a su equipo médico.</td>
+                        
+                            <td>Guardaremos la información de Ana en nuestro sistema. Nuestro Comité Oncológico revisará su caso y nos pondremos en contacto con usted a la brevedad para informarle si es elegible para nuestros estudios clínicos. Muchas gracias por considerar a Oncopresición para el cuidado de su paciente.</td>
+                        
+                            <td>Hola, soy Julieta, la Secretaria de Oncoprecisión. Lamento mucho la situación de Ana. Para ayudarla, necesitaré su nombre y correo electrónico. Luego, podré hacerle algunas preguntas sobre su cáncer y tratamiento. ¿Podría proporcionarme esa información?</td>
+                        
+                            <td>4</td>
+                        
+                            <td>La respuesta del asistente es correcta y muestra empatía, pero es inferior a la humana porque no menciona que se guardará la información de Ana ni que el Comité Oncológico revisará su caso. Además, la respuesta humana es más completa al asegurar que se contactará al usuario, lo cual es un aspecto importante en la atención al paciente.</td>
+                        
+                            <td>BEST</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>Actualmente, Ana sigue con terapias dirigidas y cuidados paliativos para manejar los síntomas. Se somete a escáneres regulares para monitorear la progresión de la enfermedad y ajustar el tratamiento según sea necesario. Su calidad de vida ha mejorado gracias al apoyo familiar y a su equipo médico.</td>
+                        
+                            <td>Guardaremos la información de Ana en nuestro sistema. Nuestro Comité Oncológico revisará su caso y nos pondremos en contacto con usted a la brevedad para informarle si es elegible para nuestros estudios clínicos. Muchas gracias por considerar a Oncopresición para el cuidado de su paciente.</td>
+                        
+                            <td>Hola, soy Julieta, la Secretaria de Oncoprecisión. Lamento mucho la situación de Ana. Para ayudarla, necesitaré su nombre y correo electrónico. Luego, podré hacerle algunas preguntas sobre su cáncer y tratamiento. ¿Podría proporcionarme esa información?</td>
+                        
+                            <td>4</td>
+                        
+                            <td>La respuesta del asistente es correcta y muestra empatía, pero es inferior a la humana porque no menciona que se guardará la información de Ana ni que el Comité Oncológico revisará su caso. Además, la respuesta humana es más completa al asegurar que se contactará al usuario, lo cual es un aspecto importante en la atención al paciente.</td>
+                        
+                            <td>WORST</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>Claro, la paciente se llama Ana López, su correo es ana.lopez@example.com. Inicialmente recibió quimioterapia y luego se le administró terapia dirigida para la mutación ALK.</td>
+                        
+                            <td>Gracias por la información, Dr. Martínez. ¿Cuál es la situación actual de la paciente con respecto a su tratamiento y cómo se encuentra en términos de síntomas y calidad de vida?</td>
+                        
+                            <td>Hola, soy Julieta, la Secretaria de Oncoprecisión. Gracias por la información. ¿Podría indicarme en qué etapa se encuentra Ana y qué tratamientos ha recibido hasta ahora?</td>
+                        
+                            <td>4</td>
+                        
+                            <td>La respuesta del asistente es correcta y adecuada, ya que agradece la información y hace preguntas relevantes sobre la etapa y tratamientos de la paciente. Sin embargo, la respuesta humana es más completa al preguntar sobre síntomas y calidad de vida, lo que podría ser importante en el contexto oncológico.</td>
+                        
+                            <td>BEST</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>Claro, la paciente se llama Ana López, su correo es ana.lopez@example.com. Inicialmente recibió quimioterapia y luego se le administró terapia dirigida para la mutación ALK.</td>
+                        
+                            <td>Gracias por la información, Dr. Martínez. ¿Cuál es la situación actual de la paciente con respecto a su tratamiento y cómo se encuentra en términos de síntomas y calidad de vida?</td>
+                        
+                            <td>Hola, soy Julieta, la Secretaria de Oncoprecisión. Gracias por la información. ¿Podría indicarme en qué etapa se encuentra Ana y qué tratamientos ha recibido hasta ahora?</td>
+                        
+                            <td>4</td>
+                        
+                            <td>La respuesta del asistente es correcta y adecuada, ya que agradece la información y hace preguntas relevantes sobre la etapa y tratamientos de la paciente. Sin embargo, la respuesta humana es más completa al preguntar sobre síntomas y calidad de vida, lo que podría ser importante en el contexto oncológico.</td>
+                        
+                            <td>WORST</td>
+                        
+                    </tr>
+                    
+                </tbody>
+            </table>
+
+        </body>
+        </html>
+        

@@ -19,8 +19,7 @@ class GatherBotData:
             service_account_path=PATH_GOOGLE_SERVICE_ACCOUNT,
             instructions_dir_path=PATH_INSTRUCTIONS_DIRECTORY, 
         )
-        self.text_separator_runner = TextSeparatorRunner(api_key= os.getenv("OPENAI_API_KEY"),
-                                                          separator_assistant_id=os.getenv("ID_ASSISTANT_TEXT_SEPARATOR"))
+        self.text_separator_runner = TextSeparatorRunner(api_key= os.getenv("OPENAI_API_KEY"))
         self.assistant_creator = AssistantCreator(api_key=os.getenv("OPENAI_API_KEY"))
         self.static_test_creator = StaticTestCreator()
         self.static_test_runner = StaticAssistantRunner(openai_api_key=os.getenv("OPENAI_API_KEY"),
@@ -75,25 +74,19 @@ class GatherBotData:
         self.static_test_runner.run_all_worst_of_4_tests(self.assistant_name)
         self.static_test_runner.run_all_single_assessment_tests(self.assistant_name)
 
-    def create_evaluator(self):
-        pass
 
     def grade_assistant(self):
         self.assistant_grader.grade_assistant(self.assistant_name)
-
-    def unify_data(self):
-        pass
 
     def get_data(self, assistant_name):
         self.assistant_name = assistant_name
         starting_time = time.time()
         print(f"Getting data for assistant: {assistant_name}")
         
-        #self.create_assistant()
-        #self.create_static_test()
-        #self.get_assistant_answers()
-        
+        self.create_assistant()
+        self.create_static_test()
+        self.get_assistant_answers()
         self.grade_assistant()
-        #self.unify_data()
+
 
         print(f"Finished retrieving data from '{assistant_name}' in {time.time() - starting_time:.2f} seconds.")

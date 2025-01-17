@@ -1,14 +1,14 @@
-# text_separator.py
-
 import sys
 sys.stdout.reconfigure(encoding='utf-8')  # Ensure UTF-8 output
 
 import json
 from openai import OpenAI, AssistantEventHandler
 from typing_extensions import override
-from parameters import PATH_INSTRUCTIONS_DIRECTORY
+from parameters import PATH_INSTRUCTIONS_DIRECTORY, SEPARATOR_MODEL, DEVELOPER_TEXT_SEPARATOR_DESCRIPTION  # <-- Adjust if needed
+
 ################################################################################
 # EventHandler: Handles streaming events from OpenAI (already OOP).
+# (We won't use the streaming approach anymore, but we'll leave the class here.)
 ################################################################################
 class EventHandler(AssistantEventHandler):
     @override
@@ -31,13 +31,12 @@ class EventHandler(AssistantEventHandler):
 # calling OpenAI, extracting JSON, and saving results.
 ################################################################################
 class TextSeparator:
-    def __init__(self, api_key: str, separator_assistant_id: str):
+    def __init__(self, api_key: str):
         """
         :param api_key: Your OpenAI API key
         :param assistant_id: The ID of your target assistant on OpenAI
         """
         self.api_key = api_key
-        self.assistant_id = separator_assistant_id
         self.client = OpenAI(api_key=self.api_key)
 
     def run(self, assistant_name: str):
@@ -95,42 +94,33 @@ class TextSeparator:
 
     def _ask_assistant(self, prompt: str) -> str:
         """
-        Sends `prompt` to the assistant and returns a combined string
-        of all assistant messages.
+        Sends `prompt` to the assistant using a Chat Completion call
+        and returns the assistant's response text as a single string.
         """
         try:
-            thread = self.client.beta.threads.create()
-            self.client.beta.threads.messages.create(
-                thread_id=thread.id,
-                role="user",
-                content=prompt
-            )
-
-            with self.client.beta.threads.runs.stream(
-                thread_id=thread.id,
-                assistant_id=self.assistant_id,
-                event_handler=EventHandler(),
-            ) as stream:
-                stream.until_done()
-
-            response_message = self.client.beta.threads.messages.list(thread_id=thread.id)
-            if not response_message or not response_message.data:
-                print("No response from assistant.")
-                return ""
-
-            assistant_responses = [
-                msg.content
-                for msg in response_message.data
-                if msg.role == 'assistant'
+            # Prepare the messages in the same style as your working code
+            messages = [
+                {
+                    "role": "developer",
+                    "content": (f"{DEVELOPER_TEXT_SEPARATOR_DESCRIPTION}")                
+                },
+                {
+                    "role": "user",
+                    "content": (
+                        f"{prompt}\n\n"
+                    ),
+                }
             ]
 
-            if not assistant_responses:
-                print("No assistant messages found.")
-                return ""
+            # Call the chat completion endpoint
+            response = self.client.chat.completions.create(
+                model=SEPARATOR_MODEL,
+                messages=messages,
+                temperature=0.0
+            )
 
-            # Combine all assistant messages into one string
-            combined_response = "\n".join(str(r) for r in assistant_responses)
-            return combined_response
+            # Extract the text from the assistant
+            return response.choices[0].message.content
 
         except Exception as e:
             print(f"Error running prompt: {e}")
@@ -147,13 +137,8 @@ class TextSeparator:
         if start_idx == -1 or end_idx == -1:
             return ""
 
-        # Substring from '{' ... '}'
         extracted = combined_response[start_idx:end_idx + 1]
-
-        # Now clean this up
         cleaned = self._clean_extracted_json_str(extracted)
-
-
         return cleaned
 
     def _clean_extracted_json_str(self, text: str) -> str:
@@ -201,13 +186,11 @@ class TextSeparator:
 
 
 class TextSeparatorRunner:
-    def __init__(self, api_key: str, separator_assistant_id: str):
+    def __init__(self, api_key: str):
         self.api_key = api_key
-        self.separator_assistant_id = separator_assistant_id
 
     def run(self, assistant_name: str):
         separator = TextSeparator(
             api_key=self.api_key,
-            separator_assistant_id= self.separator_assistant_id
         )
         separator.run(assistant_name)

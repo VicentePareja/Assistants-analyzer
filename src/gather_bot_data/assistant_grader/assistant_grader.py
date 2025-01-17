@@ -81,13 +81,13 @@ class AssistantGrader:
         )
 
     def _grade_test(
-        self,
-        input_csv_path,
-        output_csv_path,
-        developer_intro,
-        assistant_context,
-        evaluation_description
-    ):
+    self,
+    input_csv_path,
+    output_csv_path,
+    developer_intro,
+    assistant_context,
+    evaluation_description
+):
         """
         General-purpose grader that reads a CSV of format:
             Question;Human Answer;[AssistantName]
@@ -98,86 +98,79 @@ class AssistantGrader:
         graded_rows = []
 
         with open(input_csv_path, mode="r", encoding="utf-8") as infile:
-            total_rows = sum(1 for _ in infile) - 1
+            reader = list(csv.reader(infile, delimiter=";"))  # Convert reader to a list
+            total_rows = len(reader) - 1  # Deduct 1 for the header row
 
-        with open(input_csv_path, mode="r", encoding="utf-8") as infile:
-            reader = csv.reader(infile, delimiter=";")
-            # If the CSV has headers, you could store them, for example:
-            # header = next(reader)
+        with tqdm(total=total_rows, desc=f"Evaluating bot {self.assistant_name}") as pbar:
+            for i, row in enumerate(reader):
+                # Expected CSV structure:
+                # row[0] -> Question
+                # row[1] -> Human Answer
+                # row[2] -> Assistant's Machine Answer
+                if i == 0:  # Skip the header row
+                    continue
 
-            with tqdm(total_rows, desc=f"Evaluating bot {self.assistant_name}") as pbar:
-                for row in reader:
-                    # Expected CSV structure:
-                    # row[0] -> Question
-                    # row[1] -> Human Answer
-                    # row[2] -> Assistant's Machine Answer
-                    question = row[0]
-                    human_answer = row[1]
-                    machine_answer = row[2] if len(row) > 2 else ""
+                question = row[0]
+                human_answer = row[1]
+                machine_answer = row[2] if len(row) > 2 else ""
 
-                    if question == "Question":
-                        # Skip the header
-                        continue
+                # Compose the messages for the ChatCompletion
+                messages = [
+                    {
+                        "role": "developer",
+                        "content": (
+                            f"The developer says:\n\n"
+                            f"{developer_intro}\n\n"
+                            f"{assistant_context}\n\n"
+                            f"{evaluation_description}"
+                        ),
+                    },
+                    {
+                        "role": "user",
+                        "content": (
+                            f"Pregunta:\n{question}\n\n"
+                            f"Respuesta humana:\n{human_answer}\n\n"
+                            f"Respuesta de la máquina:\n{machine_answer}"
+                        ),
+                    },
+                ]
 
-                    # Compose the messages for the ChatCompletion
-                    messages = [
-                        {
-                            "role": "developer",
-                            "content": (
-                                f"The developer says:\n\n"
-                                f"{developer_intro}\n\n"
-                                f"{assistant_context}\n\n"
-                                f"{evaluation_description}"
-                            ),
-                        },
-                        {
-                            "role": "user",
-                            "content": (
-                                f"Pregunta:\n{question}\n\n"
-                                f"Respuesta humana:\n{human_answer}\n\n"
-                                f"Respuesta de la máquina:\n{machine_answer}"
-                            ),
-                        },
-                    ]
-
-                    try:
-                        response = self.client.chat.completions.create(
-                            model=EVAL_MODEL,
-                            messages=messages,
-                            temperature=0.0,
-                            # Enforce JSON output with the two fields: "grade" and "explanation"
-                            response_format={
-                                "type": "json_schema",
-                                "json_schema": {
-                                    "name": "grade_schema",
-                                    "schema": {
-                                        "type": "object",
-                                        "properties": {
-                                            "grade": {
-                                                "description": "Grade or score assigned to the answer",
-                                                "type": "string",
-                                            },
-                                            "explanation": {
-                                                "description": "Explanation for the grade",
-                                                "type": "string",
-                                            },
+                try:
+                    response = self.client.chat.completions.create(
+                        model=EVAL_MODEL,
+                        messages=messages,
+                        temperature=0.0,
+                        # Enforce JSON output with the two fields: "grade" and "explanation"
+                        response_format={
+                            "type": "json_schema",
+                            "json_schema": {
+                                "name": "grade_schema",
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "grade": {
+                                            "description": "Grade or score assigned to the answer",
+                                            "type": "string",
                                         },
-                                        "required": ["grade", "explanation"],
-                                        "additionalProperties": False,
+                                        "explanation": {
+                                            "description": "Explanation for the grade",
+                                            "type": "string",
+                                        },
                                     },
+                                    "required": ["grade", "explanation"],
+                                    "additionalProperties": False,
                                 },
                             },
-                        )
-                        # This should be a JSON string with "grade" and "explanation"
-                        
-                        grader_response = json.loads(response.choices[0].message.content)
-                        grade = grader_response["grade"]
-                        explanation = grader_response["explanation"]
-                        graded_rows.append([question, human_answer, machine_answer, grade, explanation])
-                        
-                    except Exception as e:
-                        print(f"There was an error grading, {e}\n")
-                pbar.update(1)
+                        },
+                    )
+                    # This should be a JSON string with "grade" and "explanation"
+                    grader_response = json.loads(response.choices[0].message.content)
+                    grade = grader_response["grade"]
+                    explanation = grader_response["explanation"]
+                    graded_rows.append([question, human_answer, machine_answer, grade, explanation])
+                except Exception as e:
+                    print(f"There was an error grading, {e}\n")
+                pbar.update(1)  # Update the progress bar after processing each row
 
         # Write out the graded CSV
         with open(output_csv_path, mode="w", encoding="utf-8", newline="") as outfile:

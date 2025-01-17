@@ -1,0 +1,479 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8"/>
+            <title>Report for Laboratorio Biomed</title>
+            <style>
+                :root {
+                    --font-family: Arial, sans-serif;
+                    --font-size: 14px;
+                    --header-bg-color: #f2f2f2;
+                    --alt-row-bg-color: #fafafa;
+                }
+                body {
+                    font-family: var(--font-family);
+                    font-size: var(--font-size);
+                    margin: 20px;
+                    color: #333;
+                    background-color: #fafafa; /* <--- Example: slightly off-white background */
+                }
+                h1, h2 {
+                    text-align: center;
+                    margin-bottom: 10px;
+                }
+                table {
+                    width: 100%;
+                    border: 1px solid #ccc;
+                    border-collapse: collapse;
+                    margin: 20px 0;
+                    background-color: #fff; /* White background for tables */
+                }
+                th, td {
+                    border: 1px solid #ccc;
+                    padding: 8px;
+                    text-align: center;
+                }
+                th {
+                    background-color: var(--header-bg-color);
+                }
+                /* Alternate row background */
+                tr:nth-child(odd) {
+                    background-color: var(--alt-row-bg-color);
+                }
+                /* OPTIONAL: Hover effect on table rows */
+                tr:hover {
+                    background-color: #f5f5f5; /* Subtle change on hover */
+                }
+                /* OPTIONAL: Make table headers sticky on scroll (if you have large tables)
+                   Requires a fixed height container or overflow: auto on the table wrapper
+                th {
+                    position: sticky;
+                    top: 0;
+                    z-index: 1;
+                } */
+                .stats-table {
+                    margin-top: 30px;
+                }
+                /* Optional: Slight style difference for stats summary tables */
+                .stats-table th {
+                    background-color: #e0e0e0;
+                    font-weight: bold;
+                }
+            </style>
+        </head>
+        <body>
+            <h1>Report for Laboratorio Biomed</h1>
+
+            <!-- 1) STATISTICAL SUMMARY for Single-Assessment (using the ENTIRE dataset) -->
+            
+            <h2>Statistical Summary: Single Assessment (All Data)</h2>
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        
+                            <th>index</th>
+                        
+                            <th>count</th>
+                        
+                            <th>mean</th>
+                        
+                            <th>std</th>
+                        
+                            <th>min</th>
+                        
+                            <th>25%</th>
+                        
+                            <th>50%</th>
+                        
+                            <th>75%</th>
+                        
+                            <th>max</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        
+                            <td>Grading</td>
+                        
+                            <td>38.0</td>
+                        
+                            <td>4.868421052631579</td>
+                        
+                            <td>0.41401479485112463</td>
+                        
+                            <td>3.0</td>
+                        
+                            <td>5.0</td>
+                        
+                            <td>5.0</td>
+                        
+                            <td>5.0</td>
+                        
+                            <td>5.0</td>
+                        
+                    </tr>
+                    
+                </tbody>
+            </table>
+            
+
+            <!-- 2) STATISTICAL SUMMARY for Worst-of-4 (using the ENTIRE dataset) -->
+            
+            <h2>Statistical Summary: Worst-of-4 (All Data)</h2>
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        
+                            <th>index</th>
+                        
+                            <th>count</th>
+                        
+                            <th>mean</th>
+                        
+                            <th>std</th>
+                        
+                            <th>min</th>
+                        
+                            <th>25%</th>
+                        
+                            <th>50%</th>
+                        
+                            <th>75%</th>
+                        
+                            <th>max</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        
+                            <td>Grading</td>
+                        
+                            <td>152.0</td>
+                        
+                            <td>4.855263157894737</td>
+                        
+                            <td>0.4214119240831922</td>
+                        
+                            <td>3.0</td>
+                        
+                            <td>5.0</td>
+                        
+                            <td>5.0</td>
+                        
+                            <td>5.0</td>
+                        
+                            <td>5.0</td>
+                        
+                    </tr>
+                    
+                </tbody>
+            </table>
+            
+
+
+            <!-- 3) TABLE: Single Assessment BEST (subset) -->
+            <h2>Single Assessment: BEST (Top 4)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        
+                            <th>Question</th>
+                        
+                            <th>Human Answer</th>
+                        
+                            <th>Machine Answer</th>
+                        
+                            <th>Grading</th>
+                        
+                            <th>Explanation</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        
+                            <td>Hola, necesito saber el horario de atención de la sucursal Centro en Puerto Montt.</td>
+                        
+                            <td>¡Hola! El horario de atención de nuestra Sucursal Centro en Puerto Montt (Benavente 474) es de lunes a viernes de 07:30 a 16:30 horas para atención al cliente y hasta las 16:00 horas para toma de muestras. Los sábados, atención al cliente de 08:00 a 13:00 y toma de muestras hasta las 12:30. ¿Puedo ayudarte en algo más? 😊</td>
+                        
+                            <td>¡Hola! El horario de atención de nuestra Sucursal Centro en Puerto Montt (Benavente 474) es de lunes a viernes de 07:30 a 16:30 horas para atención al cliente y hasta las 16:00 horas para toma de muestras. Los sábados, atención al cliente de 08:00 a 13:00 y toma de muestras hasta las 12:30. ¿Puedo ayudarte en algo más? 😊</td>
+                        
+                            <td>5</td>
+                        
+                            <td>La respuesta del asistente es idéntica a la respuesta humana, proporcionando la información correcta y completa sobre los horarios de atención de la sucursal Centro en Puerto Montt. Además, incluye un toque amigable al final, lo que la hace tan buena como la respuesta humana.</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>Quiero agendar una hora con el Dr. Raúl Mansilla.</td>
+                        
+                            <td>¡Claro! Puedes agendar una cita con el Dr. Raúl Mansilla a través de este enlace: https://8d38a057041999f08f2c133e325c84c029351e63.agenda.softwaremedilink.com/agenda?modalidad=1. 😊</td>
+                        
+                            <td>Puedes agendar una cita con el Dr. Raúl Mansilla a través de este enlace: [Agendar cita](https://8d38a057041999f08f2c133e325c84c029351e63.agenda.softwaremedilink.com/agenda?modalidad=1). 😊</td>
+                        
+                            <td>5</td>
+                        
+                            <td>La respuesta del asistente es tan buena como la humana, ya que proporciona el enlace correcto para agendar la cita con el Dr. Raúl Mansilla y utiliza un tono amigable con el emoji, igual que la respuesta humana.</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>¡Hola! ¿Dónde puedo hacer mamografías o radiografías?</td>
+                        
+                            <td>Puedes realizar mamografías y radiografías solo en nuestra Sucursal Casa Matriz (Benavente 761, Puerto Montt). 😊</td>
+                        
+                            <td>Puedes realizar mamografías y radiografías solo en nuestra Sucursal Casa Matriz (Benavente 761, Puerto Montt). 😊</td>
+                        
+                            <td>5</td>
+                        
+                            <td>La respuesta del asistente es idéntica a la respuesta humana, proporcionando la información correcta y completa sobre la ubicación de las mamografías y radiografías. Además, incluye el tono amigable con el emoji, lo que la hace igual de efectiva que la respuesta humana.</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>¿Qué debo hacer para agendar una hora para el PAP o VPH?</td>
+                        
+                            <td>Puedes agendar tu PAP o VPH aquí: https://wa.me/56945711542 Nuestro equipo te ayudará a escoger sucursal y horario. 👩u200d⚕️</td>
+                        
+                            <td>Puedes agendar tu PAP o VPH aquí: https://wa.me/56945711542. Nuestro equipo te ayudará a escoger sucursal y horario. 👩‍⚕️</td>
+                        
+                            <td>5</td>
+                        
+                            <td>La respuesta del asistente es tan buena como la humana. Proporciona el enlace correcto para agendar y la información necesaria sobre la ayuda del equipo para escoger sucursal y horario. Además, utiliza un emoji que añade un toque amigable a la respuesta.</td>
+                        
+                    </tr>
+                    
+                </tbody>
+            </table>
+
+            <!-- 4) TABLE: Single Assessment WORST (subset) -->
+            <h2>Single Assessment: WORST (Bottom 4)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        
+                            <th>Question</th>
+                        
+                            <th>Human Answer</th>
+                        
+                            <th>Machine Answer</th>
+                        
+                            <th>Grading</th>
+                        
+                            <th>Explanation</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        
+                            <td>¿Qué necesito para realizar el examen de glucosa en orina?</td>
+                        
+                            <td>Para conocer los requisitos del examen de glucosa en orina, por favor permíteme consultar la información. 😊 (Aquí se usaría la función consultar_tabla y se entregaría la información resumida)</td>
+                        
+                            <td>Para conocer los requisitos del examen de glucosa en orina, permíteme consultar la información. 😊 Un momento, por favor. </td>
+                        
+                            <td>4</td>
+                        
+                            <td>La respuesta del asistente es correcta y similar a la humana, ya que ambos indican que se necesita consultar información adicional. Sin embargo, la respuesta del asistente no proporciona la información específica que se esperaría tras la consulta, lo que la hace ligeramente inferior a la respuesta humana.</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>Hola</td>
+                        
+                            <td>¡Buen día, gracias por comunicarte con Laboratorio Clínico Biomed! Mi nombre es Emma, soy la asistente virtual 🤗 ¿Cómo puedo ayudarte hoy? 🌟 Puedo resolver dudas sobre: ✅ Preparación para exámenes ✅ Horarios ✅ Agendar horas médicas ✅ Dirección y horarios de sucursales.</td>
+                        
+                            <td>¡Buen día! Gracias por comunicarte con Laboratorio Clínico Biomed. Soy Emma, tu asistente virtual. ¿En qué puedo ayudarte hoy? 😊</td>
+                        
+                            <td>4</td>
+                        
+                            <td>La respuesta del asistente es correcta y adecuada, pero es inferior a la humana porque no menciona las áreas específicas en las que puede ayudar, como la preparación para exámenes, horarios y agendamiento de horas médicas. Sin embargo, mantiene un tono amigable y profesional.</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>Hola, ¿cuáles son los horarios de la sucursal Puerto Varas?</td>
+                        
+                            <td>Puerto Varas (Pio Nono 426): lun a vie toma de muestras 07:30-15:30, atención hasta 16:30; sáb toma de muestras hasta 11:30, atención hasta 13:00. 😊</td>
+                        
+                            <td>¡Hola! En la Sucursal Puerto Varas (Pio Nono 426), los horarios son:
+
+Lunes a Viernes:
+- Toma de muestras: 07:30 a 15:30
+- Atención al cliente: 07:30 a 16:30
+
+Sábado:
+- Toma de muestras: 08:00 a 11:30
+- Atención al cliente: 08:00 a 13:00
+
+¿Puedo ayudarte con algo más? 😊</td>
+                        
+                            <td>4</td>
+                        
+                            <td>La respuesta del asistente es correcta y proporciona la información necesaria sobre los horarios de la sucursal Puerto Varas. Sin embargo, hay un error en el horario del sábado para la toma de muestras, ya que debería ser hasta las 11:30 y no hasta las 08:00. A pesar de esto, la respuesta es clara y bien estructurada, aunque la humana es más concisa.</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>¿Cuáles son los patógenos que incluye el PCR-ETS?</td>
+                        
+                            <td>En Laboratorio Biomed, nuestro PCR o Panel ETS incluye: Candida Albicans Chlamydia Trachomatis Gardnerella Vaginalis Mycoplasma Genitalium Mycoplasma Hominis Treponema Pallidum Trichomonas Vaginalis Ureaplasma Parvum Ureaplasma Urealyticum Virus Herpes simple I y II Neisseria Gonorrhoeae</td>
+                        
+                            <td>El PCR o Panel ETS incluye:
+
+- Chlamydia trachomatis
+- Neisseria gonorrhoeae
+- Mycoplasma genitalium
+- Mycoplasma hominis
+- Ureaplasma parvum
+- Ureaplasma urealyticum
+
+¿Te puedo ayudar con algo más? 😊</td>
+                        
+                            <td>3</td>
+                        
+                            <td>La respuesta del asistente es parcialmente correcta, ya que menciona algunos de los patógenos incluidos en el PCR-ETS, pero omite varios otros importantes que están en la respuesta humana, como Candida Albicans, Gardnerella Vaginalis, Treponema Pallidum, Trichomonas Vaginalis y Virus Herpes simple I y II. Esto hace que la respuesta sea incompleta.</td>
+                        
+                    </tr>
+                    
+                </tbody>
+            </table>
+
+            <!-- 5) TABLE: Worst-of-4 (Max Difference subset) -->
+            <h2>Worst-of-4 (Max Difference Subset)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        
+                            <th>Question</th>
+                        
+                            <th>Human Answer</th>
+                        
+                            <th>Machine Answer</th>
+                        
+                            <th>Grading</th>
+                        
+                            <th>Explanation</th>
+                        
+                            <th>Type</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        
+                            <td>Hola, ¿puedo agendar una cita para una mamografía?</td>
+                        
+                            <td>Las mamografías se realizan en Casa Matriz (Benavente 761, Puerto Montt). Llámanos al +56 65 2 329 400 o visítanos. 🏥</td>
+                        
+                            <td>Las mamografías se realizan solo en nuestra Sucursal Casa Matriz (Benavente 761, Puerto Montt). Puedes acudir directamente o llamarnos al +56 65 2 329 400. 😊</td>
+                        
+                            <td>5</td>
+                        
+                            <td>La respuesta del asistente es tan buena como la humana. Proporciona la misma información relevante sobre la ubicación y el número de contacto, además de ser clara y concisa. El uso de un emoji también añade un toque amigable, similar a la respuesta humana.</td>
+                        
+                            <td>BEST</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>Hola, ¿puedo agendar una cita para una mamografía?</td>
+                        
+                            <td>Las mamografías se realizan en Casa Matriz (Benavente 761, Puerto Montt). Llámanos al +56 65 2 329 400 o visítanos. 🏥</td>
+                        
+                            <td>Las mamografías se realizan solo en nuestra Casa Matriz (Benavente 761, Puerto Montt). Puedes acudir directamente en horario de atención. ¿Te ayudo con algo más? 😊</td>
+                        
+                            <td>4</td>
+                        
+                            <td>La respuesta del asistente es correcta y proporciona la ubicación de la Casa Matriz, pero no incluye el número de contacto para agendar la cita, lo cual es un detalle importante que la respuesta humana sí menciona. Sin embargo, la respuesta del asistente es clara y concisa.</td>
+                        
+                            <td>WORST</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>Hola</td>
+                        
+                            <td>¡Buen día, gracias por comunicarte con Laboratorio Clínico Biomed! Mi nombre es Emma, soy la asistente virtual 🤗 ¿Cómo puedo ayudarte hoy? 🌟 Puedo resolver dudas sobre: ✅ Preparación para exámenes ✅ Horarios ✅ Agendar horas médicas ✅ Dirección y horarios de sucursales.</td>
+                        
+                            <td>¡Buen día! Gracias por comunicarte con Laboratorio Clínico Biomed. Soy Emma, tu asistente virtual. ¿En qué puedo ayudarte hoy? 😊</td>
+                        
+                            <td>4</td>
+                        
+                            <td>La respuesta del asistente es correcta y adecuada, pero es inferior a la humana porque no menciona las áreas específicas en las que puede ayudar, como la preparación para exámenes, horarios y agendamiento de horas médicas. Sin embargo, mantiene un tono amigable y profesional.</td>
+                        
+                            <td>BEST</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>Hola</td>
+                        
+                            <td>¡Buen día, gracias por comunicarte con Laboratorio Clínico Biomed! Mi nombre es Emma, soy la asistente virtual 🤗 ¿Cómo puedo ayudarte hoy? 🌟 Puedo resolver dudas sobre: ✅ Preparación para exámenes ✅ Horarios ✅ Agendar horas médicas ✅ Dirección y horarios de sucursales.</td>
+                        
+                            <td>¡Buen día! Gracias por comunicarte con Laboratorio Clínico Biomed. Soy Emma, tu asistente virtual. ¿En qué puedo ayudarte hoy? 😊</td>
+                        
+                            <td>4</td>
+                        
+                            <td>La respuesta del asistente es correcta y adecuada, pero es inferior a la humana porque no menciona las áreas específicas en las que puede ayudar, como la preparación para exámenes, horarios y agendamiento de horas médicas. Sin embargo, mantiene un tono amigable y profesional.</td>
+                        
+                            <td>WORST</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>Hola, necesito saber el horario de atención de la sucursal Centro en Puerto Montt.</td>
+                        
+                            <td>¡Hola! El horario de atención de nuestra Sucursal Centro en Puerto Montt (Benavente 474) es de lunes a viernes de 07:30 a 16:30 horas para atención al cliente y hasta las 16:00 horas para toma de muestras. Los sábados, atención al cliente de 08:00 a 13:00 y toma de muestras hasta las 12:30. ¿Puedo ayudarte en algo más? 😊</td>
+                        
+                            <td>¡Hola! El horario de atención de nuestra Sucursal Centro en Puerto Montt (Benavente 474) es de lunes a viernes de 07:30 a 16:30 horas para atención al cliente y hasta las 16:00 horas para toma de muestras. Los sábados, atención al cliente de 08:00 a 13:00 y toma de muestras hasta las 12:30. ¿Puedo ayudarte en algo más? 😊</td>
+                        
+                            <td>5</td>
+                        
+                            <td>La respuesta del asistente es idéntica a la respuesta humana, proporcionando la información correcta y completa sobre los horarios de atención de la sucursal Centro en Puerto Montt. Además, incluye un toque amigable al final, lo que la hace tan buena como la respuesta humana.</td>
+                        
+                            <td>BEST</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        
+                            <td>Hola, necesito saber el horario de atención de la sucursal Centro en Puerto Montt.</td>
+                        
+                            <td>¡Hola! El horario de atención de nuestra Sucursal Centro en Puerto Montt (Benavente 474) es de lunes a viernes de 07:30 a 16:30 horas para atención al cliente y hasta las 16:00 horas para toma de muestras. Los sábados, atención al cliente de 08:00 a 13:00 y toma de muestras hasta las 12:30. ¿Puedo ayudarte en algo más? 😊</td>
+                        
+                            <td>¡Hola! El horario de atención de nuestra Sucursal Centro en Puerto Montt (Benavente 474) es de lunes a viernes de 07:30 a 16:30 horas para atención al cliente y hasta las 16:00 horas para toma de muestras. Los sábados, atención al cliente de 08:00 a 13:00 y toma de muestras hasta las 12:30. ¿Puedo ayudarte en algo más? 😊</td>
+                        
+                            <td>5</td>
+                        
+                            <td>La respuesta del asistente es idéntica a la respuesta humana, proporcionando la información correcta y completa sobre los horarios de atención de la sucursal Centro en Puerto Montt. Además, incluye un toque amigable al final, lo que la hace tan buena como la respuesta humana.</td>
+                        
+                            <td>WORST</td>
+                        
+                    </tr>
+                    
+                </tbody>
+            </table>
+
+        </body>
+        </html>
+        
