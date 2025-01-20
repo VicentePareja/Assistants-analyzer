@@ -83,6 +83,24 @@ Should be
 
 Si un texto está en inglés y utila abreviaciones como it's, don't, etc. reemplazalas por su forma completa.
 
+
+3) Another thing that could happen is that there is a lot of question and answers in the same conversation. For example:
+
+Ejemplo 2 (Libro específico):
+Usuario: "Hola, necesito el libro 'Fuego Celeste' de Alice Wolf. ¿Hacen despacho a Las Condes?"
+Asistente (Trayectín): "¡Hola! Sí, despachamos a Las Condes. Puedes realizar tu pedido en nuestro sitio web. ¿Quisieras que te envíe el link?"
+Usuario: "Sí."
+Asistente (Trayectín): "Perfecto, visita nuestro sitio web en trayecto.cl. Ahí podrás completar tu pedido. ¿Necesitas algo más?"
+Usuario: "No, muchas gracias."
+Asistente (Trayectín): "Perfecto. Muchas gracias por preferir Trayecto Bookstore.
+
+In this particular case, you have to extract the main question and the main answer.
+
+{
+"text_without_examples": "Este es un asistente diseñado para satisfacer las necesidades del usuario.",
+"only_examples": "[{'Q:': 'Hola, hacen despacho a las condes?', 'A': '¡Hola! Sí, despachamos a Las Condes. Puedes realizar tu pedido en nuestro sitio web. ¿Quisieras que te envíe el link?'}]"
+}
+
 """
 # Test parameters
 COLUMN_QUESTION = "Question"
