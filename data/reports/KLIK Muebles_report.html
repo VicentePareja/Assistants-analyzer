@@ -1,352 +1,469 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8"/>
     <title>Report for KLIK Muebles</title>
     <style>
+        /* 
+         * We define all styling parameters as CSS variables for maximum flexibility.
+         * These variables come from your parameters.py, passed into the template context.
+         */
         :root {
-            --font-family: Arial, sans-serif;
-            --font-size: 14px;
-            --header-bg-color: #f2f2f2;
-            --alt-row-bg-color: #fafafa;
+            --font-family: Georgia, &#39;Times New Roman&#39;, serif;
+            --font-size: 18px;
+            --text-color: #444;
+
+            --heading-font-size: 2em;
+            --subheading-font-size: 1.5em;
+
+            --heading-color: #2c3e50;
+            --subheading-color: #34495e;
+
+            --header-bg-color: #34495e;
+            --header-text-color: #ffffff;
+
+            --alt-row-bg-color: #f4f6f8;
+            --hover-row-bg: #d5e0ed;
+
+            --main-bg-color: #f8fafc;
+            --table-shadow-color: rgba(0,0,0,0.05);
+            --table-border-radius: 10px;
+            --table-border-color: #bdc3c7;
+            --table-text-color: #2c3e50;
+
+            --container-max-width: 960px;
+            --container-margin: 0 auto;
+            --container-padding: 40px;
+
+            --body-margin: 0;
+            --body-padding: 0;
+
+            --threshold-box-bg-color: #ffffff;
+            --threshold-box-border-color: #dfe6e9;
+            --threshold-box-text-color: #2c3e50;
+
+            --threshold-section-bg-color: #f0f4f8;
+            --threshold-section-text-color: #333;
+
+            --percentage-section-bg-color: #ecf3fa;
+            --percentage-section-text-color: #2c3e50;
+
+            --paragraph-line-height: 1.8em;
+            --paragraph-margin: 15px 0;
+
+            --bold-highlight-color: #2980b9;
         }
+
+        /* Global reset / basic styling */
         body {
             font-family: var(--font-family);
             font-size: var(--font-size);
-            margin: 20px;
-            color: #333;
-            background-color: #fafafa;
+            color: var(--text-color);
+            background-color: var(--main-bg-color);
+            margin: var(--body-margin);
+            padding: var(--body-padding);
         }
+
+        .report-container {
+            max-width: var(--container-max-width);
+            margin: var(--container-margin);
+            padding: var(--container-padding);
+        }
+
         h1, h2 {
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 16px;
         }
+        h1 {
+            font-size: var(--heading-font-size);
+            margin-top: 0;
+            color: var(--heading-color);
+        }
+        h2 {
+            font-size: var(--subheading-font-size);
+            margin-top: 1.5em;
+            color: var(--subheading-color);
+        }
+
+        p {
+            margin: var(--paragraph-margin);
+            line-height: var(--paragraph-line-height);
+            text-align: center;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: var(--bold-highlight-color);
+        }
+
+        /* Tables */
         table {
             width: 100%;
-            border: 1px solid #ccc;
             border-collapse: collapse;
             margin: 20px 0;
             background-color: #fff;
+            color: var(--table-text-color);
+            box-shadow: 0 2px 6px var(--table-shadow-color);
+            border-radius: var(--table-border-radius);
+            overflow: hidden;
+            border: 1px solid var(--table-border-color);
         }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
+
+        thead th {
             background-color: var(--header-bg-color);
+            color: var(--header-text-color);
+            font-weight: bold;
+            padding: 12px 8px;
+            text-align: center;
+            vertical-align: middle;
         }
-        tr:nth-child(odd) {
+
+        tbody td {
+            padding: 12px 8px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        tbody tr:nth-child(odd) {
             background-color: var(--alt-row-bg-color);
         }
-        tr:hover {
-            background-color: #f5f5f5;
+
+        tbody tr:hover {
+            background-color: var(--hover-row-bg);
         }
-        .stats-table {
-            margin-top: 30px;
+
+        /* Threshold Box */
+        .threshold-box {
+            background-color: var(--threshold-box-bg-color);
+            padding: 20px;
+            border: 1px solid var(--threshold-box-border-color);
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px auto;
+            max-width: 400px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: var(--threshold-box-text-color);
         }
-        .stats-table th {
-            background-color: #e0e0e0;
+
+        .threshold-section {
+            background-color: var(--threshold-section-bg-color);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
             font-weight: bold;
+            color: var(--threshold-section-text-color);
+        }
+
+        .percentage-section {
+            background-color: var(--percentage-section-bg-color);
+            padding: 15px;
+            border: 1px solid var(--threshold-box-border-color);
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--percentage-section-text-color);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
-    <h1>Report for KLIK Muebles</h1>
+    <div class="report-container">
+        <h1>Report for KLIK Muebles</h1>
 
-    <!-- 1) Single-Assessment Summary -->
-    
-    <h2>Single Assessment Summary</h2>
-    <table class="stats-table">
-        <thead>
-            <tr>
-            
-                <th>index</th>
-            
-                <th>count</th>
-            
-                <th>mean</th>
-            
-                <th>std</th>
-            
-                <th>min</th>
-            
-                <th>25%</th>
-            
-                <th>50%</th>
-            
-                <th>75%</th>
-            
-                <th>max</th>
-            
-            </tr>
-        </thead>
-        <tbody>
         
-            <tr>
+        <h2>Single Assessment Summary</h2>
+        <table class="single-summary-table">
+            <thead>
+                <tr>
+                
+                    <th>index</th>
+                
+                    <th>count</th>
+                
+                    <th>mean</th>
+                
+                    <th>std</th>
+                
+                    <th>min</th>
+                
+                    <th>25%</th>
+                
+                    <th>50%</th>
+                
+                    <th>75%</th>
+                
+                    <th>max</th>
+                
+                </tr>
+            </thead>
+            <tbody>
             
-                <td>Grading</td>
+                <tr>
+                
+                    <td>Grading</td>
+                
+                    <td>20.0</td>
+                
+                    <td>4.65</td>
+                
+                    <td>0.4893604849295929</td>
+                
+                    <td>4.0</td>
+                
+                    <td>4.0</td>
+                
+                    <td>5.0</td>
+                
+                    <td>5.0</td>
+                
+                    <td>5.0</td>
+                
+                </tr>
             
-                <td>20.0</td>
-            
-                <td>4.65</td>
-            
-                <td>0.4893604849295929</td>
-            
-                <td>4.0</td>
-            
-                <td>4.0</td>
-            
-                <td>5.0</td>
-            
-                <td>5.0</td>
-            
-                <td>5.0</td>
-            
-            </tr>
+            </tbody>
+        </table>
         
-        </tbody>
-    </table>
-    
 
-    <!-- 2) Worst-of-4 Summary (Single Worst per Question) -->
-    
-    <h2>Worst-of-4 Summary (Single Worst per Question)</h2>
-    <table class="stats-table">
-        <thead>
-            <tr>
-            
-                <th>index</th>
-            
-                <th>count</th>
-            
-                <th>mean</th>
-            
-                <th>std</th>
-            
-                <th>min</th>
-            
-                <th>25%</th>
-            
-                <th>50%</th>
-            
-                <th>75%</th>
-            
-                <th>max</th>
-            
-            </tr>
-        </thead>
-        <tbody>
         
-            <tr>
+        <h2>Worst-of-4 Summary</h2>
+        <table class="worst-summary-table">
+            <thead>
+                <tr>
+                
+                    <th>index</th>
+                
+                    <th>count</th>
+                
+                    <th>mean</th>
+                
+                    <th>std</th>
+                
+                    <th>min</th>
+                
+                    <th>25%</th>
+                
+                    <th>50%</th>
+                
+                    <th>75%</th>
+                
+                    <th>max</th>
+                
+                </tr>
+            </thead>
+            <tbody>
             
-                <td>Grading</td>
+                <tr>
+                
+                    <td>Grading</td>
+                
+                    <td>20.0</td>
+                
+                    <td>4.5</td>
+                
+                    <td>0.512989176042577</td>
+                
+                    <td>4.0</td>
+                
+                    <td>4.0</td>
+                
+                    <td>4.5</td>
+                
+                    <td>5.0</td>
+                
+                    <td>5.0</td>
+                
+                </tr>
             
-                <td>20.0</td>
-            
-                <td>4.5</td>
-            
-                <td>0.512989176042577</td>
-            
-                <td>4.0</td>
-            
-                <td>4.0</td>
-            
-                <td>4.5</td>
-            
-                <td>5.0</td>
-            
-                <td>5.0</td>
-            
-            </tr>
+            </tbody>
+        </table>
         
-        </tbody>
-    </table>
-    
 
-    <!-- 3) Threshold & Percentage ABOVE Threshold -->
-    <h2>Threshold & Percentage Above Threshold</h2>
-    <p><strong>Threshold:</strong> 4.5</p>
-    <p><strong>Percentage of Worst-of-4 (single worst per question) above threshold:</strong> 50.00%</p>
+        <h2>Threshold & Percentage Above Threshold</h2>
+        <div class="threshold-box">
+            <div class="threshold-section">
+                Threshold: 4.5
+            </div>
+            <div class="percentage-section">
+                Percentage Above Threshold: 50.0%
+            </div>
+        </div>
 
-    <!-- 4) Worst-of-4 Below Threshold (no repeated questions) -->
-    
-    <h2>Worst-of-4 Below Threshold (No Repeats)</h2>
-    <table>
-        <thead>
-            <tr>
-            
-                <th>Question</th>
-            
-                <th>Human Answer</th>
-            
-                <th>Machine Answer</th>
-            
-                <th>Grading</th>
-            
-                <th>Explanation</th>
-            
-            </tr>
-        </thead>
-        <tbody>
         
-            <tr>
+        <h2>Worst-of-4 Below Threshold</h2>
+        <table class="worst-below-threshold-table">
+            <thead>
+                <tr>
+                
+                    <th>Question</th>
+                
+                    <th>Human Answer</th>
+                
+                    <th>Machine Answer</th>
+                
+                    <th>Grading</th>
+                
+                    <th>Explanation</th>
+                
+                </tr>
+            </thead>
+            <tbody>
             
-                <td>Claro, mi número de pedido es RIPLEY 22875145401-A. Compré la MESA ESCRITORIO AJUSTABLE PARA COMPUTADOR ROBLE, pero faltan las patas y el juego de ruedas para regular la altura.</td>
-            
-                <td>Entiendo. Gracias por la información. Voy a generar un ticket para que nuestro equipo de soporte gestione el envío de las piezas faltantes lo antes posible. Nuestro tiempo de despacho de posventa es de 3 a 5 días hábiles, dependiendo de la ubicación de destino. Tu número de ticket es PV22875145401-A. ¿Podrías facilitarme tu correo electrónico para mantenerte informado?</td>
-            
-                <td>Gracias por la información. Voy a generar un ticket para que nuestro equipo de soporte gestione el envío de las patas y el juego de ruedas que faltan lo antes posible. 
+                <tr>
+                
+                    <td>Claro, mi número de pedido es RIPLEY 22875145401-A. Compré la MESA ESCRITORIO AJUSTABLE PARA COMPUTADOR ROBLE, pero faltan las patas y el juego de ruedas para regular la altura.</td>
+                
+                    <td>Entiendo. Gracias por la información. Voy a generar un ticket para que nuestro equipo de soporte gestione el envío de las piezas faltantes lo antes posible. Nuestro tiempo de despacho de posventa es de 3 a 5 días hábiles, dependiendo de la ubicación de destino. Tu número de ticket es PV22875145401-A. ¿Podrías facilitarme tu correo electrónico para mantenerte informado?</td>
+                
+                    <td>Gracias por la información. Voy a generar un ticket para que nuestro equipo de soporte gestione el envío de las patas y el juego de ruedas que faltan lo antes posible. 
 
 Nuestro tiempo de despacho de posventa es de </td>
+                
+                    <td>4</td>
+                
+                    <td>La respuesta del asistente es correcta y aborda el problema del cliente al mencionar que generará un ticket para el envío de las piezas faltantes. Sin embargo, no proporciona el número de ticket ni solicita el correo electrónico del cliente, lo cual es importante para mantenerlo informado sobre el estado de su caso. Por lo tanto, aunque la respuesta es adecuada, le falta información crucial que se incluye en la respuesta humana.</td>
+                
+                </tr>
             
-                <td>4</td>
-            
-                <td>La respuesta del asistente es correcta y aborda el problema del cliente al mencionar que generará un ticket para el envío de las piezas faltantes. Sin embargo, no proporciona el número de ticket ni solicita el correo electrónico del cliente, lo cual es importante para mantenerlo informado sobre el estado de su caso. Por lo tanto, aunque la respuesta es adecuada, le falta información crucial que se incluye en la respuesta humana.</td>
-            
-            </tr>
-        
-            <tr>
-            
-                <td>Compré un pack de sillas y faltan algunas patas.</td>
-            
-                <td>Entiendo, gracias por informarlo. Para asegurarme de que recibas la cantidad correcta, ¿podrías confirmarme el número total de patas faltantes?</td>
-            
-                <td>¡Hola! Soy Amelia. Lamento que falten algunas patas en tu pedido. En KLIK Muebles tenemos como métrica objetivo un 100% de satisfacción. Tu posventa tendrá respuesta sí o sí; solo necesitamos confirmar tus datos para gestionarla.
+                <tr>
+                
+                    <td>Compré un pack de sillas y faltan algunas patas.</td>
+                
+                    <td>Entiendo, gracias por informarlo. Para asegurarme de que recibas la cantidad correcta, ¿podrías confirmarme el número total de patas faltantes?</td>
+                
+                    <td>¡Hola! Soy Amelia. Lamento que falten algunas patas en tu pedido. En KLIK Muebles tenemos como métrica objetivo un 100% de satisfacción. Tu posventa tendrá respuesta sí o sí; solo necesitamos confirmar tus datos para gestionarla.
 
 ¿Podrías proporcionarme tu número de pedido y confirmar cuántas patas faltan en total? *(El número de pedido lo puedes encontrar en tu email de compra o en la etiqueta del empaque.)*</td>
+                
+                    <td>4</td>
+                
+                    <td>La respuesta del asistente es correcta y aborda el problema del cliente al solicitar el número de pedido y la cantidad de patas faltantes. Sin embargo, la respuesta humana es más directa y empática al preguntar específicamente por la cantidad de patas faltantes sin rodeos. El asistente podría haber mejorado su respuesta al incluir una pregunta más directa sobre la cantidad de patas faltantes desde el principio.</td>
+                
+                </tr>
             
-                <td>4</td>
-            
-                <td>La respuesta del asistente es correcta y aborda el problema del cliente al solicitar el número de pedido y la cantidad de patas faltantes. Sin embargo, la respuesta humana es más directa y empática al preguntar específicamente por la cantidad de patas faltantes sin rodeos. El asistente podría haber mejorado su respuesta al incluir una pregunta más directa sobre la cantidad de patas faltantes desde el principio.</td>
-            
-            </tr>
-        
-            <tr>
-            
-                <td>Faltan 4 patas en total.</td>
-            
-                <td>Gracias, generaré un ticket para que nuestro equipo envíe las patas faltantes. Te notificaremos cuando estén en camino.</td>
-            
-                <td>¡Hola! Soy Amelia. Lamento que falten patas en tu pedido. En KLIK Muebles tenemos como métrica objetivo un 100% de satisfacción. Tu posventa tendrá respuesta sí o sí; solo necesitamos confirmar tus datos para gestionarla.
+                <tr>
+                
+                    <td>Faltan 4 patas en total.</td>
+                
+                    <td>Gracias, generaré un ticket para que nuestro equipo envíe las patas faltantes. Te notificaremos cuando estén en camino.</td>
+                
+                    <td>¡Hola! Soy Amelia. Lamento que falten patas en tu pedido. En KLIK Muebles tenemos como métrica objetivo un 100% de satisfacción. Tu posventa tendrá respuesta sí o sí; solo necesitamos confirmar tus datos para gestionarla.
 
 ¿Podrías proporcionarme tu número de pedido y tu correo electrónico para mantenerte informado? *(El número de pedido lo puedes encontrar en tu email de compra o en la etiqueta del empaque.)*</td>
+                
+                    <td>4</td>
+                
+                    <td>La respuesta del asistente es correcta y aborda el problema de las patas faltantes, solicitando la información necesaria para proceder con la gestión. Sin embargo, no menciona explícitamente que se generará un ticket para el envío de las patas, lo cual es un detalle importante que se incluye en la respuesta humana. Por lo tanto, aunque la respuesta del asistente es adecuada, le falta un poco de información específica que la respuesta humana proporciona.</td>
+                
+                </tr>
             
-                <td>4</td>
+                <tr>
+                
+                    <td>Hola!</td>
+                
+                    <td>¡Hola! Soy Amelia. Bienvenido a nuestro servicio de posventa. En KLIK Muebles tenemos como métrica objetivo un 100% de satisfacción. Tu posventa tendrá respuesta sí o sí; solo necesitamos confirmar tus datos para gestionarla. Podrías enviarnos tu número de orden, descripción del problema, tu correo electrónico, y si quieres, puedes adjuntar imágenes.</td>
+                
+                    <td>¡Hola! Soy Amelia. Bienvenido a nuestro servicio de posventa. En KLIK Muebles tenemos como métrica objetivo un 100% de satisfacción. Tu posventa tendrá respuesta sí o sí; solo necesitamos confirmar tus datos para gestionarla. ¿Podrías proporcionarme tu número de pedido? *(El número de pedido lo puedes encontrar en tu email de compra o en la etiqueta del empaque.)*</td>
+                
+                    <td>4</td>
+                
+                    <td>La respuesta del asistente es correcta y muy similar a la respuesta humana, pero le falta la solicitud de la descripción del problema y el correo electrónico del cliente, que son elementos importantes para gestionar la posventa. Sin embargo, la inclusión de la información sobre dónde encontrar el número de pedido es un buen detalle que mejora la respuesta.</td>
+                
+                </tr>
             
-                <td>La respuesta del asistente es correcta y aborda el problema de las patas faltantes, solicitando la información necesaria para proceder con la gestión. Sin embargo, no menciona explícitamente que se generará un ticket para el envío de las patas, lo cual es un detalle importante que se incluye en la respuesta humana. Por lo tanto, aunque la respuesta del asistente es adecuada, le falta un poco de información específica que la respuesta humana proporciona.</td>
-            
-            </tr>
-        
-            <tr>
-            
-                <td>Hola!</td>
-            
-                <td>¡Hola! Soy Amelia. Bienvenido a nuestro servicio de posventa. En KLIK Muebles tenemos como métrica objetivo un 100% de satisfacción. Tu posventa tendrá respuesta sí o sí; solo necesitamos confirmar tus datos para gestionarla. Podrías enviarnos tu número de orden, descripción del problema, tu correo electrónico, y si quieres, puedes adjuntar imágenes.</td>
-            
-                <td>¡Hola! Soy Amelia. Bienvenido a nuestro servicio de posventa. En KLIK Muebles tenemos como métrica objetivo un 100% de satisfacción. Tu posventa tendrá respuesta sí o sí; solo necesitamos confirmar tus datos para gestionarla. ¿Podrías proporcionarme tu número de pedido? *(El número de pedido lo puedes encontrar en tu email de compra o en la etiqueta del empaque.)*</td>
-            
-                <td>4</td>
-            
-                <td>La respuesta del asistente es correcta y muy similar a la respuesta humana, pero le falta la solicitud de la descripción del problema y el correo electrónico del cliente, que son elementos importantes para gestionar la posventa. Sin embargo, la inclusión de la información sobre dónde encontrar el número de pedido es un buen detalle que mejora la respuesta.</td>
-            
-            </tr>
-        
-            <tr>
-            
-                <td>Hola, en mi pedido faltan las patas de la mesa del juego de comedor.</td>
-            
-                <td>¡Hola! Soy Amelia. Siento que hayas recibido un producto incompleto. En KLIK Muebles tenemos como métrica objetivo un 100% de satisfacción. Tu posventa tendrá respuesta sí o sí; solo necesitamos confirmar tus datos para gestionarla. ¿Me puedes proporcionar tu número de pedido para asistirte mejor? *(El número de pedido lo puedes encontrar en tu email de compra o en la etiqueta del empaque.)*</td>
-            
-                <td>¡Hola! Soy Amelia. Lamento que hayas recibido un producto incompleto. En KLIK Muebles tenemos como métrica objetivo un 100% de satisfacción. Tu posventa tendrá respuesta sí o sí; solo necesitamos confirmar tus datos para gestionarla.
+                <tr>
+                
+                    <td>Hola, en mi pedido faltan las patas de la mesa del juego de comedor.</td>
+                
+                    <td>¡Hola! Soy Amelia. Siento que hayas recibido un producto incompleto. En KLIK Muebles tenemos como métrica objetivo un 100% de satisfacción. Tu posventa tendrá respuesta sí o sí; solo necesitamos confirmar tus datos para gestionarla. ¿Me puedes proporcionar tu número de pedido para asistirte mejor? *(El número de pedido lo puedes encontrar en tu email de compra o en la etiqueta del empaque.)*</td>
+                
+                    <td>¡Hola! Soy Amelia. Lamento que hayas recibido un producto incompleto. En KLIK Muebles tenemos como métrica objetivo un 100% de satisfacción. Tu posventa tendrá respuesta sí o sí; solo necesitamos confirmar tus datos para gestionarla.
 
 ¿Podrías proporcionarme tu número de pedido y el modelo de la mesa? *(El número de pedido lo puedes encontrar en tu email de compra o en la etiqueta del empaque.)*</td>
+                
+                    <td>4</td>
+                
+                    <td>La respuesta del asistente es correcta y refleja la amabilidad y el enfoque en la satisfacción del cliente, similar a la respuesta humana. Sin embargo, la respuesta de la máquina incluye una solicitud adicional para el modelo de la mesa, que no es estrictamente necesaria en este contexto, lo que puede generar confusión. A pesar de esto, la respuesta es adecuada y cumple con los requisitos de atención al cliente.</td>
+                
+                </tr>
             
-                <td>4</td>
-            
-                <td>La respuesta del asistente es correcta y refleja la amabilidad y el enfoque en la satisfacción del cliente, similar a la respuesta humana. Sin embargo, la respuesta de la máquina incluye una solicitud adicional para el modelo de la mesa, que no es estrictamente necesaria en este contexto, lo que puede generar confusión. A pesar de esto, la respuesta es adecuada y cumple con los requisitos de atención al cliente.</td>
-            
-            </tr>
-        
-            <tr>
-            
-                <td>Mi correo es ejemplo@dominio.com.</td>
-            
-                <td>Perfecto, hemos registrado tu caso. Nuestro equipo de soporte te contactará pronto. ¿Necesitas ayuda con algo más?</td>
-            
-                <td>¡Hola! Soy Amelia. Bienvenido a nuestro servicio de posventa. En KLIK Muebles tenemos como métrica objetivo un 100% de satisfacción. Tu posventa tendrá respuesta sí o sí; solo necesitamos confirmar tus datos para gestionarla. 
+                <tr>
+                
+                    <td>Mi correo es ejemplo@dominio.com.</td>
+                
+                    <td>Perfecto, hemos registrado tu caso. Nuestro equipo de soporte te contactará pronto. ¿Necesitas ayuda con algo más?</td>
+                
+                    <td>¡Hola! Soy Amelia. Bienvenido a nuestro servicio de posventa. En KLIK Muebles tenemos como métrica objetivo un 100% de satisfacción. Tu posventa tendrá respuesta sí o sí; solo necesitamos confirmar tus datos para gestionarla. 
 
 ¿Podrías proporcionarme tu número de pedido y describir el problema específico que estás enfrentando? *(El número de pedido lo puedes encontrar en tu email de compra o en la etiqueta del empaque.)*</td>
+                
+                    <td>4</td>
+                
+                    <td>La respuesta del asistente es correcta y sigue el protocolo establecido, solicitando el número de pedido y la descripción del problema. Sin embargo, no reconoce que el correo ya fue proporcionado y no menciona que el caso ha sido registrado, lo que hace que la respuesta sea inferior a la humana en términos de atención al cliente.</td>
+                
+                </tr>
             
-                <td>4</td>
+                <tr>
+                
+                    <td>No, eso es todo. Gracias.</td>
+                
+                    <td>A ti por tu paciencia. Estamos aquí para ayudarte.</td>
+                
+                    <td>¡Gracias a ti! Si necesitas ayuda en el futuro, no dudes en contactarnos. ¡Que tengas un excelente día!</td>
+                
+                    <td>4</td>
+                
+                    <td>La respuesta del asistente es correcta y amable, mostrando disposición para ayudar en el futuro. Sin embargo, la respuesta humana es más personalizada y refleja un agradecimiento más específico por la paciencia del cliente, lo que la hace ligeramente superior en términos de conexión emocional.</td>
+                
+                </tr>
             
-                <td>La respuesta del asistente es correcta y sigue el protocolo establecido, solicitando el número de pedido y la descripción del problema. Sin embargo, no reconoce que el correo ya fue proporcionado y no menciona que el caso ha sido registrado, lo que hace que la respuesta sea inferior a la humana en términos de atención al cliente.</td>
+                <tr>
+                
+                    <td>No, eso sería todo.</td>
+                
+                    <td>Muchas gracias por tu paciencia. Estamos aquí para ayudarte en lo que necesites.</td>
+                
+                    <td>¡Gracias por tu paciencia! Si necesitas ayuda en el futuro, no dudes en contactarnos. ¡Que tengas un excelente día!</td>
+                
+                    <td>4</td>
+                
+                    <td>La respuesta del asistente es correcta y amable, similar a la respuesta humana. Sin embargo, la respuesta humana es más directa al ofrecer ayuda adicional, mientras que la respuesta del asistente se enfoca más en un cierre positivo. Aunque ambas son adecuadas, la respuesta humana tiene un toque más personalizado.</td>
+                
+                </tr>
             
-            </tr>
-        
-            <tr>
+                <tr>
+                
+                    <td>No, muchas gracias.</td>
+                
+                    <td>Gracias a ti. Estamos para servirte.</td>
+                
+                    <td>¡De nada! Si necesitas ayuda en el futuro, no dudes en contactarme. Estoy aquí para ayudarte. ¡Que tengas un buen día!</td>
+                
+                    <td>4</td>
+                
+                    <td>La respuesta del asistente es correcta y amable, ofreciendo ayuda futura y deseando un buen día. Sin embargo, la respuesta humana es más concisa y directa, lo que la hace ligeramente superior en términos de brevedad y enfoque en el servicio al cliente.</td>
+                
+                </tr>
             
-                <td>No, eso es todo. Gracias.</td>
-            
-                <td>A ti por tu paciencia. Estamos aquí para ayudarte.</td>
-            
-                <td>¡Gracias a ti! Si necesitas ayuda en el futuro, no dudes en contactarnos. ¡Que tengas un excelente día!</td>
-            
-                <td>4</td>
-            
-                <td>La respuesta del asistente es correcta y amable, mostrando disposición para ayudar en el futuro. Sin embargo, la respuesta humana es más personalizada y refleja un agradecimiento más específico por la paciencia del cliente, lo que la hace ligeramente superior en términos de conexión emocional.</td>
-            
-            </tr>
-        
-            <tr>
-            
-                <td>No, eso sería todo.</td>
-            
-                <td>Muchas gracias por tu paciencia. Estamos aquí para ayudarte en lo que necesites.</td>
-            
-                <td>¡Gracias por tu paciencia! Si necesitas ayuda en el futuro, no dudes en contactarnos. ¡Que tengas un excelente día!</td>
-            
-                <td>4</td>
-            
-                <td>La respuesta del asistente es correcta y amable, similar a la respuesta humana. Sin embargo, la respuesta humana es más directa al ofrecer ayuda adicional, mientras que la respuesta del asistente se enfoca más en un cierre positivo. Aunque ambas son adecuadas, la respuesta humana tiene un toque más personalizado.</td>
-            
-            </tr>
-        
-            <tr>
-            
-                <td>No, muchas gracias.</td>
-            
-                <td>Gracias a ti. Estamos para servirte.</td>
-            
-                <td>¡De nada! Si necesitas ayuda en el futuro, no dudes en contactarme. Estoy aquí para ayudarte. ¡Que tengas un buen día!</td>
-            
-                <td>4</td>
-            
-                <td>La respuesta del asistente es correcta y amable, ofreciendo ayuda futura y deseando un buen día. Sin embargo, la respuesta humana es más concisa y directa, lo que la hace ligeramente superior en términos de brevedad y enfoque en el servicio al cliente.</td>
-            
-            </tr>
-        
-            <tr>
-            
-                <td>Sí, faltan 4 patas en total.</td>
-            
-                <td>Entiendo. Voy a generar un ticket para que te enviemos las patas faltantes a la brevedad. Nuestro tiempo de despacho de posventa es de 3 a 5 días hábiles, dependiendo de la ubicación de destino. Tu número de ticket es PV22446. ¿Cuál es tu correo electrónico para mantenerte informado?</td>
-            
-                <td>¡Hola! Soy Amelia. Lamento que falten patas en tu pedido. En KLIK Muebles tenemos como métrica objetivo un 100% de satisfacción. Tu posventa tendrá respuesta sí o sí; solo necesitamos confirmar tus datos para gestionarla.
+                <tr>
+                
+                    <td>Sí, faltan 4 patas en total.</td>
+                
+                    <td>Entiendo. Voy a generar un ticket para que te enviemos las patas faltantes a la brevedad. Nuestro tiempo de despacho de posventa es de 3 a 5 días hábiles, dependiendo de la ubicación de destino. Tu número de ticket es PV22446. ¿Cuál es tu correo electrónico para mantenerte informado?</td>
+                
+                    <td>¡Hola! Soy Amelia. Lamento que falten patas en tu pedido. En KLIK Muebles tenemos como métrica objetivo un 100% de satisfacción. Tu posventa tendrá respuesta sí o sí; solo necesitamos confirmar tus datos para gestionarla.
 
 ¿Podrías proporcionarme tu número de pedido y tu correo electrónico para mantenerte informado? *(El número de pedido lo puedes encontrar en tu email de compra o en la etiqueta del empaque.)*</td>
+                
+                    <td>4</td>
+                
+                    <td>La respuesta del asistente es correcta y aborda el problema de las patas faltantes, además de solicitar la información necesaria para gestionar la posventa. Sin embargo, no menciona el tiempo de despacho de 3 a 5 días hábiles, que es un dato importante que se incluye en la respuesta humana. Por lo tanto, aunque la respuesta del asistente es adecuada, le falta un detalle clave que la haría más completa.</td>
+                
+                </tr>
             
-                <td>4</td>
-            
-                <td>La respuesta del asistente es correcta y aborda el problema de las patas faltantes, además de solicitar la información necesaria para gestionar la posventa. Sin embargo, no menciona el tiempo de despacho de 3 a 5 días hábiles, que es un dato importante que se incluye en la respuesta humana. Por lo tanto, aunque la respuesta del asistente es adecuada, le falta un detalle clave que la haría más completa.</td>
-            
-            </tr>
+            </tbody>
+        </table>
         
-        </tbody>
-    </table>
-    
-
+    </div>
 </body>
 </html>
-        

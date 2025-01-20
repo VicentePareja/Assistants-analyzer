@@ -125,7 +125,7 @@ PATH_STATIC_ANSWERS_DIRECTORY = f"data/static_answers"
 PATH_STATIC_GRADES_DIRECTORY = f"data/static_grades"
 PATH_PROCESSED_RESULTS_DIRECTORY = f"data/processed_results"
 PATH_REPORTS_DIRECTORY = f"data/reports"
-PATH_TEMPLATES_DIRECTORY = f"src/templates"
+PATH_TEMPLATES_DIRECTORY = f"src/analyze_bot_data/crate_report/templates"
     # Google Service Account
 PATH_GOOGLE_SERVICE_ACCOUNT = f"google_service/aibotyou-assitantscreator-881108c39324.json"
 
@@ -167,8 +167,73 @@ A continuación, se te entregará la pregunta, la respuesta humana y la pregunta
 THRESHOLD = 4.5
 BEST_WORST = 4
 MOST_DIFFERENT = 3
-REPORT_FONT_FAMILY = "Arial, sans-serif"
-REPORT_FONT_SIZE = "14px"
-REPORT_HEADER_BG_COLOR = "#f2f2f2"
-REPORT_ALT_ROW_BG_COLOR = "#fafafa"
+# Report Styling Parameters
+# parameters.py
+
+# ------------------------------------------------------------------------------------
+# Report Styling Parameters
+# ------------------------------------------------------------------------------------
+# parameters.py
+
+# ------------------------------------------------------------------------------------
+# Report Styling Parameters
+# ------------------------------------------------------------------------------------
+# Font and Text
+REPORT_FONT_FAMILY = "Georgia, 'Times New Roman', serif"
+REPORT_FONT_SIZE = "18px"
+REPORT_TEXT_COLOR = "#444"  # Softer black for readability
+
+# Headings
+REPORT_HEADING_FONT_SIZE = "2em"  # Larger, more formal headings
+REPORT_SUBHEADING_FONT_SIZE = "1.5em"  # Slightly larger subheadings
+REPORT_HEADING_COLOR = "#2c3e50"  # Formal dark blue
+REPORT_SUBHEADING_COLOR = "#34495e"  # Slightly lighter complementary color
+
+# Table Headers
+REPORT_HEADER_BG_COLOR = "#34495e"  # Dark blue background for headers
+REPORT_HEADER_TEXT_COLOR = "#ffffff"  # White text for contrast
+
+# Table Rows
+REPORT_ALT_ROW_BG_COLOR = "#f4f6f8"  # Light grey for alternating rows
+REPORT_HOVER_ROW_BG = "#d5e0ed"  # Subtle blue for hover effect
+
+# Backgrounds and Shadows
+REPORT_MAIN_BG_COLOR = "#f8fafc"  # Very light blue for the main background
+REPORT_TABLE_SHADOW_COLOR = "rgba(0,0,0,0.05)"  # Subtle shadow for depth
+REPORT_TABLE_BORDER_RADIUS = "10px"  # Slightly rounded corners
+REPORT_TABLE_BORDER_COLOR = "#bdc3c7"  # Light grey for borders
+REPORT_TABLE_TEXT_COLOR = "#2c3e50"  # Match the formal heading color
+
+# Container
+REPORT_CONTAINER_MAX_WIDTH = "960px"  # Narrower for better readability
+REPORT_CONTAINER_MARGIN = "0 auto"
+REPORT_CONTAINER_PADDING = "40px"  # More spacious padding for elegance
+
+# Body
+REPORT_BODY_MARGIN = "0"
+REPORT_BODY_PADDING = "0"
+
+# Threshold Box
+REPORT_THRESHOLD_BOX_BG_COLOR = "#ffffff"  # Pure white for a clean contrast
+REPORT_THRESHOLD_BOX_BORDER_COLOR = "#dfe6e9"  # Softer grey border
+REPORT_THRESHOLD_BOX_TEXT_COLOR = "#2c3e50"  # Consistent formal blue
+
+# Threshold Section
+REPORT_THRESHOLD_SECTION_BG_COLOR = "#f0f4f8"  # Gentle grey for thresholds
+REPORT_THRESHOLD_SECTION_TEXT_COLOR = "#333"  # Standard text color
+
+# Percentage Section
+REPORT_PERCENTAGE_SECTION_BG_COLOR = "#ecf3fa"  # Light blue for emphasis
+REPORT_PERCENTAGE_SECTION_TEXT_COLOR = "#2c3e50"
+
+# Paragraphs
+REPORT_PARAGRAPH_LINE_HEIGHT = "1.8em"  # Increased line height for better readability
+REPORT_PARAGRAPH_MARGIN = "15px 0"  # Slightly more space between paragraphs
+
+# Highlights
+REPORT_BOLD_HIGHLIGHT_COLOR = "#2980b9"  # Vibrant blue for emphasis
+
+
+
+
 

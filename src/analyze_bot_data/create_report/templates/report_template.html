@@ -2,56 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>Report for Nomad Genetics</title>
+    <title>Report for {{ assistant_name }}</title>
     <style>
         /* 
          * We define all styling parameters as CSS variables for maximum flexibility.
          * These variables come from your parameters.py, passed into the template context.
          */
         :root {
-            --font-family: Georgia, &#39;Times New Roman&#39;, serif;
-            --font-size: 18px;
-            --text-color: #444;
+            --font-family: {{ font_family }};
+            --font-size: {{ font_size }};
+            --text-color: {{ text_color }};
 
-            --heading-font-size: 2em;
-            --subheading-font-size: 1.5em;
+            --heading-font-size: {{ heading_font_size }};
+            --subheading-font-size: {{ subheading_font_size }};
 
-            --heading-color: #2c3e50;
-            --subheading-color: #34495e;
+            --heading-color: {{ heading_color }};
+            --subheading-color: {{ subheading_color }};
 
-            --header-bg-color: #34495e;
-            --header-text-color: #ffffff;
+            --header-bg-color: {{ header_bg_color }};
+            --header-text-color: {{ header_text_color }};
 
-            --alt-row-bg-color: #f4f6f8;
-            --hover-row-bg: #d5e0ed;
+            --alt-row-bg-color: {{ alt_row_bg_color }};
+            --hover-row-bg: {{ hover_row_bg }};
 
-            --main-bg-color: #f8fafc;
-            --table-shadow-color: rgba(0,0,0,0.05);
-            --table-border-radius: 10px;
-            --table-border-color: #bdc3c7;
-            --table-text-color: #2c3e50;
+            --main-bg-color: {{ main_bg_color }};
+            --table-shadow-color: {{ table_shadow_color }};
+            --table-border-radius: {{ table_border_radius }};
+            --table-border-color: {{ table_border_color }};
+            --table-text-color: {{ table_text_color }};
 
-            --container-max-width: 960px;
-            --container-margin: 0 auto;
-            --container-padding: 40px;
+            --container-max-width: {{ container_max_width }};
+            --container-margin: {{ container_margin }};
+            --container-padding: {{ container_padding }};
 
-            --body-margin: 0;
-            --body-padding: 0;
+            --body-margin: {{ body_margin }};
+            --body-padding: {{ body_padding }};
 
-            --threshold-box-bg-color: #ffffff;
-            --threshold-box-border-color: #dfe6e9;
-            --threshold-box-text-color: #2c3e50;
+            --threshold-box-bg-color: {{ threshold_box_bg_color }};
+            --threshold-box-border-color: {{ threshold_box_border_color }};
+            --threshold-box-text-color: {{ threshold_box_text_color }};
 
-            --threshold-section-bg-color: #f0f4f8;
-            --threshold-section-text-color: #333;
+            --threshold-section-bg-color: {{ threshold_section_bg_color }};
+            --threshold-section-text-color: {{ threshold_section_text_color }};
 
-            --percentage-section-bg-color: #ecf3fa;
-            --percentage-section-text-color: #2c3e50;
+            --percentage-section-bg-color: {{ percentage_section_bg_color }};
+            --percentage-section-text-color: {{ percentage_section_text_color }};
 
-            --paragraph-line-height: 1.8em;
-            --paragraph-margin: 15px 0;
+            --paragraph-line-height: {{ paragraph_line_height }};
+            --paragraph-margin: {{ paragraph_margin }};
 
-            --bold-highlight-color: #2980b9;
+            --bold-highlight-color: {{ bold_highlight_color }};
         }
 
         /* Global reset / basic styling */
@@ -169,149 +169,83 @@
 </head>
 <body>
     <div class="report-container">
-        <h1>Report for Nomad Genetics</h1>
+        <h1>Report for {{ assistant_name }}</h1>
 
-        
+        {% if single_summary_columns %}
         <h2>Single Assessment Summary</h2>
         <table class="single-summary-table">
             <thead>
                 <tr>
-                
-                    <th>index</th>
-                
-                    <th>count</th>
-                
-                    <th>mean</th>
-                
-                    <th>std</th>
-                
-                    <th>min</th>
-                
-                    <th>25%</th>
-                
-                    <th>50%</th>
-                
-                    <th>75%</th>
-                
-                    <th>max</th>
-                
+                {% for col in single_summary_columns %}
+                    <th>{{ col }}</th>
+                {% endfor %}
                 </tr>
             </thead>
             <tbody>
-            
+            {% for row in single_summary_rows %}
                 <tr>
-                
-                    <td>Grading</td>
-                
-                    <td>2.0</td>
-                
-                    <td>5.0</td>
-                
-                    <td>0.0</td>
-                
-                    <td>5.0</td>
-                
-                    <td>5.0</td>
-                
-                    <td>5.0</td>
-                
-                    <td>5.0</td>
-                
-                    <td>5.0</td>
-                
+                {% for col in single_summary_columns %}
+                    <td>{{ row[col] }}</td>
+                {% endfor %}
                 </tr>
-            
+            {% endfor %}
             </tbody>
         </table>
-        
+        {% endif %}
 
-        
+        {% if worst_summary_columns %}
         <h2>Worst-of-4 Summary</h2>
         <table class="worst-summary-table">
             <thead>
                 <tr>
-                
-                    <th>index</th>
-                
-                    <th>count</th>
-                
-                    <th>mean</th>
-                
-                    <th>std</th>
-                
-                    <th>min</th>
-                
-                    <th>25%</th>
-                
-                    <th>50%</th>
-                
-                    <th>75%</th>
-                
-                    <th>max</th>
-                
+                {% for col in worst_summary_columns %}
+                    <th>{{ col }}</th>
+                {% endfor %}
                 </tr>
             </thead>
             <tbody>
-            
+            {% for row in worst_summary_rows %}
                 <tr>
-                
-                    <td>Grading</td>
-                
-                    <td>2.0</td>
-                
-                    <td>5.0</td>
-                
-                    <td>0.0</td>
-                
-                    <td>5.0</td>
-                
-                    <td>5.0</td>
-                
-                    <td>5.0</td>
-                
-                    <td>5.0</td>
-                
-                    <td>5.0</td>
-                
+                {% for col in worst_summary_columns %}
+                    <td>{{ row[col] }}</td>
+                {% endfor %}
                 </tr>
-            
+            {% endfor %}
             </tbody>
         </table>
-        
+        {% endif %}
 
         <h2>Threshold & Percentage Above Threshold</h2>
         <div class="threshold-box">
             <div class="threshold-section">
-                Threshold: 4.5
+                Threshold: {{ threshold }}
             </div>
             <div class="percentage-section">
-                Percentage Above Threshold: 100.0%
+                Percentage Above Threshold: {{ percentage_worst_of_4_above_threshold }}%
             </div>
         </div>
 
-        
+        {% if worst_of_4_below_threshold_columns %}
         <h2>Worst-of-4 Below Threshold</h2>
         <table class="worst-below-threshold-table">
             <thead>
                 <tr>
-                
-                    <th>Question</th>
-                
-                    <th>Human Answer</th>
-                
-                    <th>Machine Answer</th>
-                
-                    <th>Grading</th>
-                
-                    <th>Explanation</th>
-                
+                {% for col in worst_of_4_below_threshold_columns %}
+                    <th>{{ col }}</th>
+                {% endfor %}
                 </tr>
             </thead>
             <tbody>
-            
+            {% for row in worst_of_4_below_threshold_rows %}
+                <tr>
+                {% for col in worst_of_4_below_threshold_columns %}
+                    <td>{{ row[col] }}</td>
+                {% endfor %}
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
-        
+        {% endif %}
     </div>
 </body>
 </html>

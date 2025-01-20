@@ -1,233 +1,350 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8"/>
     <title>Report for Spencer Consulting</title>
     <style>
+        /* 
+         * We define all styling parameters as CSS variables for maximum flexibility.
+         * These variables come from your parameters.py, passed into the template context.
+         */
         :root {
-            --font-family: Arial, sans-serif;
-            --font-size: 14px;
-            --header-bg-color: #f2f2f2;
-            --alt-row-bg-color: #fafafa;
+            --font-family: Georgia, &#39;Times New Roman&#39;, serif;
+            --font-size: 18px;
+            --text-color: #444;
+
+            --heading-font-size: 2em;
+            --subheading-font-size: 1.5em;
+
+            --heading-color: #2c3e50;
+            --subheading-color: #34495e;
+
+            --header-bg-color: #34495e;
+            --header-text-color: #ffffff;
+
+            --alt-row-bg-color: #f4f6f8;
+            --hover-row-bg: #d5e0ed;
+
+            --main-bg-color: #f8fafc;
+            --table-shadow-color: rgba(0,0,0,0.05);
+            --table-border-radius: 10px;
+            --table-border-color: #bdc3c7;
+            --table-text-color: #2c3e50;
+
+            --container-max-width: 960px;
+            --container-margin: 0 auto;
+            --container-padding: 40px;
+
+            --body-margin: 0;
+            --body-padding: 0;
+
+            --threshold-box-bg-color: #ffffff;
+            --threshold-box-border-color: #dfe6e9;
+            --threshold-box-text-color: #2c3e50;
+
+            --threshold-section-bg-color: #f0f4f8;
+            --threshold-section-text-color: #333;
+
+            --percentage-section-bg-color: #ecf3fa;
+            --percentage-section-text-color: #2c3e50;
+
+            --paragraph-line-height: 1.8em;
+            --paragraph-margin: 15px 0;
+
+            --bold-highlight-color: #2980b9;
         }
+
+        /* Global reset / basic styling */
         body {
             font-family: var(--font-family);
             font-size: var(--font-size);
-            margin: 20px;
-            color: #333;
-            background-color: #fafafa;
+            color: var(--text-color);
+            background-color: var(--main-bg-color);
+            margin: var(--body-margin);
+            padding: var(--body-padding);
         }
+
+        .report-container {
+            max-width: var(--container-max-width);
+            margin: var(--container-margin);
+            padding: var(--container-padding);
+        }
+
         h1, h2 {
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 16px;
         }
+        h1 {
+            font-size: var(--heading-font-size);
+            margin-top: 0;
+            color: var(--heading-color);
+        }
+        h2 {
+            font-size: var(--subheading-font-size);
+            margin-top: 1.5em;
+            color: var(--subheading-color);
+        }
+
+        p {
+            margin: var(--paragraph-margin);
+            line-height: var(--paragraph-line-height);
+            text-align: center;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: var(--bold-highlight-color);
+        }
+
+        /* Tables */
         table {
             width: 100%;
-            border: 1px solid #ccc;
             border-collapse: collapse;
             margin: 20px 0;
             background-color: #fff;
+            color: var(--table-text-color);
+            box-shadow: 0 2px 6px var(--table-shadow-color);
+            border-radius: var(--table-border-radius);
+            overflow: hidden;
+            border: 1px solid var(--table-border-color);
         }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
+
+        thead th {
             background-color: var(--header-bg-color);
+            color: var(--header-text-color);
+            font-weight: bold;
+            padding: 12px 8px;
+            text-align: center;
+            vertical-align: middle;
         }
-        tr:nth-child(odd) {
+
+        tbody td {
+            padding: 12px 8px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        tbody tr:nth-child(odd) {
             background-color: var(--alt-row-bg-color);
         }
-        tr:hover {
-            background-color: #f5f5f5;
+
+        tbody tr:hover {
+            background-color: var(--hover-row-bg);
         }
-        .stats-table {
-            margin-top: 30px;
+
+        /* Threshold Box */
+        .threshold-box {
+            background-color: var(--threshold-box-bg-color);
+            padding: 20px;
+            border: 1px solid var(--threshold-box-border-color);
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px auto;
+            max-width: 400px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: var(--threshold-box-text-color);
         }
-        .stats-table th {
-            background-color: #e0e0e0;
+
+        .threshold-section {
+            background-color: var(--threshold-section-bg-color);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
             font-weight: bold;
+            color: var(--threshold-section-text-color);
+        }
+
+        .percentage-section {
+            background-color: var(--percentage-section-bg-color);
+            padding: 15px;
+            border: 1px solid var(--threshold-box-border-color);
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--percentage-section-text-color);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
-    <h1>Report for Spencer Consulting</h1>
+    <div class="report-container">
+        <h1>Report for Spencer Consulting</h1>
 
-    <!-- 1) Single-Assessment Summary -->
-    
-    <h2>Single Assessment Summary</h2>
-    <table class="stats-table">
-        <thead>
-            <tr>
-            
-                <th>index</th>
-            
-                <th>count</th>
-            
-                <th>mean</th>
-            
-                <th>std</th>
-            
-                <th>min</th>
-            
-                <th>25%</th>
-            
-                <th>50%</th>
-            
-                <th>75%</th>
-            
-                <th>max</th>
-            
-            </tr>
-        </thead>
-        <tbody>
         
-            <tr>
+        <h2>Single Assessment Summary</h2>
+        <table class="single-summary-table">
+            <thead>
+                <tr>
+                
+                    <th>index</th>
+                
+                    <th>count</th>
+                
+                    <th>mean</th>
+                
+                    <th>std</th>
+                
+                    <th>min</th>
+                
+                    <th>25%</th>
+                
+                    <th>50%</th>
+                
+                    <th>75%</th>
+                
+                    <th>max</th>
+                
+                </tr>
+            </thead>
+            <tbody>
             
-                <td>Grading</td>
+                <tr>
+                
+                    <td>Grading</td>
+                
+                    <td>4.0</td>
+                
+                    <td>4.75</td>
+                
+                    <td>0.5</td>
+                
+                    <td>4.0</td>
+                
+                    <td>4.75</td>
+                
+                    <td>5.0</td>
+                
+                    <td>5.0</td>
+                
+                    <td>5.0</td>
+                
+                </tr>
             
-                <td>4.0</td>
-            
-                <td>4.75</td>
-            
-                <td>0.5</td>
-            
-                <td>4.0</td>
-            
-                <td>4.75</td>
-            
-                <td>5.0</td>
-            
-                <td>5.0</td>
-            
-                <td>5.0</td>
-            
-            </tr>
+            </tbody>
+        </table>
         
-        </tbody>
-    </table>
-    
 
-    <!-- 2) Worst-of-4 Summary (Single Worst per Question) -->
-    
-    <h2>Worst-of-4 Summary (Single Worst per Question)</h2>
-    <table class="stats-table">
-        <thead>
-            <tr>
-            
-                <th>index</th>
-            
-                <th>count</th>
-            
-                <th>mean</th>
-            
-                <th>std</th>
-            
-                <th>min</th>
-            
-                <th>25%</th>
-            
-                <th>50%</th>
-            
-                <th>75%</th>
-            
-                <th>max</th>
-            
-            </tr>
-        </thead>
-        <tbody>
         
-            <tr>
+        <h2>Worst-of-4 Summary</h2>
+        <table class="worst-summary-table">
+            <thead>
+                <tr>
+                
+                    <th>index</th>
+                
+                    <th>count</th>
+                
+                    <th>mean</th>
+                
+                    <th>std</th>
+                
+                    <th>min</th>
+                
+                    <th>25%</th>
+                
+                    <th>50%</th>
+                
+                    <th>75%</th>
+                
+                    <th>max</th>
+                
+                </tr>
+            </thead>
+            <tbody>
             
-                <td>Grading</td>
+                <tr>
+                
+                    <td>Grading</td>
+                
+                    <td>4.0</td>
+                
+                    <td>4.5</td>
+                
+                    <td>0.5773502691896257</td>
+                
+                    <td>4.0</td>
+                
+                    <td>4.0</td>
+                
+                    <td>4.5</td>
+                
+                    <td>5.0</td>
+                
+                    <td>5.0</td>
+                
+                </tr>
             
-                <td>4.0</td>
-            
-                <td>4.5</td>
-            
-                <td>0.5773502691896257</td>
-            
-                <td>4.0</td>
-            
-                <td>4.0</td>
-            
-                <td>4.5</td>
-            
-                <td>5.0</td>
-            
-                <td>5.0</td>
-            
-            </tr>
+            </tbody>
+        </table>
         
-        </tbody>
-    </table>
-    
 
-    <!-- 3) Threshold & Percentage ABOVE Threshold -->
-    <h2>Threshold & Percentage Above Threshold</h2>
-    <p><strong>Threshold:</strong> 4.5</p>
-    <p><strong>Percentage of Worst-of-4 (single worst per question) above threshold:</strong> 50.00%</p>
+        <h2>Threshold & Percentage Above Threshold</h2>
+        <div class="threshold-box">
+            <div class="threshold-section">
+                Threshold: 4.5
+            </div>
+            <div class="percentage-section">
+                Percentage Above Threshold: 50.0%
+            </div>
+        </div>
 
-    <!-- 4) Worst-of-4 Below Threshold (no repeated questions) -->
-    
-    <h2>Worst-of-4 Below Threshold (No Repeats)</h2>
-    <table>
-        <thead>
-            <tr>
-            
-                <th>Question</th>
-            
-                <th>Human Answer</th>
-            
-                <th>Machine Answer</th>
-            
-                <th>Grading</th>
-            
-                <th>Explanation</th>
-            
-            </tr>
-        </thead>
-        <tbody>
         
-            <tr>
+        <h2>Worst-of-4 Below Threshold</h2>
+        <table class="worst-below-threshold-table">
+            <thead>
+                <tr>
+                
+                    <th>Question</th>
+                
+                    <th>Human Answer</th>
+                
+                    <th>Machine Answer</th>
+                
+                    <th>Grading</th>
+                
+                    <th>Explanation</th>
+                
+                </tr>
+            </thead>
+            <tbody>
             
-                <td>¡Quiero saber más de sus cursos y talleres!</td>
+                <tr>
+                
+                    <td>¡Quiero saber más de sus cursos y talleres!</td>
+                
+                    <td>Qué habilidades estás buscando desarrollar? Tenemos el curso de la magia del lenguaje. Perfecto para encausar tu propósito a través del lenguaje.</td>
+                
+                    <td>¡Hola! Soy tu asistente de Spencer Consulting. ¿Qué habilidades estás buscando desarrollar? Te puedo contar sobre nuestros cursos y talleres.</td>
+                
+                    <td>4</td>
+                
+                    <td>La respuesta del asistente es correcta y mantiene la amabilidad y el enfoque en la consulta del cliente. Sin embargo, no menciona específicamente el curso de la magia del lenguaje, lo que podría haber enriquecido la respuesta.</td>
+                
+                </tr>
             
-                <td>Qué habilidades estás buscando desarrollar? Tenemos el curso de la magia del lenguaje. Perfecto para encausar tu propósito a través del lenguaje.</td>
-            
-                <td>¡Hola! Soy tu asistente de Spencer Consulting. ¿Qué habilidades estás buscando desarrollar? Te puedo contar sobre nuestros cursos y talleres.</td>
-            
-                <td>4</td>
-            
-                <td>La respuesta del asistente es correcta y mantiene la amabilidad y el enfoque en la consulta del cliente. Sin embargo, no menciona específicamente el curso de la magia del lenguaje, lo que podría haber enriquecido la respuesta.</td>
-            
-            </tr>
-        
-            <tr>
-            
-                <td>¿Me das más información de las mentorías?</td>
-            
-                <td>Perfecto, te gustaría que te enviemos un correo con más información?</td>
-            
-                <td>¡Hola! Soy tu asistente de Spencer Consulting. Nuestras mentorías son: 
+                <tr>
+                
+                    <td>¿Me das más información de las mentorías?</td>
+                
+                    <td>Perfecto, te gustaría que te enviemos un correo con más información?</td>
+                
+                    <td>¡Hola! Soy tu asistente de Spencer Consulting. Nuestras mentorías son: 
 
 1. Desarrollo Liderazgo: Fortalece tu liderazgo y autoestima.
 2. Desarrollo Espiritual: Supera miedos y limitaciones.
 
 ¿Te gustaría recibir más información por correo?</td>
+                
+                    <td>4</td>
+                
+                    <td>La respuesta del asistente es correcta y proporciona información sobre las mentorías, pero es inferior a la humana porque no menciona la opción de enviar un correo con más información, lo cual es un detalle importante para el cliente.</td>
+                
+                </tr>
             
-                <td>4</td>
-            
-                <td>La respuesta del asistente es correcta y proporciona información sobre las mentorías, pero es inferior a la humana porque no menciona la opción de enviar un correo con más información, lo cual es un detalle importante para el cliente.</td>
-            
-            </tr>
+            </tbody>
+        </table>
         
-        </tbody>
-    </table>
-    
-
+    </div>
 </body>
 </html>
-        

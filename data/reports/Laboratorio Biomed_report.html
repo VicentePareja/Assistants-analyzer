@@ -1,217 +1,335 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8"/>
     <title>Report for Laboratorio Biomed</title>
     <style>
+        /* 
+         * We define all styling parameters as CSS variables for maximum flexibility.
+         * These variables come from your parameters.py, passed into the template context.
+         */
         :root {
-            --font-family: Arial, sans-serif;
-            --font-size: 14px;
-            --header-bg-color: #f2f2f2;
-            --alt-row-bg-color: #fafafa;
+            --font-family: Georgia, &#39;Times New Roman&#39;, serif;
+            --font-size: 18px;
+            --text-color: #444;
+
+            --heading-font-size: 2em;
+            --subheading-font-size: 1.5em;
+
+            --heading-color: #2c3e50;
+            --subheading-color: #34495e;
+
+            --header-bg-color: #34495e;
+            --header-text-color: #ffffff;
+
+            --alt-row-bg-color: #f4f6f8;
+            --hover-row-bg: #d5e0ed;
+
+            --main-bg-color: #f8fafc;
+            --table-shadow-color: rgba(0,0,0,0.05);
+            --table-border-radius: 10px;
+            --table-border-color: #bdc3c7;
+            --table-text-color: #2c3e50;
+
+            --container-max-width: 960px;
+            --container-margin: 0 auto;
+            --container-padding: 40px;
+
+            --body-margin: 0;
+            --body-padding: 0;
+
+            --threshold-box-bg-color: #ffffff;
+            --threshold-box-border-color: #dfe6e9;
+            --threshold-box-text-color: #2c3e50;
+
+            --threshold-section-bg-color: #f0f4f8;
+            --threshold-section-text-color: #333;
+
+            --percentage-section-bg-color: #ecf3fa;
+            --percentage-section-text-color: #2c3e50;
+
+            --paragraph-line-height: 1.8em;
+            --paragraph-margin: 15px 0;
+
+            --bold-highlight-color: #2980b9;
         }
+
+        /* Global reset / basic styling */
         body {
             font-family: var(--font-family);
             font-size: var(--font-size);
-            margin: 20px;
-            color: #333;
-            background-color: #fafafa;
+            color: var(--text-color);
+            background-color: var(--main-bg-color);
+            margin: var(--body-margin);
+            padding: var(--body-padding);
         }
+
+        .report-container {
+            max-width: var(--container-max-width);
+            margin: var(--container-margin);
+            padding: var(--container-padding);
+        }
+
         h1, h2 {
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 16px;
         }
+        h1 {
+            font-size: var(--heading-font-size);
+            margin-top: 0;
+            color: var(--heading-color);
+        }
+        h2 {
+            font-size: var(--subheading-font-size);
+            margin-top: 1.5em;
+            color: var(--subheading-color);
+        }
+
+        p {
+            margin: var(--paragraph-margin);
+            line-height: var(--paragraph-line-height);
+            text-align: center;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: var(--bold-highlight-color);
+        }
+
+        /* Tables */
         table {
             width: 100%;
-            border: 1px solid #ccc;
             border-collapse: collapse;
             margin: 20px 0;
             background-color: #fff;
+            color: var(--table-text-color);
+            box-shadow: 0 2px 6px var(--table-shadow-color);
+            border-radius: var(--table-border-radius);
+            overflow: hidden;
+            border: 1px solid var(--table-border-color);
         }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
+
+        thead th {
             background-color: var(--header-bg-color);
+            color: var(--header-text-color);
+            font-weight: bold;
+            padding: 12px 8px;
+            text-align: center;
+            vertical-align: middle;
         }
-        tr:nth-child(odd) {
+
+        tbody td {
+            padding: 12px 8px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        tbody tr:nth-child(odd) {
             background-color: var(--alt-row-bg-color);
         }
-        tr:hover {
-            background-color: #f5f5f5;
+
+        tbody tr:hover {
+            background-color: var(--hover-row-bg);
         }
-        .stats-table {
-            margin-top: 30px;
+
+        /* Threshold Box */
+        .threshold-box {
+            background-color: var(--threshold-box-bg-color);
+            padding: 20px;
+            border: 1px solid var(--threshold-box-border-color);
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px auto;
+            max-width: 400px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: var(--threshold-box-text-color);
         }
-        .stats-table th {
-            background-color: #e0e0e0;
+
+        .threshold-section {
+            background-color: var(--threshold-section-bg-color);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
             font-weight: bold;
+            color: var(--threshold-section-text-color);
+        }
+
+        .percentage-section {
+            background-color: var(--percentage-section-bg-color);
+            padding: 15px;
+            border: 1px solid var(--threshold-box-border-color);
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--percentage-section-text-color);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
-    <h1>Report for Laboratorio Biomed</h1>
+    <div class="report-container">
+        <h1>Report for Laboratorio Biomed</h1>
 
-    <!-- 1) Single-Assessment Summary -->
-    
-    <h2>Single Assessment Summary</h2>
-    <table class="stats-table">
-        <thead>
-            <tr>
-            
-                <th>index</th>
-            
-                <th>count</th>
-            
-                <th>mean</th>
-            
-                <th>std</th>
-            
-                <th>min</th>
-            
-                <th>25%</th>
-            
-                <th>50%</th>
-            
-                <th>75%</th>
-            
-                <th>max</th>
-            
-            </tr>
-        </thead>
-        <tbody>
         
-            <tr>
+        <h2>Single Assessment Summary</h2>
+        <table class="single-summary-table">
+            <thead>
+                <tr>
+                
+                    <th>index</th>
+                
+                    <th>count</th>
+                
+                    <th>mean</th>
+                
+                    <th>std</th>
+                
+                    <th>min</th>
+                
+                    <th>25%</th>
+                
+                    <th>50%</th>
+                
+                    <th>75%</th>
+                
+                    <th>max</th>
+                
+                </tr>
+            </thead>
+            <tbody>
             
-                <td>Grading</td>
+                <tr>
+                
+                    <td>Grading</td>
+                
+                    <td>38.0</td>
+                
+                    <td>4.868421052631579</td>
+                
+                    <td>0.41401479485112463</td>
+                
+                    <td>3.0</td>
+                
+                    <td>5.0</td>
+                
+                    <td>5.0</td>
+                
+                    <td>5.0</td>
+                
+                    <td>5.0</td>
+                
+                </tr>
             
-                <td>38.0</td>
-            
-                <td>4.868421052631579</td>
-            
-                <td>0.41401479485112463</td>
-            
-                <td>3.0</td>
-            
-                <td>5.0</td>
-            
-                <td>5.0</td>
-            
-                <td>5.0</td>
-            
-                <td>5.0</td>
-            
-            </tr>
+            </tbody>
+        </table>
         
-        </tbody>
-    </table>
-    
 
-    <!-- 2) Worst-of-4 Summary (Single Worst per Question) -->
-    
-    <h2>Worst-of-4 Summary (Single Worst per Question)</h2>
-    <table class="stats-table">
-        <thead>
-            <tr>
-            
-                <th>index</th>
-            
-                <th>count</th>
-            
-                <th>mean</th>
-            
-                <th>std</th>
-            
-                <th>min</th>
-            
-                <th>25%</th>
-            
-                <th>50%</th>
-            
-                <th>75%</th>
-            
-                <th>max</th>
-            
-            </tr>
-        </thead>
-        <tbody>
         
-            <tr>
+        <h2>Worst-of-4 Summary</h2>
+        <table class="worst-summary-table">
+            <thead>
+                <tr>
+                
+                    <th>index</th>
+                
+                    <th>count</th>
+                
+                    <th>mean</th>
+                
+                    <th>std</th>
+                
+                    <th>min</th>
+                
+                    <th>25%</th>
+                
+                    <th>50%</th>
+                
+                    <th>75%</th>
+                
+                    <th>max</th>
+                
+                </tr>
+            </thead>
+            <tbody>
             
-                <td>Grading</td>
+                <tr>
+                
+                    <td>Grading</td>
+                
+                    <td>37.0</td>
+                
+                    <td>4.837837837837838</td>
+                
+                    <td>0.44180900307168386</td>
+                
+                    <td>3.0</td>
+                
+                    <td>5.0</td>
+                
+                    <td>5.0</td>
+                
+                    <td>5.0</td>
+                
+                    <td>5.0</td>
+                
+                </tr>
             
-                <td>37.0</td>
-            
-                <td>4.837837837837838</td>
-            
-                <td>0.44180900307168386</td>
-            
-                <td>3.0</td>
-            
-                <td>5.0</td>
-            
-                <td>5.0</td>
-            
-                <td>5.0</td>
-            
-                <td>5.0</td>
-            
-            </tr>
+            </tbody>
+        </table>
         
-        </tbody>
-    </table>
-    
 
-    <!-- 3) Threshold & Percentage ABOVE Threshold -->
-    <h2>Threshold & Percentage Above Threshold</h2>
-    <p><strong>Threshold:</strong> 4.5</p>
-    <p><strong>Percentage of Worst-of-4 (single worst per question) above threshold:</strong> 86.49%</p>
+        <h2>Threshold & Percentage Above Threshold</h2>
+        <div class="threshold-box">
+            <div class="threshold-section">
+                Threshold: 4.5
+            </div>
+            <div class="percentage-section">
+                Percentage Above Threshold: 86.48648648648648%
+            </div>
+        </div>
 
-    <!-- 4) Worst-of-4 Below Threshold (no repeated questions) -->
-    
-    <h2>Worst-of-4 Below Threshold (No Repeats)</h2>
-    <table>
-        <thead>
-            <tr>
-            
-                <th>Question</th>
-            
-                <th>Human Answer</th>
-            
-                <th>Machine Answer</th>
-            
-                <th>Grading</th>
-            
-                <th>Explanation</th>
-            
-            </tr>
-        </thead>
-        <tbody>
         
-            <tr>
+        <h2>Worst-of-4 Below Threshold</h2>
+        <table class="worst-below-threshold-table">
+            <thead>
+                <tr>
+                
+                    <th>Question</th>
+                
+                    <th>Human Answer</th>
+                
+                    <th>Machine Answer</th>
+                
+                    <th>Grading</th>
+                
+                    <th>Explanation</th>
+                
+                </tr>
+            </thead>
+            <tbody>
             
-                <td>Hola</td>
+                <tr>
+                
+                    <td>Hola</td>
+                
+                    <td>¡Buen día, gracias por comunicarte con Laboratorio Clínico Biomed! Mi nombre es Emma, soy la asistente virtual 🤗 ¿Cómo puedo ayudarte hoy? 🌟 Puedo resolver dudas sobre: ✅ Preparación para exámenes ✅ Horarios ✅ Agendar horas médicas ✅ Dirección y horarios de sucursales.</td>
+                
+                    <td>¡Buen día! Gracias por comunicarte con Laboratorio Clínico Biomed. Soy Emma, tu asistente virtual. ¿En qué puedo ayudarte hoy? 😊</td>
+                
+                    <td>4</td>
+                
+                    <td>La respuesta del asistente es correcta y adecuada, pero es inferior a la humana porque no menciona las áreas específicas en las que puede ayudar, como la preparación para exámenes, horarios y agendamiento de horas médicas. Sin embargo, mantiene un tono amigable y profesional.</td>
+                
+                </tr>
             
-                <td>¡Buen día, gracias por comunicarte con Laboratorio Clínico Biomed! Mi nombre es Emma, soy la asistente virtual 🤗 ¿Cómo puedo ayudarte hoy? 🌟 Puedo resolver dudas sobre: ✅ Preparación para exámenes ✅ Horarios ✅ Agendar horas médicas ✅ Dirección y horarios de sucursales.</td>
-            
-                <td>¡Buen día! Gracias por comunicarte con Laboratorio Clínico Biomed. Soy Emma, tu asistente virtual. ¿En qué puedo ayudarte hoy? 😊</td>
-            
-                <td>4</td>
-            
-                <td>La respuesta del asistente es correcta y adecuada, pero es inferior a la humana porque no menciona las áreas específicas en las que puede ayudar, como la preparación para exámenes, horarios y agendamiento de horas médicas. Sin embargo, mantiene un tono amigable y profesional.</td>
-            
-            </tr>
-        
-            <tr>
-            
-                <td>Hola, ¿cuáles son los horarios de la sucursal Puerto Varas?</td>
-            
-                <td>Puerto Varas (Pio Nono 426): lun a vie toma de muestras 07:30-15:30, atención hasta 16:30; sáb toma de muestras hasta 11:30, atención hasta 13:00. 😊</td>
-            
-                <td>¡Hola! En la Sucursal Puerto Varas (Pio Nono 426), los horarios son:
+                <tr>
+                
+                    <td>Hola, ¿cuáles son los horarios de la sucursal Puerto Varas?</td>
+                
+                    <td>Puerto Varas (Pio Nono 426): lun a vie toma de muestras 07:30-15:30, atención hasta 16:30; sáb toma de muestras hasta 11:30, atención hasta 13:00. 😊</td>
+                
+                    <td>¡Hola! En la Sucursal Puerto Varas (Pio Nono 426), los horarios son:
 
 Lunes a Viernes:
 - Toma de muestras: 07:30 a 15:30
@@ -222,34 +340,34 @@ Sábado:
 - Atención al cliente: 08:00 a 13:00
 
 ¿Puedo ayudarte con algo más? 😊</td>
+                
+                    <td>4</td>
+                
+                    <td>La respuesta del asistente es correcta y proporciona la información necesaria sobre los horarios de la sucursal Puerto Varas. Sin embargo, hay un error en el horario del sábado para la toma de muestras, que debería ser hasta las 11:30, no a partir de las 08:00. La respuesta humana es más concisa y directa, lo que la hace superior en términos de claridad.</td>
+                
+                </tr>
             
-                <td>4</td>
+                <tr>
+                
+                    <td>Hola, ¿puedo agendar una cita para una mamografía?</td>
+                
+                    <td>Las mamografías se realizan en Casa Matriz (Benavente 761, Puerto Montt). Llámanos al +56 65 2 329 400 o visítanos. 🏥</td>
+                
+                    <td>Las mamografías se realizan solo en nuestra Casa Matriz (Benavente 761, Puerto Montt). Puedes acudir directamente en horario de atención. ¿Te ayudo con algo más? 😊</td>
+                
+                    <td>4</td>
+                
+                    <td>La respuesta del asistente es correcta y proporciona la ubicación de la Casa Matriz, pero no incluye el número de contacto para agendar la cita, lo cual es un detalle importante que la respuesta humana sí menciona. Sin embargo, la respuesta del asistente es clara y concisa.</td>
+                
+                </tr>
             
-                <td>La respuesta del asistente es correcta y proporciona la información necesaria sobre los horarios de la sucursal Puerto Varas. Sin embargo, hay un error en el horario del sábado para la toma de muestras, que debería ser hasta las 11:30, no a partir de las 08:00. La respuesta humana es más concisa y directa, lo que la hace superior en términos de claridad.</td>
-            
-            </tr>
-        
-            <tr>
-            
-                <td>Hola, ¿puedo agendar una cita para una mamografía?</td>
-            
-                <td>Las mamografías se realizan en Casa Matriz (Benavente 761, Puerto Montt). Llámanos al +56 65 2 329 400 o visítanos. 🏥</td>
-            
-                <td>Las mamografías se realizan solo en nuestra Casa Matriz (Benavente 761, Puerto Montt). Puedes acudir directamente en horario de atención. ¿Te ayudo con algo más? 😊</td>
-            
-                <td>4</td>
-            
-                <td>La respuesta del asistente es correcta y proporciona la ubicación de la Casa Matriz, pero no incluye el número de contacto para agendar la cita, lo cual es un detalle importante que la respuesta humana sí menciona. Sin embargo, la respuesta del asistente es clara y concisa.</td>
-            
-            </tr>
-        
-            <tr>
-            
-                <td>¿Cuáles son los patógenos que incluye el PCR-ETS?</td>
-            
-                <td>En Laboratorio Biomed, nuestro PCR o Panel ETS incluye: Candida Albicans Chlamydia Trachomatis Gardnerella Vaginalis Mycoplasma Genitalium Mycoplasma Hominis Treponema Pallidum Trichomonas Vaginalis Ureaplasma Parvum Ureaplasma Urealyticum Virus Herpes simple I y II Neisseria Gonorrhoeae</td>
-            
-                <td>El PCR o Panel ETS incluye:
+                <tr>
+                
+                    <td>¿Cuáles son los patógenos que incluye el PCR-ETS?</td>
+                
+                    <td>En Laboratorio Biomed, nuestro PCR o Panel ETS incluye: Candida Albicans Chlamydia Trachomatis Gardnerella Vaginalis Mycoplasma Genitalium Mycoplasma Hominis Treponema Pallidum Trichomonas Vaginalis Ureaplasma Parvum Ureaplasma Urealyticum Virus Herpes simple I y II Neisseria Gonorrhoeae</td>
+                
+                    <td>El PCR o Panel ETS incluye:
 
 - Chlamydia trachomatis
 - Neisseria gonorrhoeae
@@ -261,31 +379,30 @@ Sábado:
 - Candida albicans
 
 ¿Puedo ayudarte con algo más? 😊</td>
+                
+                    <td>3</td>
+                
+                    <td>La respuesta del asistente es parcialmente correcta, ya que incluye varios de los patógenos mencionados en la respuesta humana, pero omite algunos importantes como Treponema Pallidum y Virus Herpes simple I y II. Además, la respuesta no menciona a Gardnerella Vaginalis, lo que hace que falte información clave.</td>
+                
+                </tr>
             
-                <td>3</td>
+                <tr>
+                
+                    <td>¿Qué necesito para realizar el examen de glucosa en orina?</td>
+                
+                    <td>Para conocer los requisitos del examen de glucosa en orina, por favor permíteme consultar la información. 😊 (Aquí se usaría la función consultar_tabla y se entregaría la información resumida)</td>
+                
+                    <td>Para conocer los requisitos del examen de glucosa en orina, permíteme consultar la información. 😊 Un momento, por favor.</td>
+                
+                    <td>4</td>
+                
+                    <td>La respuesta del asistente es correcta y similar a la humana, ya que ambos indican que se necesita consultar información adicional. Sin embargo, la respuesta del asistente no proporciona la información específica que se esperaría después de la consulta, lo que la hace ligeramente inferior a la respuesta humana.</td>
+                
+                </tr>
             
-                <td>La respuesta del asistente es parcialmente correcta, ya que incluye varios de los patógenos mencionados en la respuesta humana, pero omite algunos importantes como Treponema Pallidum y Virus Herpes simple I y II. Además, la respuesta no menciona a Gardnerella Vaginalis, lo que hace que falte información clave.</td>
-            
-            </tr>
+            </tbody>
+        </table>
         
-            <tr>
-            
-                <td>¿Qué necesito para realizar el examen de glucosa en orina?</td>
-            
-                <td>Para conocer los requisitos del examen de glucosa en orina, por favor permíteme consultar la información. 😊 (Aquí se usaría la función consultar_tabla y se entregaría la información resumida)</td>
-            
-                <td>Para conocer los requisitos del examen de glucosa en orina, permíteme consultar la información. 😊 Un momento, por favor.</td>
-            
-                <td>4</td>
-            
-                <td>La respuesta del asistente es correcta y similar a la humana, ya que ambos indican que se necesita consultar información adicional. Sin embargo, la respuesta del asistente no proporciona la información específica que se esperaría después de la consulta, lo que la hace ligeramente inferior a la respuesta humana.</td>
-            
-            </tr>
-        
-        </tbody>
-    </table>
-    
-
+    </div>
 </body>
 </html>
-        
