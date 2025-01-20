@@ -48,8 +48,8 @@
     "A": "Ofrecemos planes desde 5 UF + IVA mensuales, más un costo de implementación inicial a medida, adaptado a las necesidades y requerimientos específicos de tu empresa. Queremos ofrecerte una solución que sea tanto efectiva como rentable."
   },
   {
-    "Q": "Hi, I'm interested in implementing a virtual assistant for my business, but I'm worried it might be complicated.",
-    "A": "Hi! 🤖 No need to worry; implementation is very straightforward. Our team takes care of the entire technical process. We just need to understand your needs, and within days, your assistant will be up and running effortlessly. We're here to make your life easier!"
+    "Q": "Hi, I am interested in implementing a virtual assistant for my business, but I am worried it might be complicated.",
+    "A": "Hi! 🤖 No need to worry; implementation is very straightforward. Our team takes care of the entire technical process. We just need to understand your needs, and within days, your assistant will be up and running effortlessly. We are here to make your life easier!"
   },
   {
     "Q": "Is the assistant available 24/7, even on weekends?",

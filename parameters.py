@@ -1,14 +1,14 @@
 BOTS_NAMES = [
-    "MyU",
+    #"MyU",
     "Ai Bot You",
-    "Spencer Consulting",
-    "Oncoprecisión",
-    "Laboratorio Biomed",
-    "Trayecto Bookstore",
-    "Ortodoncia de la Fuente",
-    "KLIK Muebles",
-    "Nomad Genetics",
-    "House of Spencer"
+    #"Spencer Consulting",
+    #"Oncoprecisión",
+    #"Laboratorio Biomed",
+    #"Trayecto Bookstore",
+    #"Ortodoncia de la Fuente",
+    #"KLIK Muebles",
+    #"Nomad Genetics",
+    #"House of Spencer"
 ]
 
 # Bots' parameters
@@ -68,10 +68,8 @@ A: Hi there! 😊 Absolutely! You can book your free trial class here: 📲 http
 
 
 ### Extra observations
-1) Be very varefull using \n, use \\n.
 
-
-2) Only use doble quote to delimit the JSON. if some text has quotes or double quotes delete them. 
+1) Only use doble quote to delimit the JSON. if some text has quotes or double quotes delete them. 
 
 For example:
 
@@ -84,7 +82,7 @@ Should be
 Si un texto está en inglés y utila abreviaciones como it's, don't, etc. reemplazalas por su forma completa.
 
 
-3) Another thing that could happen is that there is a lot of question and answers in the same conversation. For example:
+2) Another thing that could happen is that there is a lot of question and answers in the same conversation. For example:
 
 Ejemplo 2 (Libro específico):
 Usuario: "Hola, necesito el libro 'Fuego Celeste' de Alice Wolf. ¿Hacen despacho a Las Condes?"
@@ -99,6 +97,19 @@ In this particular case, you have to extract the main question and the main answ
 {
 "text_without_examples": "Este es un asistente diseñado para satisfacer las necesidades del usuario.",
 "only_examples": "[{'Q:': 'Hola, hacen despacho a las condes?', 'A': '¡Hola! Sí, despachamos a Las Condes. Puedes realizar tu pedido en nuestro sitio web. ¿Quisieras que te envíe el link?'}]"
+}
+
+3) If the text is in English, and there is an abrevetion such as it's, don't, we're etc. replace it with the full form.
+It is, Do not, We are, etc.
+
+Example:
+
+Implementation of the Virtual Assistant
+Customer: "Hi, I'm interested in implementing a virtual assistant for my business, but I'm worried it might be complicated."
+Arturito: "Hi! 🤖 No need to worry; implementation is very straightforward. Our team takes care of the entire technical process. We just need to understand your needs, and within days, your assistant will be up and running effortlessly. We're here to make your life easier!" 🚀
+{
+"text_without_examples": "Este es un asistente diseñado para satisfacer las necesidades del usuario.",
+"only_examples": [{'Q': 'Hi, I am interested in implementing a virtual assistant for my business, but I am worried it might be complicated.','A': 'Hi! 🤖 No need to worry; implementation is very straightforward. Our team takes care of the entire technical process. We just need to understand your needs, and within days, your assistant will be up and running effortlessly. We're here to make your life easier!'}]
 }
 
 """
