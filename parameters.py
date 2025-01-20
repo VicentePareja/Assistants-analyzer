@@ -18,7 +18,7 @@ BASE_TEMPERATURE = 0.5
 BASE_TOP_P = 1
 
 # Text separator parameters
-SEPARATOR_MODEL = "o1-mini-2024-09-12"
+SEPARATOR_MODEL = "gpt-4o-mini-2024-07-18"
 DEVELOPER_TEXT_SEPARATOR_DESCRIPTION = """
 You are a text processing AI. Your goal is to split the given text into two parts and return them **strictly** as valid JSON, **with no additional text** outside the JSON. The two parts are:
 
