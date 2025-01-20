@@ -1,14 +1,14 @@
 BOTS_NAMES = [
-    #"MyU",
+    "MyU",
     "Ai Bot You",
-    #"Spencer Consulting",
-    #"Oncoprecisión",
-    #"Laboratorio Biomed",
-    #"Trayecto Bookstore",
-    #"Ortodoncia de la Fuente",
-    #"KLIK Muebles",
-    #"Nomad Genetics",
-    #"House of Spencer"
+    "Spencer Consulting",
+    "Oncoprecisión",
+    "Laboratorio Biomed",
+    "Trayecto Bookstore",
+    "Ortodoncia de la Fuente",
+    "KLIK Muebles",
+    "Nomad Genetics",
+    "House of Spencer"
 ]
 
 # Bots' parameters
@@ -164,9 +164,11 @@ Nota adicional: Has especial énfasis en la correcititud de datos como los enlac
 A continuación, se te entregará la pregunta, la respuesta humana y la pregunta del asistente."""
 
 # Analysis parameters
+THRESHOLD = 4.5
 BEST_WORST = 4
 MOST_DIFFERENT = 3
 REPORT_FONT_FAMILY = "Arial, sans-serif"
 REPORT_FONT_SIZE = "14px"
 REPORT_HEADER_BG_COLOR = "#f2f2f2"
 REPORT_ALT_ROW_BG_COLOR = "#fafafa"
+

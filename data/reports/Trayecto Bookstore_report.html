@@ -1,460 +1,270 @@
 
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <meta charset="utf-8"/>
-            <title>Report for Trayecto Bookstore</title>
-            <style>
-                :root {
-                    --font-family: Arial, sans-serif;
-                    --font-size: 14px;
-                    --header-bg-color: #f2f2f2;
-                    --alt-row-bg-color: #fafafa;
-                }
-                body {
-                    font-family: var(--font-family);
-                    font-size: var(--font-size);
-                    margin: 20px;
-                    color: #333;
-                    background-color: #fafafa; /* <--- Example: slightly off-white background */
-                }
-                h1, h2 {
-                    text-align: center;
-                    margin-bottom: 10px;
-                }
-                table {
-                    width: 100%;
-                    border: 1px solid #ccc;
-                    border-collapse: collapse;
-                    margin: 20px 0;
-                    background-color: #fff; /* White background for tables */
-                }
-                th, td {
-                    border: 1px solid #ccc;
-                    padding: 8px;
-                    text-align: center;
-                }
-                th {
-                    background-color: var(--header-bg-color);
-                }
-                /* Alternate row background */
-                tr:nth-child(odd) {
-                    background-color: var(--alt-row-bg-color);
-                }
-                /* OPTIONAL: Hover effect on table rows */
-                tr:hover {
-                    background-color: #f5f5f5; /* Subtle change on hover */
-                }
-                /* OPTIONAL: Make table headers sticky on scroll (if you have large tables)
-                   Requires a fixed height container or overflow: auto on the table wrapper
-                th {
-                    position: sticky;
-                    top: 0;
-                    z-index: 1;
-                } */
-                .stats-table {
-                    margin-top: 30px;
-                }
-                /* Optional: Slight style difference for stats summary tables */
-                .stats-table th {
-                    background-color: #e0e0e0;
-                    font-weight: bold;
-                }
-            </style>
-        </head>
-        <body>
-            <h1>Report for Trayecto Bookstore</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Report for Trayecto Bookstore</title>
+    <style>
+        :root {
+            --font-family: Arial, sans-serif;
+            --font-size: 14px;
+            --header-bg-color: #f2f2f2;
+            --alt-row-bg-color: #fafafa;
+        }
+        body {
+            font-family: var(--font-family);
+            font-size: var(--font-size);
+            margin: 20px;
+            color: #333;
+            background-color: #fafafa;
+        }
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: var(--header-bg-color);
+        }
+        tr:nth-child(odd) {
+            background-color: var(--alt-row-bg-color);
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .stats-table {
+            margin-top: 30px;
+        }
+        .stats-table th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Report for Trayecto Bookstore</h1>
 
-            <!-- 1) STATISTICAL SUMMARY for Single-Assessment (using the ENTIRE dataset) -->
+    <!-- 1) Single-Assessment Summary -->
+    
+    <h2>Single Assessment Summary</h2>
+    <table class="stats-table">
+        <thead>
+            <tr>
             
-            <h2>Statistical Summary: Single Assessment (All Data)</h2>
-            <table class="stats-table">
-                <thead>
-                    <tr>
-                        
-                            <th>index</th>
-                        
-                            <th>count</th>
-                        
-                            <th>mean</th>
-                        
-                            <th>std</th>
-                        
-                            <th>min</th>
-                        
-                            <th>25%</th>
-                        
-                            <th>50%</th>
-                        
-                            <th>75%</th>
-                        
-                            <th>max</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    <tr>
-                        
-                            <td>Grading</td>
-                        
-                            <td>21.0</td>
-                        
-                            <td>4.666666666666667</td>
-                        
-                            <td>0.9128709291752768</td>
-                        
-                            <td>2.0</td>
-                        
-                            <td>5.0</td>
-                        
-                            <td>5.0</td>
-                        
-                            <td>5.0</td>
-                        
-                            <td>5.0</td>
-                        
-                    </tr>
-                    
-                </tbody>
-            </table>
+                <th>index</th>
             
-
-            <!-- 2) STATISTICAL SUMMARY for Worst-of-4 (using the ENTIRE dataset) -->
+                <th>count</th>
             
-            <h2>Statistical Summary: Worst-of-4 (All Data)</h2>
-            <table class="stats-table">
-                <thead>
-                    <tr>
-                        
-                            <th>index</th>
-                        
-                            <th>count</th>
-                        
-                            <th>mean</th>
-                        
-                            <th>std</th>
-                        
-                            <th>min</th>
-                        
-                            <th>25%</th>
-                        
-                            <th>50%</th>
-                        
-                            <th>75%</th>
-                        
-                            <th>max</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    <tr>
-                        
-                            <td>Grading</td>
-                        
-                            <td>84.0</td>
-                        
-                            <td>4.690476190476191</td>
-                        
-                            <td>0.7757808421770461</td>
-                        
-                            <td>2.0</td>
-                        
-                            <td>5.0</td>
-                        
-                            <td>5.0</td>
-                        
-                            <td>5.0</td>
-                        
-                            <td>5.0</td>
-                        
-                    </tr>
-                    
-                </tbody>
-            </table>
+                <th>mean</th>
             
+                <th>std</th>
+            
+                <th>min</th>
+            
+                <th>25%</th>
+            
+                <th>50%</th>
+            
+                <th>75%</th>
+            
+                <th>max</th>
+            
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+            
+                <td>Grading</td>
+            
+                <td>21.0</td>
+            
+                <td>4.666666666666667</td>
+            
+                <td>0.9128709291752768</td>
+            
+                <td>2.0</td>
+            
+                <td>5.0</td>
+            
+                <td>5.0</td>
+            
+                <td>5.0</td>
+            
+                <td>5.0</td>
+            
+            </tr>
+        
+        </tbody>
+    </table>
+    
 
+    <!-- 2) Worst-of-4 Summary (Single Worst per Question) -->
+    
+    <h2>Worst-of-4 Summary (Single Worst per Question)</h2>
+    <table class="stats-table">
+        <thead>
+            <tr>
+            
+                <th>index</th>
+            
+                <th>count</th>
+            
+                <th>mean</th>
+            
+                <th>std</th>
+            
+                <th>min</th>
+            
+                <th>25%</th>
+            
+                <th>50%</th>
+            
+                <th>75%</th>
+            
+                <th>max</th>
+            
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+            
+                <td>Grading</td>
+            
+                <td>21.0</td>
+            
+                <td>4.619047619047619</td>
+            
+                <td>0.8047478161629565</td>
+            
+                <td>2.0</td>
+            
+                <td>5.0</td>
+            
+                <td>5.0</td>
+            
+                <td>5.0</td>
+            
+                <td>5.0</td>
+            
+            </tr>
+        
+        </tbody>
+    </table>
+    
 
-            <!-- 3) TABLE: Single Assessment BEST (subset) -->
-            <h2>Single Assessment: BEST (Top 4)</h2>
-            <table>
-                <thead>
-                    <tr>
-                        
-                            <th>Question</th>
-                        
-                            <th>Human Answer</th>
-                        
-                            <th>Machine Answer</th>
-                        
-                            <th>Grading</th>
-                        
-                            <th>Explanation</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    <tr>
-                        
-                            <td>¡Hola!</td>
-                        
-                            <td>¡Hola! Te damos la bienvenida a Trayecto Bookstore, mi nombre es Trayectín. Podemos ayudarte con información de nuestros productos o resolver cualquier duda. ¡No dude en consultarnos! 😊</td>
-                        
-                            <td>¡Hola! Te doy la bienvenida a Trayecto Bookstore, mi nombre es Trayectín. ¿En qué puedo ayudarte hoy? 😊</td>
-                        
-                            <td>5</td>
-                        
-                            <td>Ambas respuestas son correctas y cumplen con el saludo y la presentación del asistente. La respuesta del asistente es tan buena como la humana, ya que también invita al usuario a hacer preguntas, manteniendo un tono amigable y acogedor.</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>Hola, quiero saber más de Trayecto Bookstore.</td>
-                        
-                            <td>Trayecto Bookstore: ubicados en Santiago, ofrecemos una amplia variedad de libros y despachamos a domicilio. ¿Te gustaría saber de algún libro o juego de mesa en particular? ✨</td>
-                        
-                            <td>¡Hola! Te doy la bienvenida a Trayecto Bookstore, mi nombre es Trayectín. Estamos ubicados en Santiago y ofrecemos una amplia variedad de libros y despachos a domicilio. ¿Te gustaría saber sobre algún libro o producto en particular? 😊</td>
-                        
-                            <td>5</td>
-                        
-                            <td>Ambas respuestas son correctas y brindan información similar sobre Trayecto Bookstore. La respuesta del asistente es incluso más completa al incluir su nombre y un saludo, lo que mejora la experiencia del usuario. Además, ambas respuestas invitan al usuario a preguntar sobre productos específicos, lo que es adecuado para el contexto.</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>Hola, ¿tienen libros de J.K. Rowling?</td>
-                        
-                            <td>¡Hola! Sí, claro, tenemos varios libros de J.K. Rowling. ¿Te gustaría saber detalles de alguno en específico? 📚</td>
-                        
-                            <td>¡Hola! Te doy la bienvenida a Trayecto Bookstore, soy Trayectín. Sí, tenemos varios libros de J.K. Rowling. ¿Te gustaría saber detalles de alguno en específico? 📚</td>
-                        
-                            <td>5</td>
-                        
-                            <td>La respuesta del asistente es tan buena como la humana. Ambas respuestas son correctas y ofrecen la misma información, además de invitar al usuario a solicitar más detalles, lo que es un enfoque amigable y útil.</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>Hola, necesito el libro Fuego Celeste de Alice Wolf. ¿Hacen despacho a Las Condes?</td>
-                        
-                            <td>¡Hola! Sí, despachamos a Las Condes. Puedes realizar tu pedido en nuestro sitio web. ¿Quisieras que te envíe el link?</td>
-                        
-                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Sí, despachamos a Las Condes. ¿Te gustaría que te envíe el link para que puedas realizar tu pedido? 😊</td>
-                        
-                            <td>5</td>
-                        
-                            <td>La respuesta del asistente es tan buena como la humana. Ambas respuestas son correctas y ofrecen la misma información relevante sobre el despacho a Las Condes y la opción de enviar el link para realizar el pedido. Además, el asistente mantiene un tono amigable y conciso, cumpliendo con las instrucciones dadas.</td>
-                        
-                    </tr>
-                    
-                </tbody>
-            </table>
+    <!-- 3) Threshold & Percentage ABOVE Threshold -->
+    <h2>Threshold & Percentage Above Threshold</h2>
+    <p><strong>Threshold:</strong> 4.5</p>
+    <p><strong>Percentage of Worst-of-4 (single worst per question) above threshold:</strong> 76.19%</p>
 
-            <!-- 4) TABLE: Single Assessment WORST (subset) -->
-            <h2>Single Assessment: WORST (Bottom 4)</h2>
-            <table>
-                <thead>
-                    <tr>
-                        
-                            <th>Question</th>
-                        
-                            <th>Human Answer</th>
-                        
-                            <th>Machine Answer</th>
-                        
-                            <th>Grading</th>
-                        
-                            <th>Explanation</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    <tr>
-                        
-                            <td>Estoy en la línea 1, ¿cómo llego?</td>
-                        
-                            <td>Desde la línea 1, combina con la línea 6, camina hasta el fondo del túnel Suecia, llega al Oxxo y sube un nivel. ¡Nos vemos pronto! 📖</td>
-                        
-                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Desde la línea 1, dirígete a la combinación con la línea 6. Camina hasta el fondo del túnel Suecia, llegarás al Oxxo y ahí sube un nivel. ¡Te esperamos! 📖</td>
-                        
-                            <td>5</td>
-                        
-                            <td>La respuesta del asistente es tan buena como la humana. Proporciona instrucciones claras y precisas sobre cómo llegar desde la línea 1, incluyendo todos los pasos necesarios. Además, mantiene un tono amistoso y acogedor, similar al de la respuesta humana.</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>¿Puedo retirar mi pedido hoy?</td>
-                        
-                            <td>¡Hola! Debes esperar nuestro email de confirmación. Si no lo has recibido, aún no está listo. El plazo varía entre 1 a 7 días hábiles. ¡Pronto tendrás tus libros en mano! 📖✨</td>
-                        
-                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Debes esperar nuestro email de confirmación. Si no lo has recibido, aún no está listo. ¡Pronto tendrás tus libros en mano! 📖✨</td>
-                        
-                            <td>4</td>
-                        
-                            <td>La respuesta del asistente es correcta y proporciona la información necesaria, pero no menciona el plazo de 1 a 7 días hábiles que es importante para el cliente. Sin embargo, la respuesta es amigable y concisa, similar a la humana.</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>Sí.</td>
-                        
-                            <td>Perfecto, visita nuestro sitio web en trayecto.cl. Ahí podrás completar tu pedido. ¿Necesitas algo más?</td>
-                        
-                            <td>¡Hola! Te doy la bienvenida a Trayecto Bookstore, soy Trayectín. ¿En qué puedo ayudarte hoy? 😊</td>
-                        
-                            <td>2</td>
-                        
-                            <td>La respuesta del asistente es incorrecta porque no responde a la pregunta de manera adecuada. Aunque saluda y se presenta, no proporciona la información sobre el sitio web ni invita al usuario a completar su pedido, lo cual es esencial en este contexto.</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>No, muchas gracias.</td>
-                        
-                            <td>Perfecto. Muchas gracias por preferir Trayecto Bookstore. 😊</td>
-                        
-                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Si necesitas algo más o tienes alguna consulta, no dudes en decírmelo. ¡Estoy aquí para ayudarte! 😊</td>
-                        
-                            <td>2</td>
-                        
-                            <td>La respuesta del asistente es incorrecta porque no responde adecuadamente a la negativa del cliente. En lugar de agradecer y cerrar la conversación de manera amigable, el asistente intenta continuar la interacción, lo que puede resultar molesto para el usuario que ya ha indicado que no necesita más ayuda.</td>
-                        
-                    </tr>
-                    
-                </tbody>
-            </table>
+    <!-- 4) Worst-of-4 Below Threshold (no repeated questions) -->
+    
+    <h2>Worst-of-4 Below Threshold (No Repeats)</h2>
+    <table>
+        <thead>
+            <tr>
+            
+                <th>Question</th>
+            
+                <th>Human Answer</th>
+            
+                <th>Machine Answer</th>
+            
+                <th>Grading</th>
+            
+                <th>Explanation</th>
+            
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+            
+                <td>Hola, necesito el libro Fuego Celeste de Alice Wolf. ¿Hacen despacho a Las Condes?</td>
+            
+                <td>¡Hola! Sí, despachamos a Las Condes. Puedes realizar tu pedido en nuestro sitio web. ¿Quisieras que te envíe el link?</td>
+            
+                <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Sí, despachamos a Las Condes. Permíteme buscar la información del libro &#34;Fuego Celeste / Alice Wolf&#34;. Un momento, por favor.</td>
+            
+                <td>4</td>
+            
+                <td>La respuesta del asistente es correcta y proporciona la información necesaria sobre el despacho a Las Condes. Sin embargo, le falta la oferta de enviar el link del sitio web, que es un detalle importante que la respuesta humana incluye.</td>
+            
+            </tr>
+        
+            <tr>
+            
+                <td>No, muchas gracias.</td>
+            
+                <td>Perfecto. Muchas gracias por preferir Trayecto Bookstore. 😊</td>
+            
+                <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Si necesitas algo más, no dudes en preguntar. ¡Estoy aquí para ayudarte! 😊</td>
+            
+                <td>3</td>
+            
+                <td>La respuesta del asistente es amigable y ofrece ayuda adicional, pero no responde directamente a la negativa del cliente. La respuesta humana es más adecuada porque agradece y cierra la conversación de manera más efectiva.</td>
+            
+            </tr>
+        
+            <tr>
+            
+                <td>Sí.</td>
+            
+                <td>Perfecto, visita nuestro sitio web en trayecto.cl. Ahí podrás completar tu pedido. ¿Necesitas algo más?</td>
+            
+                <td>¡Hola! Te doy la bienvenida a Trayecto Bookstore, soy Trayectín. ¿En qué puedo ayudarte hoy? 😊</td>
+            
+                <td>2</td>
+            
+                <td>La respuesta del asistente es incorrecta porque no responde a la pregunta de manera adecuada. Aunque saluda y se presenta, no proporciona la información sobre el sitio web ni invita al usuario a completar su pedido, lo cual es esencial en este contexto.</td>
+            
+            </tr>
+        
+            <tr>
+            
+                <td>¿Hacen envíos dentro de Santiago?</td>
+            
+                <td>¡Hola! Sí, enviamos dentro de Santiago (excepto San Bernardo, Colina, Padre Hurtado, Til-Til) con TRIP, nuestra empresa interna. No tenemos seguimiento, pero puedes consultarme cualquier duda 😉. ¿Quieres más información?, dime tu numero de pedido y con gusto te ayudaré.</td>
+            
+                <td>¡Hola! Soy Trayectín de Trayecto Bookstore. 😊 Sí, hacemos envíos dentro de Santiago. Si necesitas más información, no dudes en preguntar.</td>
+            
+                <td>4</td>
+            
+                <td>La respuesta del asistente es correcta y concisa, pero le falta información importante sobre las excepciones de envío dentro de Santiago y la falta de seguimiento, que son detalles relevantes que proporciona la respuesta humana.</td>
+            
+            </tr>
+        
+            <tr>
+            
+                <td>¿Puedo retirar mi pedido hoy?</td>
+            
+                <td>¡Hola! Debes esperar nuestro email de confirmación. Si no lo has recibido, aún no está listo. El plazo varía entre 1 a 7 días hábiles. ¡Pronto tendrás tus libros en mano! 📖✨</td>
+            
+                <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Debes esperar nuestro email de confirmación. Si no lo has recibido, aún no está listo. ¡Pronto tendrás tus libros en mano! 📖✨</td>
+            
+                <td>4</td>
+            
+                <td>La respuesta del asistente es correcta y proporciona la información necesaria, pero no menciona el plazo de 1 a 7 días hábiles que incluye la respuesta humana. Sin embargo, la respuesta del asistente es clara y amigable, lo que la hace efectiva.</td>
+            
+            </tr>
+        
+        </tbody>
+    </table>
+    
 
-            <!-- 5) TABLE: Worst-of-4 (Max Difference subset) -->
-            <h2>Worst-of-4 (Max Difference Subset)</h2>
-            <table>
-                <thead>
-                    <tr>
-                        
-                            <th>Question</th>
-                        
-                            <th>Human Answer</th>
-                        
-                            <th>Machine Answer</th>
-                        
-                            <th>Grading</th>
-                        
-                            <th>Explanation</th>
-                        
-                            <th>Type</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    <tr>
-                        
-                            <td>Hola, necesito el libro Fuego Celeste de Alice Wolf. ¿Hacen despacho a Las Condes?</td>
-                        
-                            <td>¡Hola! Sí, despachamos a Las Condes. Puedes realizar tu pedido en nuestro sitio web. ¿Quisieras que te envíe el link?</td>
-                        
-                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Sí, despachamos a Las Condes. ¿Te gustaría que te envíe el link para que realices tu pedido? 😊</td>
-                        
-                            <td>5</td>
-                        
-                            <td>La respuesta del asistente es tan buena como la humana. Ambas respuestas son correctas y ofrecen la misma información, incluyendo la disposición para enviar el link para realizar el pedido. El asistente mantiene un tono amigable y conciso, cumpliendo con las instrucciones dadas.</td>
-                        
-                            <td>BEST</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>Hola, necesito el libro Fuego Celeste de Alice Wolf. ¿Hacen despacho a Las Condes?</td>
-                        
-                            <td>¡Hola! Sí, despachamos a Las Condes. Puedes realizar tu pedido en nuestro sitio web. ¿Quisieras que te envíe el link?</td>
-                        
-                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Sí, despachamos a Las Condes. Permíteme buscar la información del libro &#34;Fuego Celeste / Alice Wolf&#34;. Un momento, por favor.</td>
-                        
-                            <td>4</td>
-                        
-                            <td>La respuesta del asistente es correcta y proporciona la información necesaria sobre el despacho a Las Condes. Sin embargo, le falta la oferta de enviar el link del sitio web, que es un detalle importante que la respuesta humana incluye.</td>
-                        
-                            <td>WORST</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>¿Hacen envíos dentro de Santiago?</td>
-                        
-                            <td>¡Hola! Sí, enviamos dentro de Santiago (excepto San Bernardo, Colina, Padre Hurtado, Til-Til) con TRIP, nuestra empresa interna. No tenemos seguimiento, pero puedes consultarme cualquier duda 😉. ¿Quieres más información?, dime tu numero de pedido y con gusto te ayudaré.</td>
-                        
-                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. 😊 Sí, hacemos envíos dentro de Santiago, excepto a San Bernardo, Colina, Padre Hurtado y Til-Til. ¿Te gustaría más información sobre un pedido?</td>
-                        
-                            <td>5</td>
-                        
-                            <td>La respuesta del asistente es tan buena como la humana. Proporciona la información correcta sobre los envíos dentro de Santiago, incluyendo las excepciones, y mantiene un tono amigable y accesible. Además, invita al usuario a solicitar más información, lo que es útil y apropiado.</td>
-                        
-                            <td>BEST</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>¿Hacen envíos dentro de Santiago?</td>
-                        
-                            <td>¡Hola! Sí, enviamos dentro de Santiago (excepto San Bernardo, Colina, Padre Hurtado, Til-Til) con TRIP, nuestra empresa interna. No tenemos seguimiento, pero puedes consultarme cualquier duda 😉. ¿Quieres más información?, dime tu numero de pedido y con gusto te ayudaré.</td>
-                        
-                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. 😊 Sí, hacemos envíos dentro de Santiago. Si necesitas más información, no dudes en preguntar.</td>
-                        
-                            <td>4</td>
-                        
-                            <td>La respuesta del asistente es correcta y concisa, pero le falta información importante sobre las excepciones de envío dentro de Santiago y la falta de seguimiento, que son detalles relevantes que proporciona la respuesta humana.</td>
-                        
-                            <td>WORST</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>¿Puedo retirar mi pedido hoy?</td>
-                        
-                            <td>¡Hola! Debes esperar nuestro email de confirmación. Si no lo has recibido, aún no está listo. El plazo varía entre 1 a 7 días hábiles. ¡Pronto tendrás tus libros en mano! 📖✨</td>
-                        
-                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Debes esperar nuestro email de confirmación. Si no lo has recibido, aún no está listo. ¡Pronto tendrás tus libros en mano! 📖✨</td>
-                        
-                            <td>5</td>
-                        
-                            <td>La respuesta del asistente es tan buena como la humana. Ambas respuestas son correctas y transmiten la misma información esencial sobre la necesidad de esperar el email de confirmación para el retiro del pedido. Además, el asistente mantiene un tono amigable y conciso, cumpliendo con las instrucciones dadas.</td>
-                        
-                            <td>BEST</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>¿Puedo retirar mi pedido hoy?</td>
-                        
-                            <td>¡Hola! Debes esperar nuestro email de confirmación. Si no lo has recibido, aún no está listo. El plazo varía entre 1 a 7 días hábiles. ¡Pronto tendrás tus libros en mano! 📖✨</td>
-                        
-                            <td>¡Hola! Soy Trayectín de Trayecto Bookstore. Debes esperar nuestro email de confirmación. Si no lo has recibido, aún no está listo. ¡Pronto tendrás tus libros en mano! 📖✨</td>
-                        
-                            <td>4</td>
-                        
-                            <td>La respuesta del asistente es correcta y proporciona la información necesaria, pero no menciona el plazo de 1 a 7 días hábiles que incluye la respuesta humana. Sin embargo, la respuesta del asistente es clara y amigable, lo que la hace efectiva.</td>
-                        
-                            <td>WORST</td>
-                        
-                    </tr>
-                    
-                </tbody>
-            </table>
-
-        </body>
-        </html>
+</body>
+</html>
         

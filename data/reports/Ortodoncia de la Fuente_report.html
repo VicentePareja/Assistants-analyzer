@@ -1,460 +1,200 @@
 
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <meta charset="utf-8"/>
-            <title>Report for Ortodoncia de la Fuente</title>
-            <style>
-                :root {
-                    --font-family: Arial, sans-serif;
-                    --font-size: 14px;
-                    --header-bg-color: #f2f2f2;
-                    --alt-row-bg-color: #fafafa;
-                }
-                body {
-                    font-family: var(--font-family);
-                    font-size: var(--font-size);
-                    margin: 20px;
-                    color: #333;
-                    background-color: #fafafa; /* <--- Example: slightly off-white background */
-                }
-                h1, h2 {
-                    text-align: center;
-                    margin-bottom: 10px;
-                }
-                table {
-                    width: 100%;
-                    border: 1px solid #ccc;
-                    border-collapse: collapse;
-                    margin: 20px 0;
-                    background-color: #fff; /* White background for tables */
-                }
-                th, td {
-                    border: 1px solid #ccc;
-                    padding: 8px;
-                    text-align: center;
-                }
-                th {
-                    background-color: var(--header-bg-color);
-                }
-                /* Alternate row background */
-                tr:nth-child(odd) {
-                    background-color: var(--alt-row-bg-color);
-                }
-                /* OPTIONAL: Hover effect on table rows */
-                tr:hover {
-                    background-color: #f5f5f5; /* Subtle change on hover */
-                }
-                /* OPTIONAL: Make table headers sticky on scroll (if you have large tables)
-                   Requires a fixed height container or overflow: auto on the table wrapper
-                th {
-                    position: sticky;
-                    top: 0;
-                    z-index: 1;
-                } */
-                .stats-table {
-                    margin-top: 30px;
-                }
-                /* Optional: Slight style difference for stats summary tables */
-                .stats-table th {
-                    background-color: #e0e0e0;
-                    font-weight: bold;
-                }
-            </style>
-        </head>
-        <body>
-            <h1>Report for Ortodoncia de la Fuente</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Report for Ortodoncia de la Fuente</title>
+    <style>
+        :root {
+            --font-family: Arial, sans-serif;
+            --font-size: 14px;
+            --header-bg-color: #f2f2f2;
+            --alt-row-bg-color: #fafafa;
+        }
+        body {
+            font-family: var(--font-family);
+            font-size: var(--font-size);
+            margin: 20px;
+            color: #333;
+            background-color: #fafafa;
+        }
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: var(--header-bg-color);
+        }
+        tr:nth-child(odd) {
+            background-color: var(--alt-row-bg-color);
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .stats-table {
+            margin-top: 30px;
+        }
+        .stats-table th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Report for Ortodoncia de la Fuente</h1>
 
-            <!-- 1) STATISTICAL SUMMARY for Single-Assessment (using the ENTIRE dataset) -->
+    <!-- 1) Single-Assessment Summary -->
+    
+    <h2>Single Assessment Summary</h2>
+    <table class="stats-table">
+        <thead>
+            <tr>
             
-            <h2>Statistical Summary: Single Assessment (All Data)</h2>
-            <table class="stats-table">
-                <thead>
-                    <tr>
-                        
-                            <th>index</th>
-                        
-                            <th>count</th>
-                        
-                            <th>mean</th>
-                        
-                            <th>std</th>
-                        
-                            <th>min</th>
-                        
-                            <th>25%</th>
-                        
-                            <th>50%</th>
-                        
-                            <th>75%</th>
-                        
-                            <th>max</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    <tr>
-                        
-                            <td>Grading</td>
-                        
-                            <td>12.0</td>
-                        
-                            <td>5.0</td>
-                        
-                            <td>0.0</td>
-                        
-                            <td>5.0</td>
-                        
-                            <td>5.0</td>
-                        
-                            <td>5.0</td>
-                        
-                            <td>5.0</td>
-                        
-                            <td>5.0</td>
-                        
-                    </tr>
-                    
-                </tbody>
-            </table>
+                <th>index</th>
             
-
-            <!-- 2) STATISTICAL SUMMARY for Worst-of-4 (using the ENTIRE dataset) -->
+                <th>count</th>
             
-            <h2>Statistical Summary: Worst-of-4 (All Data)</h2>
-            <table class="stats-table">
-                <thead>
-                    <tr>
-                        
-                            <th>index</th>
-                        
-                            <th>count</th>
-                        
-                            <th>mean</th>
-                        
-                            <th>std</th>
-                        
-                            <th>min</th>
-                        
-                            <th>25%</th>
-                        
-                            <th>50%</th>
-                        
-                            <th>75%</th>
-                        
-                            <th>max</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    <tr>
-                        
-                            <td>Grading</td>
-                        
-                            <td>48.0</td>
-                        
-                            <td>5.0</td>
-                        
-                            <td>0.0</td>
-                        
-                            <td>5.0</td>
-                        
-                            <td>5.0</td>
-                        
-                            <td>5.0</td>
-                        
-                            <td>5.0</td>
-                        
-                            <td>5.0</td>
-                        
-                    </tr>
-                    
-                </tbody>
-            </table>
+                <th>mean</th>
             
+                <th>std</th>
+            
+                <th>min</th>
+            
+                <th>25%</th>
+            
+                <th>50%</th>
+            
+                <th>75%</th>
+            
+                <th>max</th>
+            
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+            
+                <td>Grading</td>
+            
+                <td>12.0</td>
+            
+                <td>5.0</td>
+            
+                <td>0.0</td>
+            
+                <td>5.0</td>
+            
+                <td>5.0</td>
+            
+                <td>5.0</td>
+            
+                <td>5.0</td>
+            
+                <td>5.0</td>
+            
+            </tr>
+        
+        </tbody>
+    </table>
+    
 
+    <!-- 2) Worst-of-4 Summary (Single Worst per Question) -->
+    
+    <h2>Worst-of-4 Summary (Single Worst per Question)</h2>
+    <table class="stats-table">
+        <thead>
+            <tr>
+            
+                <th>index</th>
+            
+                <th>count</th>
+            
+                <th>mean</th>
+            
+                <th>std</th>
+            
+                <th>min</th>
+            
+                <th>25%</th>
+            
+                <th>50%</th>
+            
+                <th>75%</th>
+            
+                <th>max</th>
+            
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+            
+                <td>Grading</td>
+            
+                <td>12.0</td>
+            
+                <td>5.0</td>
+            
+                <td>0.0</td>
+            
+                <td>5.0</td>
+            
+                <td>5.0</td>
+            
+                <td>5.0</td>
+            
+                <td>5.0</td>
+            
+                <td>5.0</td>
+            
+            </tr>
+        
+        </tbody>
+    </table>
+    
 
-            <!-- 3) TABLE: Single Assessment BEST (subset) -->
-            <h2>Single Assessment: BEST (Top 4)</h2>
-            <table>
-                <thead>
-                    <tr>
-                        
-                            <th>Question</th>
-                        
-                            <th>Human Answer</th>
-                        
-                            <th>Machine Answer</th>
-                        
-                            <th>Grading</th>
-                        
-                            <th>Explanation</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    <tr>
-                        
-                            <td>Hola, necesito una limpieza dental. ¿Cuáles son sus horarios de atención?</td>
-                        
-                            <td>Realizamos limpiezas dentales como parte de nuestros servicios de odontología general. Las evaluaciones son gratuitas y estamos disponibles de lunes a viernes de 09:00 a 13:00 y de 14:30 a 19:00. ¿Te gustaría agendar una evaluación?</td>
-                        
-                            <td>¡Hola! Soy Antonia 👩🏻‍💻Asistente virtual de Ortodoncia de la Fuente. Realizamos limpiezas dentales como parte de nuestros servicios de odontología general. Las evaluaciones son gratuitas y estamos disponibles de lunes a viernes de 09:00 a 13:00 y de 14:30 a 19:00. ¿Te gustaría agendar una evaluación?</td>
-                        
-                            <td>5</td>
-                        
-                            <td>La respuesta del asistente es tan buena como la humana. Proporciona la misma información sobre los horarios de atención y la disponibilidad de limpiezas dentales, además de incluir la invitación para agendar una evaluación. La respuesta es clara y concisa, cumpliendo con las instrucciones del asistente.</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>Hola, ¿tienen tratamientos de ortodoncia?</td>
-                        
-                            <td>Sí, ofrecemos tratamientos de ortodoncia, incluyendo brackets metálicos y alineadores. ¿Te gustaría agendar una evaluación?</td>
-                        
-                            <td>¡Hola! Soy Antonia 👩🏻‍💻Asistente virtual de Ortodoncia de la Fuente. Sí, ofrecemos tratamientos de ortodoncia, incluyendo brackets metálicos y alineadores. ¿Te gustaría agendar una evaluación?</td>
-                        
-                            <td>5</td>
-                        
-                            <td>La respuesta del asistente es tan buena como la humana. Proporciona la misma información sobre los tratamientos de ortodoncia y también invita a agendar una evaluación, manteniendo un tono amigable y profesional.</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>Hola, quiero saber más sobre los tratamientos de estética facial.</td>
-                        
-                            <td>Ofrecemos tratamientos de estética facial como rinomodelación y aumento de labios. Las evaluaciones son gratuitas. ¿Te gustaría agendar una cita?</td>
-                        
-                            <td>¡Hola! Soy Antonia 👩🏻‍💻Asistente virtual de Ortodoncia de la Fuente. Ofrecemos tratamientos de estética facial como rinomodelación, aumento de labios, y más. Las evaluaciones son gratuitas. ¿Te gustaría agendar una cita?</td>
-                        
-                            <td>5</td>
-                        
-                            <td>La respuesta del asistente es tan buena como la humana. Proporciona la misma información relevante sobre los tratamientos de estética facial y menciona que las evaluaciones son gratuitas. Además, mantiene un tono amigable y ofrece la opción de agendar una cita, lo que es coherente con el estilo de comunicación del asistente.</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>Hola, ¿qué me pueden decir sobre los implantes dentales?</td>
-                        
-                            <td>Realizamos implantes dentales para restaurar tanto la funcionalidad como la estética dental. Las evaluaciones son gratuitas y están disponibles en horario de tarde. ¿Te gustaría agendar una evaluación?</td>
-                        
-                            <td>Realizamos implantes dentales para restaurar tanto la funcionalidad como la estética dental. Las evaluaciones son gratuitas. ¿Te gustaría agendar una evaluación?</td>
-                        
-                            <td>5</td>
-                        
-                            <td>La respuesta del asistente es tan buena como la humana. Proporciona la misma información relevante sobre los implantes dentales y la disponibilidad de evaluaciones gratuitas, además de invitar al usuario a agendar una evaluación.</td>
-                        
-                    </tr>
-                    
-                </tbody>
-            </table>
+    <!-- 3) Threshold & Percentage ABOVE Threshold -->
+    <h2>Threshold & Percentage Above Threshold</h2>
+    <p><strong>Threshold:</strong> 4.5</p>
+    <p><strong>Percentage of Worst-of-4 (single worst per question) above threshold:</strong> 100.00%</p>
 
-            <!-- 4) TABLE: Single Assessment WORST (subset) -->
-            <h2>Single Assessment: WORST (Bottom 4)</h2>
-            <table>
-                <thead>
-                    <tr>
-                        
-                            <th>Question</th>
-                        
-                            <th>Human Answer</th>
-                        
-                            <th>Machine Answer</th>
-                        
-                            <th>Grading</th>
-                        
-                            <th>Explanation</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    <tr>
-                        
-                            <td>Hola, quiero blanquear mis dientes, ¿cuáles son las opciones?</td>
-                        
-                            <td>Ofrecemos tratamientos personalizados de blanqueamiento dental para lograr una sonrisa más brillante. Las evaluaciones son gratuitas. ¿Te gustaría agendar una evaluación?</td>
-                        
-                            <td>Ofrecemos tratamientos personalizados de blanqueamiento dental para lograr una sonrisa más brillante. Las evaluaciones son gratuitas. ¿Te gustaría agendar una evaluación?</td>
-                        
-                            <td>5</td>
-                        
-                            <td>La respuesta del asistente es idéntica a la respuesta humana, lo que indica que ha replicado correctamente la información y el tono. Ambas respuestas son correctas y ofrecen la misma información relevante sobre los tratamientos de blanqueamiento dental y la evaluación gratuita.</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>Hola, ¿qué opciones tienen para mejorar la estética de mis dientes?</td>
-                        
-                            <td>Ofrecemos restauraciones estéticas personalizadas, como carillas y coronas, para renovar tu sonrisa. ¿Te gustaría agendar una evaluación gratuita?</td>
-                        
-                            <td>Ofrecemos restauraciones estéticas personalizadas, como carillas y coronas, para renovar tu sonrisa. ¿Te gustaría agendar una evaluación gratuita?</td>
-                        
-                            <td>5</td>
-                        
-                            <td>La respuesta del asistente es idéntica a la respuesta humana, lo que indica que es tan buena como la respuesta del humano. Proporciona información precisa sobre las opciones de estética dental y también invita a agendar una evaluación gratuita, cumpliendo con el estilo de comunicación esperado.</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>Hola, quiero saber más sobre los tratamientos de ortodoncia en Calama.</td>
-                        
-                            <td>En Calama realizamos tratamientos de ortodoncia. La evaluación tiene un costo de $15.000, que debe ser transferido 24 horas antes de la atención. ¿Te gustaría agendar una evaluación?</td>
-                        
-                            <td>En Calama realizamos tratamientos de ortodoncia. La evaluación tiene un costo de $15.000, que debe ser transferido 24 horas antes de la atención. ¿Te gustaría agendar una evaluación?</td>
-                        
-                            <td>5</td>
-                        
-                            <td>La respuesta del asistente es idéntica a la respuesta humana, proporcionando la misma información precisa y relevante sobre los tratamientos de ortodoncia en Calama, incluyendo el costo de la evaluación y el requisito de transferencia. Por lo tanto, es tan buena como la respuesta humana.</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>Hola, me interesa un tratamiento pero quiero coordinar cómo seguir.</td>
-                        
-                            <td>¡Claro! Puedes agendar una cita directamente por nuestro WhatsApp en este enlace: https://wa.link/e5fvfm. También puedes visitar nuestro sitio web para obtener más información y agendar. ¿En qué más puedo ayudarte?</td>
-                        
-                            <td>¡Claro! Puedes agendar una cita directamente por nuestro WhatsApp en este enlace: https://wa.link/e5fvfm. También puedes visitar nuestro sitio web para obtener más información y agendar. ¿En qué más puedo ayudarte?</td>
-                        
-                            <td>5</td>
-                        
-                            <td>La respuesta del asistente es idéntica a la respuesta humana, proporcionando la misma información y enlaces correctos. Cumple con el estilo de comunicación y es tan buena como la respuesta humana.</td>
-                        
-                    </tr>
-                    
-                </tbody>
-            </table>
+    <!-- 4) Worst-of-4 Below Threshold (no repeated questions) -->
+    
+    <h2>Worst-of-4 Below Threshold (No Repeats)</h2>
+    <table>
+        <thead>
+            <tr>
+            
+                <th>Question</th>
+            
+                <th>Human Answer</th>
+            
+                <th>Machine Answer</th>
+            
+                <th>Grading</th>
+            
+                <th>Explanation</th>
+            
+            </tr>
+        </thead>
+        <tbody>
+        
+        </tbody>
+    </table>
+    
 
-            <!-- 5) TABLE: Worst-of-4 (Max Difference subset) -->
-            <h2>Worst-of-4 (Max Difference Subset)</h2>
-            <table>
-                <thead>
-                    <tr>
-                        
-                            <th>Question</th>
-                        
-                            <th>Human Answer</th>
-                        
-                            <th>Machine Answer</th>
-                        
-                            <th>Grading</th>
-                        
-                            <th>Explanation</th>
-                        
-                            <th>Type</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    <tr>
-                        
-                            <td>Hola, me interesa un tratamiento pero quiero coordinar cómo seguir.</td>
-                        
-                            <td>¡Claro! Puedes agendar una cita directamente por nuestro WhatsApp en este enlace: https://wa.link/e5fvfm. También puedes visitar nuestro sitio web para obtener más información y agendar. ¿En qué más puedo ayudarte?</td>
-                        
-                            <td>¡Claro! Puedes agendar una cita directamente por nuestro WhatsApp en este enlace: https://wa.link/e5fvfm. También puedes visitar nuestro sitio web para obtener más información y agendar. ¿En qué más puedo ayudarte?</td>
-                        
-                            <td>5</td>
-                        
-                            <td>La respuesta del asistente es idéntica a la del humano, proporcionando la misma información y enlaces correctos. Cumple con el estilo de comunicación y es tan buena como la respuesta humana.</td>
-                        
-                            <td>BEST</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>Hola, me interesa un tratamiento pero quiero coordinar cómo seguir.</td>
-                        
-                            <td>¡Claro! Puedes agendar una cita directamente por nuestro WhatsApp en este enlace: https://wa.link/e5fvfm. También puedes visitar nuestro sitio web para obtener más información y agendar. ¿En qué más puedo ayudarte?</td>
-                        
-                            <td>¡Claro! Puedes agendar una cita directamente por nuestro WhatsApp en este enlace: https://wa.link/e5fvfm. También puedes visitar nuestro sitio web para obtener más información y agendar. ¿En qué más puedo ayudarte?</td>
-                        
-                            <td>5</td>
-                        
-                            <td>La respuesta del asistente es idéntica a la del humano, proporcionando la misma información y enlaces correctos. Cumple con el estilo de comunicación y es tan buena como la respuesta humana.</td>
-                        
-                            <td>WORST</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>Hola, necesito una limpieza dental. ¿Cuáles son sus horarios de atención?</td>
-                        
-                            <td>Realizamos limpiezas dentales como parte de nuestros servicios de odontología general. Las evaluaciones son gratuitas y estamos disponibles de lunes a viernes de 09:00 a 13:00 y de 14:30 a 19:00. ¿Te gustaría agendar una evaluación?</td>
-                        
-                            <td>¡Hola! Soy Antonia 👩🏻‍💻Asistente virtual de Ortodoncia de la Fuente. Realizamos limpiezas dentales como parte de nuestros servicios de odontología general. Las evaluaciones son gratuitas y estamos disponibles de lunes a viernes de 09:00 a 13:00 y de 14:30 a 19:00. ¿Te gustaría agendar una evaluación?</td>
-                        
-                            <td>5</td>
-                        
-                            <td>La respuesta del asistente es tan buena como la humana. Proporciona la misma información sobre los horarios de atención y la disponibilidad de limpiezas dentales, además de invitar al usuario a agendar una evaluación. La única diferencia es que el asistente incluye su saludo inicial, lo cual es apropiado en su contexto.</td>
-                        
-                            <td>BEST</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>Hola, necesito una limpieza dental. ¿Cuáles son sus horarios de atención?</td>
-                        
-                            <td>Realizamos limpiezas dentales como parte de nuestros servicios de odontología general. Las evaluaciones son gratuitas y estamos disponibles de lunes a viernes de 09:00 a 13:00 y de 14:30 a 19:00. ¿Te gustaría agendar una evaluación?</td>
-                        
-                            <td>¡Hola! Soy Antonia 👩🏻‍💻Asistente virtual de Ortodoncia de la Fuente. Realizamos limpiezas dentales como parte de nuestros servicios de odontología general. Las evaluaciones son gratuitas y estamos disponibles de lunes a viernes de 09:00 a 13:00 y de 14:30 a 19:00. ¿Te gustaría agendar una evaluación?</td>
-                        
-                            <td>5</td>
-                        
-                            <td>La respuesta del asistente es tan buena como la humana. Proporciona la misma información sobre los horarios de atención y la disponibilidad de limpiezas dentales, además de invitar al usuario a agendar una evaluación. La única diferencia es que el asistente incluye su saludo inicial, lo cual es apropiado en su contexto.</td>
-                        
-                            <td>WORST</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>Hola, quiero blanquear mis dientes, ¿cuáles son las opciones?</td>
-                        
-                            <td>Ofrecemos tratamientos personalizados de blanqueamiento dental para lograr una sonrisa más brillante. Las evaluaciones son gratuitas. ¿Te gustaría agendar una evaluación?</td>
-                        
-                            <td>Ofrecemos tratamientos personalizados de blanqueamiento dental para lograr una sonrisa más brillante. Las evaluaciones son gratuitas. ¿Te gustaría agendar una evaluación?</td>
-                        
-                            <td>5</td>
-                        
-                            <td>La respuesta del asistente es idéntica a la respuesta humana, lo que indica que es tan buena como la respuesta del humano. Proporciona la información correcta sobre los tratamientos de blanqueamiento dental y menciona que las evaluaciones son gratuitas, además de invitar al usuario a agendar una evaluación.</td>
-                        
-                            <td>BEST</td>
-                        
-                    </tr>
-                    
-                    <tr>
-                        
-                            <td>Hola, quiero blanquear mis dientes, ¿cuáles son las opciones?</td>
-                        
-                            <td>Ofrecemos tratamientos personalizados de blanqueamiento dental para lograr una sonrisa más brillante. Las evaluaciones son gratuitas. ¿Te gustaría agendar una evaluación?</td>
-                        
-                            <td>Ofrecemos tratamientos personalizados de blanqueamiento dental para lograr una sonrisa más brillante. Las evaluaciones son gratuitas. ¿Te gustaría agendar una evaluación?</td>
-                        
-                            <td>5</td>
-                        
-                            <td>La respuesta del asistente es idéntica a la respuesta humana, lo que indica que es tan buena como la respuesta del humano. Proporciona la información correcta sobre los tratamientos de blanqueamiento dental y menciona que las evaluaciones son gratuitas, además de invitar al usuario a agendar una evaluación.</td>
-                        
-                            <td>WORST</td>
-                        
-                    </tr>
-                    
-                </tbody>
-            </table>
-
-        </body>
-        </html>
+</body>
+</html>
         

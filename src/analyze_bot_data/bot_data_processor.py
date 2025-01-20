@@ -78,6 +78,13 @@ class BotDataProcessor:
         if df.empty or grading_col not in df.columns:
             return pd.DataFrame()  # Return an empty DataFrame if conditions are not met
         return df.sort_values(by=grading_col, ascending=False).tail(n)
+    
+    def get_rows_below_threshold(self, df: pd.DataFrame, threshold: float, grading_col: str = "Grading") -> pd.DataFrame:
+       
+        if df.empty or grading_col not in df.columns:
+            return pd.DataFrame()
+
+        return df[df[grading_col] < threshold]
 
 class WorstOf4Saver:
    
