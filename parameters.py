@@ -233,7 +233,5 @@ REPORT_PARAGRAPH_MARGIN = "15px 0"  # Slightly more space between paragraphs
 # Highlights
 REPORT_BOLD_HIGHLIGHT_COLOR = "#2980b9"  # Vibrant blue for emphasis
 
-
-
-
-
+REPORT_THRESHOLD_BOX_HOVER_BG_COLOR = "#f8fafc"  # Light blue for hover effect
+REPORT_THRESHOLD_BOX_HOVER_SHADOW = "rgba(0,0,0,0.05)"

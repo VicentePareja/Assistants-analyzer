@@ -49,6 +49,9 @@ from parameters import (
     REPORT_PARAGRAPH_MARGIN,
 
     REPORT_BOLD_HIGHLIGHT_COLOR,
+
+    REPORT_THRESHOLD_BOX_HOVER_BG_COLOR,
+    REPORT_THRESHOLD_BOX_HOVER_SHADOW
 )
 
 
@@ -156,4 +159,7 @@ class HTMLReportRenderer:
 
             worst_of_4_below_threshold_rows=worst_of_4_below_threshold_rows,
             worst_of_4_below_threshold_columns=worst_of_4_below_threshold_columns,
+            threshold_box_hover_bg_color=REPORT_THRESHOLD_BOX_HOVER_BG_COLOR,
+            threshold_box_hover_shadow=REPORT_THRESHOLD_BOX_HOVER_SHADOW
+
         )
