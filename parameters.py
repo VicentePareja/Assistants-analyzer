@@ -1,14 +1,14 @@
 BOTS_NAMES = [
-    "MyU",
-    "Ai Bot You",
-    "Spencer Consulting",
-    "Oncoprecisión",
-    "Laboratorio Biomed",
+    #"MyU",
+    #"Ai Bot You",
+    #"Spencer Consulting",
+    #"Oncoprecisión",
+    #"Laboratorio Biomed",
     "Trayecto Bookstore",
-    "Ortodoncia de la Fuente",
-    "KLIK Muebles",
-    "Nomad Genetics",
-    "House of Spencer"
+    #"Ortodoncia de la Fuente",
+    #"KLIK Muebles",
+    #"Nomad Genetics",
+    #"House of Spencer"
 ]
 
 # Bots' parameters
@@ -18,23 +18,24 @@ BASE_TEMPERATURE = 0.5
 BASE_TOP_P = 1
 
 # Text separator parameters
-SEPARATOR_MODEL = "gpt-4o-mini-2024-07-18"
+SEPARATOR_MODEL = "gpt-4o"
 DEVELOPER_TEXT_SEPARATOR_DESCRIPTION = """
-You are a text processing AI. Your goal is to split the given text into two parts and return them **strictly** as valid JSON, **with no additional text** outside the JSON. The two parts are:
-
-1. "text_without_examples": This must contain all text from the input **before** any example Q/A pairs appear.
-2. "only_examples": This must contain **only** the example pairs in JSON array format, something like:
+Eres una IA de procesamiento de texto. Tu objetivo es dividir el texto dado en dos partes y devolverlas estrictamente como JSON válido, sin texto adicional fuera del JSON. Las dos partes son:
+1. "text_without_examples": Esto debe contener todo el texto de la entrada antes de que aparezca cualquier par de preguntas/respuestas de ejemplo.
+2. "only_examples": Esto debe contener solo los pares de ejemplo en formato de lista JSON, algo como:
    [
      {'Q': '...','A': '...'},
      {'Q': '...', 'A': '...'}
    ]
 
-### Steps
-1. Identify where the example Q/A pairs begin (usually indicated by lines starting with "Q:" or a clear "Example" section).
-2. Extract all text **before** this section and place it under the "text_without_examples" key.
-3. Extract **only** the Q/A pairs, ensuring the "Q" and "A" strings are correct, and place them in the "only_examples" array. 
-4. Do not include any extra text in "only_examples"; just the Q/A pairs. 
-5. If there are no examples, return "only_examples" as an empty array.
+   Observar que no puese haber comillas en los textos, solo en el JSON. Además, no es necesario escribir cosas como "asistente" o "usuario", se asume que la Q es del usuario y la A es del asistente.
+
+### Pasos
+1. Identifica dónde comienzan los pares de preguntas/respuestas de ejemplo (generalmente indicado por líneas que empiezan con "Q:" o una sección claramente marcada como "Ejemplo").
+2. Extrae todo el texto antes de esta sección y colócalo bajo la clave "text_without_examples".
+3. Extrae solo los pares de preguntas/respuestas, asegurándote de que las cadenas 'Q' y 'A' sean correctas. es importante que sea con 'Q' como key y 'A' como value. colócalos en la lista "only_examples".
+4. No incluyas ningún texto adicional en "only_examples"; solo los pares de preguntas/respuestas.
+5. Si no hay ejemplos, devuelve "only_examples" como un arreglo vacío.
 
 ### Required JSON Output Format
 ```json
@@ -43,11 +44,11 @@ You are a text processing AI. Your goal is to split the given text into two part
   "only_examples": "[{'Q':'question1', 'A':'answer1'}, {'Q':'question2', 'A':'answer2'}]" 
 }
 
-Always mantain that format.
+Siempre mantén ese formato.
 
-If there are different groups of examples manten them in the same json.
+Si hay diferentes ejemplos, agrégalos a la lista "only_examples".
 
-Example:
+Ejemplo:
 
 Este es un asistente diseñado para satisfacer las necesidades del usuario.
 
@@ -60,31 +61,18 @@ Q: Hi, do you offer trial classes to get to know your services?
 A: Hi there! 😊 Absolutely! You can book your free trial class here: 📲 https://boxmagic.cl/sp/HouseofSpencer24. Let me know if you need any help!
 
 {
-"text_without_examples": "Este es un asistente diseñado para satisfacer las necesidades del usuario.",
-"only_examples": "[{'Q:': '¿Entregan un reporte por cada sesión para poder reembolsar a la Isapre?', 'A': '¡Hola! 😊 No entregamos un reporte por sesión, pero nuestra boleta de servicios puede te permite reembolsar. Cuentanos si necesitas detallar el tipo de sesiones realizadas para facilitar tu reembolso con la Isapre. Contactanos directamente a https://walink.co/83468b para poder ayudarte mejor 📝 ¿Te ayudo con algo más?'}, {'Q': 'Hi, do you offer trial classes to get to know your services?', 'A': 'Hi there! 😊 Absolutely! You can book your free trial class here: 📲 https://boxmagic.cl/sp/HouseofSpencer24. Let me know if you need any help!
+"text_without_examples": 'Este es un asistente diseñado para satisfacer las necesidades del usuario.',
+"only_examples": "[{'Q:': '¿Entregan un reporte por cada sesión para poder reembolsar a la Isapre?', 'A': '¡Hola! 😊 No entregamos un reporte por sesión, pero nuestra boleta de servicios puede te permite reembolsar. Cuentanos si necesitas detallar el tipo de sesiones realizadas para facilitar tu reembolso con la Isapre. Contactanos directamente a https://walink.co/83468b para poder ayudarte mejor 📝 ¿Te ayudo con algo más?'}, 
+{'Q': 'Hi, do you offer trial classes to get to know your services?', 'A': 'Hi there! 😊 Absolutely! You can book your free trial class here: 📲 https://boxmagic.cl/sp/HouseofSpencer24. Let me know if you need any help!
 '}]"
 }
 
+### Casos borde a considerar:
 
+1) Otra cosa que podría suceder es que haya muchas preguntas y respuestas en la misma conversación.
 
-### Extra observations
+Ejemplo:
 
-1) Only use doble quote to delimit the JSON. if some text has quotes or double quotes delete them. 
-
-For example:
-
-'A': '¡Claro que sí! 😃 Para ayudarte, necesito que me indiques los siguientes datos: Nombre completo 📝 Dirección 🏠 Comuna 📍 Correo electrónico 📧 Marca de los equipos ❄️ (Ejemplo: Samsung, Midea, Otro) Número de equipos 🔢 ¿Quién instaló los equipos? ⚙️ (Opciones: "M&U" o "Tercero") Tipo de equipo 🔧 (Opciones: "Split" o "Multi-Split")'
-
-Should be 
-
-'A': '¡Claro que sí! 😃 Para ayudarte, necesito que me indiques los siguientes datos: Nombre completo 📝 Dirección 🏠 Comuna 📍 Correo electrónico 📧 Marca de los equipos ❄️ (Ejemplo: Samsung, Midea, Otro) Número de equipos 🔢 ¿Quién instaló los equipos? ⚙️ (Opciones: M&U o Tercero) Tipo de equipo 🔧 (Opciones: Split o Multi-Split)'  
-
-Si un texto está en inglés y utila abreviaciones como it's, don't, etc. reemplazalas por su forma completa.
-
-
-2) Another thing that could happen is that there is a lot of question and answers in the same conversation. For example:
-
-Ejemplo 2 (Libro específico):
 Usuario: "Hola, necesito el libro 'Fuego Celeste' de Alice Wolf. ¿Hacen despacho a Las Condes?"
 Asistente (Trayectín): "¡Hola! Sí, despachamos a Las Condes. Puedes realizar tu pedido en nuestro sitio web. ¿Quisieras que te envíe el link?"
 Usuario: "Sí."
@@ -92,24 +80,46 @@ Asistente (Trayectín): "Perfecto, visita nuestro sitio web en trayecto.cl. Ahí
 Usuario: "No, muchas gracias."
 Asistente (Trayectín): "Perfecto. Muchas gracias por preferir Trayecto Bookstore.
 
-In this particular case, you have to extract the main question and the main answer.
+En este caso particular, debes extraer la pregunta principal y la respuesta principal:
 
 {
-"text_without_examples": "Este es un asistente diseñado para satisfacer las necesidades del usuario.",
+"text_without_examples": "",
 "only_examples": "[{'Q:': 'Hola, hacen despacho a las condes?', 'A': '¡Hola! Sí, despachamos a Las Condes. Puedes realizar tu pedido en nuestro sitio web. ¿Quisieras que te envíe el link?'}]"
 }
 
-3) If the text is in English, and there is an abrevetion such as it's, don't, we're etc. replace it with the full form.
+Es muy importante que solo extraigas la pregunta principal y la respuesta principal. No incluyas las preguntas de seguimiento ni las respuestas de seguimiento.
+cosas como "Sí" no son una pregunta válida, por lo que no se incluirá en el JSON.
+
+
+2) Solo usa comillas simples y dobles para delimitar el JSON. Si algún texto tiene comillas simples o dobles, elimínalas. Repito, usa únicamente comillas simples y dobles para delimitar el JSON. NUNCA las uses en otros contextos; simplemente elimínalas.
+
+Ejemplo:
+
+"A": "¡Claro que sí! 😃 Para ayudarte, necesito que me indiques los siguientes datos: Nombre completo 📝 Dirección 🏠 Comuna 📍 Correo electrónico 📧 Marca de los equipos ❄️ (Ejemplo: Samsung, Midea, Otro) Número de equipos 🔢 ¿Quién instaló los equipos? ⚙️ (Opciones: "M&U" o "Tercero") Tipo de equipo 🔧 (Opciones: "Split" o "Multi-Split")"
+
+Debería ser:
+
+'A': '¡Claro que sí! 😃 Para ayudarte, necesito que me indiques los siguientes datos: Nombre completo 📝 Dirección 🏠 Comuna 📍 Correo electrónico 📧 Marca de los equipos ❄️ (Ejemplo: Samsung, Midea, Otro) Número de equipos 🔢 ¿Quién instaló los equipos? ⚙️ (Opciones: M&U o Tercero) Tipo de equipo 🔧 (Opciones: Split o Multi-Split)'
+
+Otro ejemplo:
+
+"Q": "Hola, necesito el libro 'Fuego Celeste' de Alice Wolf. ¿Hacen despacho a Las Condes?"
+
+Debería ser:
+
+"Q": "Hola, necesito el libro Fuego Celeste de Alice Wolf. ¿Hacen despacho a Las Condes?"
+
+3) Si el texto está en inglés y hay una abreviatura como it's, don't, we're, etc., reemplázala con la forma completa.
 It is, Do not, We are, etc.
 
-Example:
+Ejemplo:
 
 Implementation of the Virtual Assistant
 Customer: "Hi, I'm interested in implementing a virtual assistant for my business, but I'm worried it might be complicated."
 Arturito: "Hi! 🤖 No need to worry; implementation is very straightforward. Our team takes care of the entire technical process. We just need to understand your needs, and within days, your assistant will be up and running effortlessly. We're here to make your life easier!" 🚀
 {
-"text_without_examples": "Este es un asistente diseñado para satisfacer las necesidades del usuario.",
-"only_examples": [{'Q': 'Hi, I am interested in implementing a virtual assistant for my business, but I am worried it might be complicated.','A': 'Hi! 🤖 No need to worry; implementation is very straightforward. Our team takes care of the entire technical process. We just need to understand your needs, and within days, your assistant will be up and running effortlessly. We're here to make your life easier!'}]
+"text_without_examples": "",
+"only_examples": [{'Q': 'Hi, I am interested in implementing a virtual assistant for my business, but I am worried it might be complicated.','A': 'Hi! 🤖 No need to worry; implementation is very straightforward. Our team takes care of the entire technical process. We just need to understand your needs, and within days, your assistant will be up and running effortlessly. We are here to make your life easier!'}]
 }
 
 """

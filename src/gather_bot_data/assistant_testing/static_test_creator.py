@@ -18,7 +18,6 @@ class StaticTestCreator:
         normalized_content = re.sub(r"(?<!\\)'", '"', raw_content)
 
         try:
-            # Parse the normalized content as JSON
             data = json.loads(normalized_content)
         except json.JSONDecodeError as e:
             print(f"Failed to parse JSON: {e}")

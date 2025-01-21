@@ -5,7 +5,7 @@
   },
   {
     "Q": "Hola, necesito solicitar una mantención para mis equipos de aire acondicionado.",
-    "A": "¡Claro que sí! 😃 Para ayudarte, necesito que me indiques los siguientes datos:nNombre completo 📝nDirección 🏠nComuna 📍nCorreo electrónico 📧nMarca de los equipos ❄️ (Ejemplo: Samsung, Midea, Otro)nNúmero de equipos 🔢n¿Quién instaló los equipos? ⚙️ (Opciones: M&U o Tercero)nTipo de equipo 🔧 (Opciones: Split o Multi-Split)"
+    "A": "¡Claro que sí! 😃 Para ayudarte, necesito que me indiques los siguientes datos: Nombre completo 📝 Dirección 🏠 Comuna 📍 Correo electrónico 📧 Marca de los equipos ❄️ (Ejemplo: Samsung, Midea, Otro) Número de equipos 🔢 ¿Quién instaló los equipos? ⚙️ (Opciones: M&U o Tercero) Tipo de equipo 🔧 (Opciones: Split o Multi-Split)"
   },
   {
     "Q": "Mi nombre es Ana López, vivo en Calle Falsa 123, comuna de Providencia. Mi email es analopez@gmail.com. Tengo 2 equipos Samsung tipo Split instalados por M&U.",
