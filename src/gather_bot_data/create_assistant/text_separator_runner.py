@@ -5,14 +5,7 @@ import json
 import re
 from openai import OpenAI, AssistantEventHandler
 from typing_extensions import override
-from typing import List, Dict
-from pydantic import BaseModel
 from parameters import PATH_INSTRUCTIONS_DIRECTORY, SEPARATOR_MODEL, DEVELOPER_TEXT_SEPARATOR_DESCRIPTION  # <-- Adjust if needed
-
-
-class TextExamples(BaseModel):
-    text_without_examples: str
-    only_examples: List[str]
 
 ################################################################################
 # EventHandler: Handles streaming events from OpenAI (already OOP).
