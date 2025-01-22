@@ -1,14 +1,14 @@
 BOTS_NAMES = [
-    #"MyU",
-    #"Ai Bot You",
-    #"Spencer Consulting",
-    #"Oncoprecisión",
-    #"Laboratorio Biomed",
+    "MyU",
+    "Ai Bot You",
+    "Spencer Consulting",
+    "Oncoprecisión",
+    "Laboratorio Biomed",
     "Trayecto Bookstore",
-    #"Ortodoncia de la Fuente",
-    #"KLIK Muebles",
-    #"Nomad Genetics",
-    #"House of Spencer"
+    "Ortodoncia de la Fuente",
+    "KLIK Muebles",
+    "Nomad Genetics",
+    "House of Spencer"
 ]
 
 # Bots' parameters

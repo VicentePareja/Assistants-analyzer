@@ -1,1 +1,2 @@
 3. Improve performance with threads.
+4. Get re dependency out of the way.
